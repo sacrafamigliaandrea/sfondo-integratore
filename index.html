@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sfondo Integratore | Due sedi, un'unica missione</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&family=Source+Sans+3:wght@400;450;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===== VARIABLES ===== */
 :root {
@@ -16,7 +16,8 @@
   --ombra:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(60,72,22,.08);
   --ombra-up:0 4px 12px rgba(0,0,0,.08),0 12px 40px rgba(60,72,22,.14);
   --tr:.25s cubic-bezier(.4,0,.2,1);
-  --ff:'Source Sans 3',sans-serif; --fd:'Playfair Display',serif;
+  --ff:'Source Sans 3',system-ui,sans-serif;
+  --fd:'Inter',system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-height:100vh;line-height:1.7;font-weight:450;-webkit-font-smoothing:antialiased}
@@ -30,7 +31,7 @@ body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-hei
 .header-loghi img{width:88px;height:88px;border-radius:50%;border:2px solid var(--oliva-medio);object-fit:cover;box-shadow:var(--ombra)}
 .header-badge{display:inline-flex;align-items:center;gap:8px;background:var(--oliva);color:var(--bianco);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:14px}
 .header-badge svg{width:14px;height:14px;fill:currentColor}
-.header h1{font-family:var(--fd);font-weight:700;font-size:clamp(1.8rem,5vw,2.5rem);color:var(--oliva-scuro);line-height:1.15;margin-bottom:6px}
+.header h1{font-family:var(--fd);font-weight:800;font-size:clamp(1.8rem,5vw,2.5rem);color:var(--oliva-scuro);line-height:1.15;margin-bottom:6px}
 .header-sub{font-size:.95rem;color:var(--testo-soft);max-width:520px;margin:0 auto}
 .header-fondatrice{font-size:.8rem;color:var(--oliva);margin-top:6px;font-style:italic;letter-spacing:.02em}
 
@@ -38,7 +39,7 @@ body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-hei
 .profilo-bar{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;padding:10px 20px;background:var(--bianco);border-radius:24px;box-shadow:var(--ombra);font-size:.85rem;flex-wrap:wrap}
 .profilo-bar-name{font-weight:600;color:var(--oliva-scuro)}
 .profilo-bar-info{color:var(--testo-soft)}
-.profilo-bar-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:4px 14px;border-radius:16px;cursor:pointer;font-family:var(--ff);font-size:.78rem;font-weight:600;transition:all var(--tr)}
+.profilo-bar-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:4px 14px;border-radius:16px;cursor:pointer;font-family:var(--ff);font-size:.78rem;font-weight:600;transition:all var(--tr);min-height:44px}
 .profilo-bar-btn:hover{background:var(--oliva-chiaro)}
 
 /* ===== CARD ===== */
@@ -81,7 +82,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .anno-section{margin-bottom:16px}
 .anno-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--oliva);color:var(--bianco);border-radius:var(--raggio) var(--raggio) 0 0;cursor:pointer;user-select:none;transition:background var(--tr)}
 .anno-header:hover{background:var(--oliva-scuro)}
-.anno-header h2{font-family:var(--fd);font-size:1.1rem;font-weight:600}
+.anno-header h2{font-family:var(--fd);font-size:1.1rem;font-weight:700}
 .anno-header-sfondo{font-size:.82rem;opacity:.85;margin-top:2px;font-style:italic}
 .anno-chevron{width:22px;height:22px;fill:var(--bianco);flex-shrink:0;transition:transform var(--tr)}
 .anno-section.aperta .anno-chevron{transform:rotate(180deg)}
@@ -123,7 +124,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .admin-wrap{display:none;min-height:100vh}
 .admin-wrap.vis{display:grid;grid-template-columns:280px 1fr;grid-template-rows:auto 1fr}
 .admin-topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:var(--oliva-scuro);color:var(--bianco)}
-.admin-topbar h1{font-family:var(--fd);font-size:1.1rem;font-weight:600}
+.admin-topbar h1{font-family:var(--fd);font-size:1.1rem;font-weight:700}
 .admin-topbar-right{display:flex;align-items:center;gap:12px}
 .admin-topbar .btn-sm{background:rgba(255,255,255,.15);color:var(--bianco);border:none;font-size:.8rem}
 .admin-topbar .btn-sm:hover{background:rgba(255,255,255,.25)}
@@ -146,10 +147,10 @@ textarea.campo-input{resize:vertical;min-height:80px}
 
 /* Main content */
 .admin-main{padding:24px 28px;overflow-y:auto;background:var(--oliva-bg)}
-.admin-main h2{font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:16px}
+.admin-main h2{font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:16px;font-weight:700}
 .chart-row{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:24px}
 .chart-card{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:20px;border:1px solid rgba(92,107,36,.04)}
-.chart-card h3{font-family:var(--fd);font-size:.95rem;color:var(--oliva-scuro);margin-bottom:12px}
+.chart-card h3{font-family:var(--fd);font-size:.95rem;color:var(--oliva-scuro);margin-bottom:12px;font-weight:700}
 .chart-svg{width:100%;height:auto;display:block}
 
 /* Area coverage bars */
@@ -172,7 +173,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .modal-overlay.vis{display:flex}
 .modal{background:var(--bianco);border-radius:var(--raggio);box-shadow:0 12px 28px rgba(0,0,0,.15),0 32px 64px rgba(0,0,0,.2);width:100%;max-width:540px;max-height:90vh;overflow-y:auto;padding:28px 24px;animation:modalIn .3s ease}
 @keyframes modalIn{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal h3{font-family:var(--fd);font-size:1.1rem;color:var(--oliva-scuro);margin-bottom:18px}
+.modal h3{font-family:var(--fd);font-size:1.1rem;color:var(--oliva-scuro);margin-bottom:18px;font-weight:700}
 .modal-actions{display:flex;gap:10px;margin-top:18px}
 .modal-actions .btn{flex:1}
 
@@ -185,7 +186,6 @@ textarea.campo-input{resize:vertical;min-height:80px}
 
 /* ===== FOOTER ===== */
 .footer{text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--oliva-medio);font-size:.75rem;color:var(--testo-soft)}
-
 .hidden{display:none!important}
 .mt-16{margin-top:16px}
 
@@ -225,7 +225,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
   <!-- LOGIN -->
   <section id="profiloSection">
     <div class="card" style="max-width:480px;margin:20px auto;">
-      <h2 style="font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px">Identificati</h2>
+      <h2 style="font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;font-weight:700">Identificati</h2>
       <p style="font-size:.85rem;color:var(--testo-soft);margin-bottom:18px">I tuoi dati verranno salvati per i prossimi accessi.</p>
       <div class="campo"><label class="campo-label" for="pNome">Nome e cognome</label><input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name"><div class="campo-errore" id="errPN"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci il tuo nome</span></div></div>
       <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona la sede</span></div></div>
@@ -244,9 +244,10 @@ textarea.campo-input{resize:vertical;min-height:80px}
       </div>
       <div class="anno-body"><div class="anno-body-inner">
         <button class="btn-aggiungi" onclick="apriModal('2025-26')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; svolta</button>
-        <ul class="att-lista" id="lista2526"></ul>
+        <ul class="att-lista" id="listaAtt2025-26"></ul>
       </div></div>
     </div>
+
     <!-- 2026-27 -->
     <div class="anno-section" id="anno2627">
       <div class="anno-header" onclick="toggleAnno('anno2627')">
@@ -257,12 +258,14 @@ textarea.campo-input{resize:vertical;min-height:80px}
         <div id="propostaBox" class="proposta-box"><h3>Proponi lo sfondo integratore 2026-27</h3><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Il viaggio: scoprire se stessi e il mondo" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Invia la tua proposta</button></div>
         <div id="propostaOk" class="proposta-ok hidden">La tua proposta: <strong id="propostaText"></strong></div>
         <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; in itinere</button>
-        <ul class="att-lista" id="lista2627"></ul>
+        <ul class="att-lista" id="listaAtt2026-27"></ul>
       </div></div>
     </div>
+
     <!-- Admin link -->
     <div class="admin-link"><a href="#" onclick="event.preventDefault();apriPwdModal()">Accesso amministratore</a></div>
   </section>
+
   <footer class="footer">Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo<br>SacraFamiglia education &copy; 2026</footer>
 </div>
 </div>
@@ -278,6 +281,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <button class="btn btn-sm" onclick="esciAdmin()">Torna al sito</button>
     </div>
   </div>
+
   <!-- SIDEBAR -->
   <div class="admin-sidebar">
     <div class="sidebar-section">
@@ -302,10 +306,9 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <div class="sidebar-stats" id="sidebarStats"></div>
     </div>
   </div>
+
   <!-- MAIN -->
-  <div class="admin-main" id="adminMain">
-    <!-- Populated by JS -->
-  </div>
+  <div class="admin-main" id="adminMain"></div>
 </div>
 
 <!-- ===============================================
@@ -342,7 +345,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwAXRYP_EENJQzSQnOOuKHmo7RpoXS-o-tcUAUF3mIN7W1r1X5U2f4VN95k8rcZKJcJGQ/exec';
 const PWD_HASH='526a8f0533636e1d0ef2e02820b0ba73fdbe88c2ce5f631b2518fae81a0d85ec';
 const LS_P='sf_profilo',LS_PR='sf_proposta27',LS_A='sf_attivita';
-let modalAnno='',adminDati=[],adminProp=[];
+let modalAnno='',adminDati=[],adminProp=[],adminReady={att:false,prop:false};
 
 /* ===== ORDINI / DISCIPLINE ===== */
 const ORDINI={
@@ -365,22 +368,57 @@ const D2A={'Italiano':'Area letteraria','Storia':'Area letteraria','Geografia':'
   'Inglese':'Area lingue','English':'Area lingue','Seconda lingua comunitaria':'Area lingue','CLIL / Bilingual Module':'Area lingue',
   'Tecnologia':'Area digitale','Educazione civica':'Area digitale','Progetto trasversale':'Area digitale'};
 const AREA_COLORS={'Area letteraria':['#7B6B3A','a-letteraria'],'Area matematico-scientifica':['#3A6B5C','a-mat-sci'],'Area artistico-espressiva':['#8B4E6A','a-artistica'],'Area lingue':['#3A5E8B','a-lingue'],'Area digitale':['#5C6B24','a-digitale'],'Altro':['#888','a-altro']};
+
 function getArea(d){if(!d)return'Altro';for(const p of d.split('/').map(s=>s.trim())){if(D2A[p])return D2A[p];}return D2A[d]||'Altro';}
 
 const MESI=['Set','Ott','Nov','Dic','Gen','Feb','Mar','Apr','Mag','Giu'];
 const MESI_F=['Settembre','Ottobre','Novembre','Dicembre','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno'];
 function per2m(p){const i=MESI_F.indexOf(p);if(i>=0)return[i];if(p==='Primo quadrimestre')return[0,1,2,3,4];if(p==='Secondo quadrimestre')return[5,6,7,8,9];if(p==='Intero anno scolastico')return[0,1,2,3,4,5,6,7,8,9];return[];}
 
-/* ===== ANDREA PRE-FILL ===== */
+/* ===== ANDREA PRE-FILL — 14 attivita connessione forte ===== */
 const ANDREA=[
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'ScriviMeglio \u2014 Laboratorio di scrittura guidata',disciplina:'Italiano / Tecnologia',periodo:'Intero anno scolastico',descrizione:'Web app con 100 prompt e approccio socratico. Filosofia "mai rosso per errori": l\'errore diventa punto di partenza per la riflessione. Include Officina della Lingua con grammatica valenziale (Ferraboschi).',link:'https://tracciatema.neocities.org'},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'CyberEscape \u2014 Simulazione cittadinanza digitale',disciplina:'Educazione civica / Tecnologia',periodo:'Secondo quadrimestre',descrizione:'12 missioni con scenari digitali reali. Le scelte sbagliate generano conseguenze formative: l\'errore come motore dell\'apprendimento esperienziale.',link:'https://cyberescape.neocities.org'},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'Calibro \u2014 Valutazione qualitativa',disciplina:'Progetto trasversale',periodo:'Intero anno scolastico',descrizione:'Scala qualitativa a 5 livelli con spirale Dewey dinamica. Documenta crescita, non giudizio.',link:''},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'Comportamentismo e Social Media',disciplina:'Tecnologia',periodo:'Primo quadrimestre',descrizione:'Meccanismi di condizionamento operante (Skinner) applicati ai social media. Consapevolezza come cambiamento.',link:'https://comportamentismo.neocities.org'},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'PesoDigitale \u2014 Impronta digitale',disciplina:'Educazione civica',periodo:'Secondo quadrimestre',descrizione:'9 sezioni con metafora LEGO brick. Errori di privacy trasformati in mattoncini di consapevolezza.',link:'https://pesodigitale.neocities.org'},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'Crescere Cittadini Digitali \u2014 Ecosistema genitori',disciplina:'Educazione civica',periodo:'Marzo',descrizione:'Serata genitori: Guida, CyberEscape (missione In Famiglia), Patto Digitale con export PDF.',link:'https://genitori.neocities.org'},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'Atlante dello Studente \u2014 Portfolio competenze',disciplina:'Progetto trasversale',periodo:'Intero anno scolastico',descrizione:'Competenze Chiave Europee, Life Skills, Condotta, Competenze Digitali. Sistema ASSOC.',link:''},
-  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,titolo:'Stampa 3D \u2014 Simulatore laboratorio',disciplina:'Tecnologia',periodo:'Secondo quadrimestre',descrizione:'Simulatore web TinkerCAD \u2192 Cura \u2192 Anycubic Kobra Plus. Trial & error come metodo.',link:'https://stampa3d.neocities.org'}
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Autovalutazione della Lezione',disciplina:'Progetto trasversale',periodo:'Dicembre',
+   descrizione:'Metacognizione in azione: riconoscere i propri punti deboli come primo passo per migliorarli.',link:'https://autovalutazione.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Garage Valley',disciplina:'Tecnologia',periodo:'Dicembre',
+   descrizione:'Il fallimento come trampolino: storie reali di errori trasformati in innovazione.',link:'https://garagevalley.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Manipolazione',disciplina:'Educazione civica',periodo:'Dicembre',
+   descrizione:'Scoprire come gli errori di giudizio sotto pressione diventano leva di consapevolezza.',link:'https://manipolazione.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Mental Coaching',disciplina:'Progetto trasversale',periodo:'Gennaio',
+   descrizione:'Riconoscere l\'errore come momento generativo: strategie per trasformare la frustrazione in rilancio personale.',link:'https://mentalcoach.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Fake Hunter',disciplina:'Educazione civica',periodo:'Gennaio',
+   descrizione:'L\'errore di valutazione delle fonti come punto di partenza per costruire pensiero critico.',link:'https://fakehunter.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Giamaica \u2014 Bob Team',disciplina:'Educazione fisica',periodo:'Gennaio',
+   descrizione:'Una squadra costruita sull\'improbabile: il valore del tentativo quando tutto dice "non puoi".',link:'https://giamaica.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Calibro \u2014 Valutazione qualitativa',disciplina:'Progetto trasversale',periodo:'Gennaio',
+   descrizione:'La valutazione come feedback per crescere, non come sentenza: dall\'errore al miglioramento misurabile.',link:''},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Truffe Online',disciplina:'Educazione civica',periodo:'Febbraio',
+   descrizione:'Analizzare gli errori di fiducia in contesti digitali per sviluppare pattern di autodifesa.',link:'https://truffe.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Comportamentismo e Social Media',disciplina:'Tecnologia',periodo:'Febbraio',
+   descrizione:'Trial & error come meccanismo di apprendimento: dall\'errore casuale alla scoperta intenzionale.',link:'https://comportamentismo.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'ScriviMeglio \u2014 Laboratorio di scrittura',disciplina:'Italiano',periodo:'Febbraio',
+   descrizione:'L\'errore nella scrittura come tappa del processo, non come verdetto: revisione senza giudizio.',link:'https://tracciatema.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Debate',disciplina:'Italiano',periodo:'Marzo',
+   descrizione:'Il confronto argomentativo come spazio dove cambiare posizione \u00e8 crescita, non sconfitta.',link:'https://schooldebate.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Testo Argomentativo \u2014 Sharenting',disciplina:'Italiano',periodo:'Marzo',
+   descrizione:'Lo sharenting come errore genitoriale inconsapevole: argomentare per generare consapevolezza.',link:'https://laboratorioscrittura.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Cyberbullismo',disciplina:'Educazione civica',periodo:'Marzo',
+   descrizione:'Dall\'errore nel comportamento digitale alla responsabilit\u00e0: percorso di riparazione e prevenzione.',link:'https://cyberbullismo.neocities.org'},
+  {nome:'Andrea Cerioli',sede:'Orzinuovi',ordine:'Secondaria I grado',anno:'2025-26',pre:true,
+   titolo:'Stampa 3D \u2014 Simulatore laboratorio',disciplina:'Tecnologia',periodo:'Marzo',
+   descrizione:'Progettare, fallire, riprogettare: l\'iterazione fisica come palestra dell\'errore produttivo.',link:'https://stampa3d.neocities.org'}
 ];
 
 /* ===== INIT ===== */
@@ -392,6 +430,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   const p=JSON.parse(localStorage.getItem(LS_P));
   if(p&&p.nome)mostraDash(p);
 });
+
+/* ===== HELPER: restituisce l'id lista per un anno ===== */
+function listaId(anno){return 'listaAtt'+anno;}
 
 /* ===== PROFILO ===== */
 function salvaProfilo(){
@@ -406,6 +447,7 @@ function salvaProfilo(){
   localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
 }
 function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');}
+
 function mostraDash(p){
   document.getElementById('profiloSection').classList.add('hidden');
   document.getElementById('dashboardSection').classList.remove('hidden');
@@ -432,30 +474,39 @@ function inviaAttivita(){
   document.querySelectorAll('.campo-errore').forEach(e=>e.classList.remove('vis'));
   if(!t){document.getElementById('errAT').classList.add('vis');return;}
   const p=JSON.parse(localStorage.getItem(LS_P));
+  if(!p)return;
   const a={nome:p.nome,sede:p.sede,ordine:p.ordine,anno:modalAnno,titolo:t,disciplina:document.getElementById('aDisciplina').value,periodo:document.getElementById('aPeriodo').value,descrizione:document.getElementById('aDesc').value.trim(),link:document.getElementById('aLink').value.trim(),timestamp:new Date().toISOString()};
   inviaSheet('attivita',a);
   const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');sal.push(a);localStorage.setItem(LS_A,JSON.stringify(sal));
   chiudiModal();caricaAtt();
 }
+
 function inviaProposta(){
   const t=document.getElementById('propostaTitolo').value.trim();if(!t||t.length<3)return;
   const p=JSON.parse(localStorage.getItem(LS_P));
+  if(!p)return;
   inviaSheet('proposta',{nome:p.nome,sede:p.sede,ordine:p.ordine,titolo:t});
   localStorage.setItem(LS_PR,t);document.getElementById('propostaBox').classList.add('hidden');document.getElementById('propostaOk').classList.remove('hidden');document.getElementById('propostaText').textContent=t;
 }
+
 function inviaSheet(tipo,dati){new Image().src=SCRIPT_URL+'?'+new URLSearchParams({tipo,...dati}).toString();}
 
-/* ===== RENDER ACTIVITIES ===== */
+/* ===== RENDER ACTIVITIES (FIX: usa listaId per id coerenti) ===== */
 function caricaAtt(){
-  const sal=JSON.parse(localStorage.getItem(LS_A)||'[]'),p=JSON.parse(localStorage.getItem(LS_P));
+  const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');
+  const p=JSON.parse(localStorage.getItem(LS_P));
+  if(!p)return; /* FIX: null-check per evitare crash */
   const isA=p.nome.toLowerCase().includes('cerioli')||p.nome.toLowerCase().includes('andrea c');
+
   ['2025-26','2026-27'].forEach(anno=>{
-    const el=document.getElementById('lista'+anno.replace('-',''));
+    const el=document.getElementById(listaId(anno));
+    if(!el)return; /* FIX: null-check sull'elemento */
     let items=sal.filter(a=>a.anno===anno);
     if(isA&&anno==='2025-26')items=[...ANDREA,...items];
     el.innerHTML=items.length?items.map(renderAtt).join(''):'<li class="att-vuota">Nessuna attivit\u00e0 ancora.</li>';
   });
 }
+
 function renderAtt(a){
   const pre=a.pre?'<span class="tag-pre">pre-compilata</span>':'';
   const ar=getArea(a.disciplina),ac=AREA_COLORS[ar]||AREA_COLORS['Altro'];
@@ -478,12 +529,15 @@ async function verificaPwd(){
   else document.getElementById('pwdErr').classList.add('vis');
 }
 
-/* ===== ADMIN ===== */
+/* ===== ADMIN (FIX: sequenza JSONP + flag ready) ===== */
 function avviaAdmin(){
   document.getElementById('publicView').style.display='none';
   document.getElementById('adminView').classList.add('vis');
-  jsonp('leggi_proposte',d=>{adminProp=d||[];});
-  jsonp('leggi_attivita',d=>{adminDati=d||[];cambiaAnnoAdmin();});
+  adminReady={att:false,prop:false};
+  jsonp('leggi_proposte',d=>{adminProp=Array.isArray(d)?d:[];adminReady.prop=true;if(adminReady.att)cambiaAnnoAdmin();});
+  jsonp('leggi_attivita',d=>{adminDati=Array.isArray(d)?d:[];adminReady.att=true;if(adminReady.prop)cambiaAnnoAdmin();});
+  /* Fallback: se entrambi non rispondono entro 5s, mostra comunque */
+  setTimeout(()=>{if(!adminReady.att||!adminReady.prop)cambiaAnnoAdmin();},5000);
 }
 function esciAdmin(){document.getElementById('adminView').classList.remove('vis');document.getElementById('publicView').style.display='';}
 
@@ -515,13 +569,11 @@ function applicaFiltri(){
     if(key&&!(a.titolo+' '+a.descrizione+' '+a.disciplina+' '+a.nome).toLowerCase().includes(key))return false;
     return true;
   });
-  // Stats
   const ds=new Set(f.map(a=>a.nome)),ss=new Set(f.map(a=>a.sede)),as2=new Set(f.map(a=>getArea(a.disciplina)));
   document.getElementById('sidebarStats').innerHTML=sstat(f.length,'Attivit\u00e0')+sstat(ds.size,'Docenti')+sstat(ss.size,'Sedi')+sstat(as2.size,'Aree');
-  // Main
   const main=document.getElementById('adminMain');
-  let h='<h2>A.S. 2025-26 &mdash; &laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</h2>';
-  h+='<div class="chart-row"><div class="chart-card"><h3>Timeline &mdash; distribuzione per mese</h3><svg id="histSvg" class="chart-svg" viewBox="0 0 600 220"></svg></div>';
+  let h='<h2>A.S. 2025-26 \u2014 \u00abTrasformiamo gli errori in opportunit\u00e0\u00bb</h2>';
+  h+='<div class="chart-row"><div class="chart-card"><h3>Timeline \u2014 distribuzione per mese</h3><svg id="histSvg" class="chart-svg" viewBox="0 0 600 220"></svg></div>';
   h+='<div class="chart-card"><h3>Copertura per area disciplinare</h3><div id="areaBars"></div></div></div>';
   h+='<h2 style="margin-top:8px">Attivit\u00e0 registrate <span style="font-family:var(--ff);font-size:.85rem;font-weight:500;color:var(--testo-soft)">('+f.length+')</span></h2>';
   h+='<ul class="att-lista">'+(f.length?f.map(renderAtt).join(''):'<li class="att-vuota">Nessuna attivit\u00e0 corrisponde ai filtri.</li>')+'</ul>';
@@ -541,11 +593,9 @@ function renderHistogram(dati){
   const mx=Math.max(1,...cO.map((v,i)=>v+cM[i]));
   const sY=cH/(mx+1);
   let s='';
-  // Grid
   for(let i=0;i<=mx;i++){const y=pT+cH-i*sY;s+='<line x1="'+pL+'" y1="'+y+'" x2="'+(W-pR)+'" y2="'+y+'" stroke="#C5CCA0" stroke-width=".5" stroke-dasharray="3,3"/>';s+='<text x="'+(pL-5)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#4A4F3B" font-family="Source Sans 3">'+i+'</text>';}
-  // Bars
   for(let i=0;i<10;i++){
-    const x=pL+i*bW,oH=cO[i]*sY,mH=cM[i]*sY,tH=oH+mH;
+    const x=pL+i*bW,oH=cO[i]*sY,mH=cM[i]*sY;
     if(cO[i]>0)s+='<rect x="'+(x+bW*.12)+'" y="'+(pT+cH-oH)+'" width="'+(bW*.38)+'" height="'+oH+'" rx="4" fill="#5C6B24" opacity=".9"><title>Orzinuovi: '+cO[i]+'</title></rect>';
     if(cM[i]>0)s+='<rect x="'+(x+bW*.5)+'" y="'+(pT+cH-mH)+'" width="'+(bW*.38)+'" height="'+mH+'" rx="4" fill="#C4593C" opacity=".85"><title>Martinengo: '+cM[i]+'</title></rect>';
     const t=cO[i]+cM[i];if(t>0)s+='<text x="'+(x+bW/2)+'" y="'+(pT+cH-Math.max(oH,mH)-5)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#3D4816" font-family="Source Sans 3">'+t+'</text>';
@@ -553,7 +603,6 @@ function renderHistogram(dati){
     if(i===4)s+='<line x1="'+(x+bW)+'" y1="'+pT+'" x2="'+(x+bW)+'" y2="'+(H-pB)+'" stroke="#C4593C" stroke-width="1" stroke-dasharray="4,3" opacity=".4"/>';
   }
   s+='<line x1="'+pL+'" y1="'+(pT+cH)+'" x2="'+(W-pR)+'" y2="'+(pT+cH)+'" stroke="#3D4816" stroke-width="1.5"/>';
-  // Legend
   s+='<rect x="'+(W-170)+'" y="4" width="10" height="10" rx="2" fill="#5C6B24"/><text x="'+(W-156)+'" y="13" font-size="10" fill="#4A4F3B" font-family="Source Sans 3">Orzinuovi</text>';
   s+='<rect x="'+(W-88)+'" y="4" width="10" height="10" rx="2" fill="#C4593C"/><text x="'+(W-74)+'" y="13" font-size="10" fill="#4A4F3B" font-family="Source Sans 3">Martinengo</text>';
   svg.innerHTML=s;
@@ -575,23 +624,28 @@ function renderAreaBars(dati){
   el.innerHTML=h;
 }
 
-/* ===== 2026-27 PROPOSTE ===== */
+/* ===== 2026-27 PROPOSTE (FIX: null-safety su proprieta) ===== */
 function renderAdmin2627(){
   const att=adminDati.filter(a=>a.anno==='2026-27');
-  const dp=new Set(adminProp.map(p=>p.nome)),sp=new Set(adminProp.map(p=>p.sede));
+  const dp=new Set(adminProp.map(p=>(p&&p.nome)||'')),sp=new Set(adminProp.map(p=>(p&&p.sede)||''));
   document.getElementById('sidebarStats').innerHTML=sstat(adminProp.length,'Proposte')+sstat(dp.size,'Docenti')+sstat(sp.size,'Sedi')+sstat(att.length,'Attivit\u00e0 itinere');
   const main=document.getElementById('adminMain');
-  let h='<h2>A.S. 2026-27 &mdash; Proposte sfondo integratore</h2>';
+  let h='<h2>A.S. 2026-27 \u2014 Proposte sfondo integratore</h2>';
   if(!adminProp.length){h+='<div class="att-vuota">Nessuna proposta ancora ricevuta.</div>';main.innerHTML=h;return;}
-  // Group by tematica
-  const gr={};adminProp.forEach(p=>{const t=(p.tematica&&p.tematica.trim())||'__nc';if(!gr[t])gr[t]=[];gr[t].push(p);});
+  const gr={};
+  adminProp.forEach(p=>{
+    if(!p)return;
+    const t=(p.tematica&&p.tematica.trim())||'__nc';
+    if(!gr[t])gr[t]=[];
+    gr[t].push(p);
+  });
   const keys=Object.keys(gr).sort((a,b)=>a==='__nc'?1:b==='__nc'?-1:a.localeCompare(b));
   const hasTemi=keys.some(k=>k!=='__nc');
   if(!hasTemi)h+='<div class="prop-note">Le proposte non sono ancora classificate. Aggiungi una colonna "Tematica" (F) nel foglio Proposte del Google Sheet per abilitare il raggruppamento per area.</div>';
   keys.forEach(k=>{
     const items=gr[k],label=k==='__nc'?'Da classificare':k;
     h+='<div class="prop-group"><div class="prop-group-hdr"><span>'+esc(label)+'</span><span class="prop-group-count">'+items.length+'</span></div><div class="prop-group-body">';
-    h+=items.map(p=>'<div class="prop-item"><span>'+esc(p.titolo)+'</span><span class="prop-item-nome">'+esc(p.nome)+' \u00b7 '+esc(p.sede)+'</span></div>').join('');
+    h+=items.map(p=>'<div class="prop-item"><span>'+esc(p.titolo||'')+'</span><span class="prop-item-nome">'+esc(p.nome||'')+' \u00b7 '+esc(p.sede||'')+'</span></div>').join('');
     h+='</div></div>';
   });
   if(att.length){h+='<h2 style="margin-top:24px">Attivit\u00e0 in itinere 2026-27</h2><ul class="att-lista">'+att.map(renderAtt).join('')+'</ul>';}
