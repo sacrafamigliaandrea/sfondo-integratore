@@ -4,216 +4,478 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sfondo Integratore | Due sedi, un'unica missione</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 <style>
 :root {
-  --oliva: #616C27;
-  --oliva-scuro: #4A5220;
-  --oliva-chiaro: #F0F2E6;
-  --oliva-medio: #C5CCA0;
-  --oliva-bg: #F7F8F3;
-  --ambra: #B8862B;
-  --ambra-hover: #A07424;
-  --ambra-chiaro: #FDF6E9;
-  --testo: #2A2E1F;
-  --testo-soft: #5C6148;
-  --bianco: #FFFFFF;
-  --errore: #C97B1A;
-  --raggio: 12px;
-  --raggio-sm: 8px;
-  --ombra: 0 2px 12px rgba(97,108,39,0.08);
-  --ombra-forte: 0 8px 32px rgba(97,108,39,0.12);
-  --ombra-modal: 0 20px 60px rgba(0,0,0,0.25);
-  --transizione: 0.3s cubic-bezier(0.4,0,0.2,1);
-  --font: 'Source Sans 3', sans-serif;
-  --font-display: 'Playfair Display', serif;
+  --win-desktop: #008080;
+  --win-gray: #c0c0c0;
+  --win-dark-gray: #808080;
+  --win-light-gray: #dfdfdf;
+  --win-white: #ffffff;
+  --win-black: #000000;
+  --win-blue: #000080;
+  --win-title-blue: #0A246A;
+  --win-title-blue-grad: #1084D0;
+  --win-text: #000000;
+  --win-highlight: #000080;
+  --win-menu-gray: #c0c0c0;
+  --win-border-dark: #808080;
+  --win-border-darkest: #000000;
+  --win-border-light: #ffffff;
+  --win-3d-shadow: #808080;
+  --win-3d-light: #ffffff;
+  --raggio: 0px;
+  --raggio-sm: 0px;
+  --font: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
+  --font-display: 'MS Sans Serif', 'Microsoft Sans Serif', sans-serif;
 }
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-body { font-family:var(--font); background:var(--oliva-bg); color:var(--testo); min-height:100vh; line-height:1.6; }
-.container { max-width:720px; margin:0 auto; padding:20px 16px 80px; }
+body { 
+  font-family:var(--font); 
+  background:var(--win-desktop); 
+  color:var(--win-text); 
+  min-height:100vh; 
+  line-height:1.4; 
+  font-size:11px;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* WIN2000 3D BORDER MIXINS */
+/* raised = outer raised bevel */
+/* sunken = outer sunken bevel */
+
+/* desktop/container */
+.container { max-width:740px; margin:0 auto; padding:8px 8px 60px; }
+
+/* WIN TASKBAR (bottom) */
+.win-taskbar {
+  position:fixed; bottom:0; left:0; right:0; height:28px; z-index:9999;
+  background:var(--win-gray);
+  border-top:2px solid var(--win-white);
+  display:flex; align-items:center; gap:4px; padding:2px 4px;
+}
+.win-start-btn {
+  display:flex; align-items:center; gap:4px; padding:1px 8px;
+  background:var(--win-gray); border:0; cursor:pointer; font-size:11px; font-weight:700; font-family:var(--font);
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-bottom:2px solid var(--win-dark-gray); border-right:2px solid var(--win-dark-gray);
+  outline:1px solid var(--win-black);
+}
+.win-start-btn:active { border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray); border-bottom:2px solid var(--win-white); border-right:2px solid var(--win-white); }
+.win-taskbar-clock { margin-left:auto; padding:2px 8px; font-size:11px; font-family:var(--font); border: 1px inset var(--win-dark-gray); }
+
+/* WINDOW CHROME */
+.win-window {
+  background:var(--win-gray);
+  border-top:2px solid var(--win-white);
+  border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-black);
+  border-bottom:2px solid var(--win-black);
+  outline:1px solid var(--win-dark-gray);
+  margin-bottom:6px;
+}
+.win-title-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:3px 4px;
+  background: linear-gradient(to right, var(--win-title-blue), var(--win-title-blue-grad));
+  color:var(--win-white);
+  font-size:11px; font-weight:700; font-family:var(--font);
+  user-select:none;
+}
+.win-title-bar-left { display:flex; align-items:center; gap:4px; }
+.win-title-bar-icon { width:14px; height:14px; }
+.win-title-controls { display:flex; gap:2px; }
+.win-ctrl-btn {
+  width:16px; height:14px; display:flex; align-items:center; justify-content:center;
+  background:var(--win-gray); color:var(--win-black); font-size:9px; font-family:var(--font);
+  border-top:1px solid var(--win-white); border-left:1px solid var(--win-white);
+  border-right:1px solid var(--win-dark-gray); border-bottom:1px solid var(--win-dark-gray);
+  cursor:pointer; line-height:1;
+}
+.win-ctrl-btn:active { border-top:1px solid var(--win-dark-gray); border-left:1px solid var(--win-dark-gray); border-right:1px solid var(--win-white); border-bottom:1px solid var(--win-white); }
+.win-menu-bar {
+  display:flex; gap:0; padding:2px 4px;
+  border-bottom:1px solid var(--win-dark-gray);
+  font-size:11px; font-family:var(--font);
+}
+.win-menu-item { padding:2px 8px; cursor:pointer; }
+.win-menu-item:hover { background:var(--win-title-blue); color:var(--win-white); }
+.win-window-body { padding:8px; }
 
 /* HEADER */
-.header { text-align:center; padding:24px 0 20px; }
-.header-loghi { display:flex; justify-content:center; gap:16px; margin-bottom:16px; }
-.header-loghi img { width:64px; height:64px; border-radius:50%; border:2px solid var(--oliva-medio); object-fit:cover; }
-.header-badge { display:inline-flex; align-items:center; gap:8px; background:var(--oliva); color:var(--bianco); font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:14px; }
-.header-badge svg { width:14px; height:14px; fill:currentColor; }
-.header h1 { font-family:var(--font-display); font-weight:700; font-size:clamp(1.5rem,4.5vw,2.1rem); color:var(--oliva-scuro); line-height:1.2; margin-bottom:6px; }
-.header-sub { font-size:.92rem; color:var(--testo-soft); max-width:520px; margin:0 auto; }
+.header { text-align:center; padding:6px 0 4px; }
+.header-loghi { display:flex; justify-content:center; gap:8px; margin-bottom:8px; }
+.header-loghi img { width:48px; height:48px; border-radius:0; border:2px inset var(--win-dark-gray); object-fit:cover; }
+.header-badge { 
+  display:inline-flex; align-items:center; gap:4px; 
+  background:var(--win-gray); color:var(--win-black); 
+  font-size:10px; font-weight:700; text-transform:uppercase; 
+  padding:2px 10px; margin-bottom:8px;
+  border-top:1px solid var(--win-white); border-left:1px solid var(--win-white);
+  border-right:1px solid var(--win-dark-gray); border-bottom:1px solid var(--win-dark-gray);
+}
+.header-badge svg { width:12px; height:12px; fill:currentColor; }
+.header h1 { font-family:var(--font); font-weight:700; font-size:16px; color:var(--win-black); margin-bottom:2px; }
+.header-sub { font-size:11px; color:var(--win-black); max-width:520px; margin:0 auto; }
 
 /* Profilo bar */
-.profilo-bar { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:14px; padding:10px 20px; background:var(--bianco); border-radius:24px; box-shadow:var(--ombra); font-size:.85rem; flex-wrap:wrap; }
-.profilo-bar-name { font-weight:600; color:var(--oliva-scuro); }
-.profilo-bar-info { color:var(--testo-soft); }
-.profilo-bar-btn { background:none; border:1px solid var(--oliva-medio); color:var(--oliva); padding:4px 12px; border-radius:16px; cursor:pointer; font-family:var(--font); font-size:.78rem; font-weight:600; transition:all var(--transizione); }
-.profilo-bar-btn:hover { background:var(--oliva-chiaro); }
+.profilo-bar { 
+  display:flex; align-items:center; justify-content:center; gap:8px; margin-top:4px; 
+  padding:4px 10px; background:var(--win-gray); font-size:11px; flex-wrap:wrap;
+  border:1px solid var(--win-dark-gray);
+}
+.profilo-bar-name { font-weight:700; color:var(--win-black); }
+.profilo-bar-info { color:var(--win-black); }
+.profilo-bar-btn { 
+  background:var(--win-gray); border:0; color:var(--win-black); padding:2px 10px; cursor:pointer; 
+  font-family:var(--font); font-size:11px; font-weight:400;
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-bottom:2px solid var(--win-dark-gray); border-right:2px solid var(--win-dark-gray);
+  outline:1px solid var(--win-black);
+}
+.profilo-bar-btn:active { border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray); border-bottom:2px solid var(--win-white); border-right:2px solid var(--win-white); }
 
 /* CARD & CAMPO */
-.card { background:var(--bianco); border-radius:var(--raggio); box-shadow:var(--ombra); padding:28px 24px; border:1px solid rgba(97,108,39,0.06); margin-bottom:16px; }
-.campo { margin-bottom:20px; }
+.card { 
+  background:var(--win-gray); 
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-black); border-bottom:2px solid var(--win-black);
+  outline:1px solid var(--win-dark-gray);
+  padding:12px 12px; margin-bottom:6px; 
+}
+.campo { margin-bottom:10px; }
 .campo:last-child { margin-bottom:0; }
-.campo-label { display:block; font-weight:600; font-size:.88rem; color:var(--oliva-scuro); margin-bottom:6px; }
-.campo-hint { display:block; font-size:.78rem; color:var(--testo-soft); margin-bottom:6px; }
-.campo-input,.campo-select { width:100%; padding:11px 14px; font-family:var(--font); font-size:.95rem; color:var(--testo); background:var(--oliva-bg); border:2px solid var(--oliva-medio); border-radius:var(--raggio-sm); outline:none; transition:border-color var(--transizione), box-shadow var(--transizione); }
-.campo-input:focus,.campo-select:focus { border-color:var(--oliva); box-shadow:0 0 0 3px rgba(97,108,39,0.12); }
-.campo-input::placeholder { color:#94A078; }
-textarea.campo-input { resize:vertical; min-height:80px; }
-.campo-errore { display:none; align-items:center; gap:5px; margin-top:5px; font-size:.78rem; color:var(--errore); font-weight:500; }
-.campo-errore svg { width:13px; height:13px; fill:var(--errore); flex-shrink:0; }
+.campo-label { display:block; font-weight:700; font-size:11px; color:var(--win-black); margin-bottom:3px; }
+.campo-hint { display:block; font-size:10px; color:var(--win-black); margin-bottom:3px; }
+.campo-input,.campo-select { 
+  width:100%; padding:3px 6px; font-family:var(--font); font-size:11px; color:var(--win-black); 
+  background:var(--win-white); 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+  outline:none;
+}
+.campo-input:focus,.campo-select:focus { outline:2px dotted var(--win-black); outline-offset:-2px; }
+.campo-input::placeholder { color:#808080; }
+textarea.campo-input { resize:vertical; min-height:70px; }
+.campo-errore { display:none; align-items:center; gap:4px; margin-top:4px; font-size:11px; color:#800000; font-weight:700; }
+.campo-errore svg { width:12px; height:12px; fill:#800000; flex-shrink:0; }
 .campo-errore.visibile { display:flex; }
-.campo-input.invalido,.campo-select.invalido { border-color:var(--errore); }
+.campo-input.invalido,.campo-select.invalido { outline:1px solid #800000; }
 
 /* RADIO */
-.radio-group { display:flex; gap:10px; flex-wrap:wrap; }
+.radio-group { display:flex; gap:8px; flex-wrap:wrap; }
 .radio-opt { position:relative; }
 .radio-opt input { position:absolute; opacity:0; pointer-events:none; }
-.radio-opt label { display:inline-flex; align-items:center; gap:6px; padding:9px 16px; background:var(--oliva-bg); border:2px solid var(--oliva-medio); border-radius:var(--raggio-sm); cursor:pointer; font-weight:500; font-size:.9rem; color:var(--testo-soft); transition:all var(--transizione); user-select:none; }
-.radio-opt input:checked + label { background:var(--oliva-chiaro); border-color:var(--oliva); color:var(--oliva-scuro); font-weight:600; }
-.radio-opt label:hover { border-color:var(--oliva); background:var(--oliva-chiaro); }
+.radio-opt label { 
+  display:inline-flex; align-items:center; gap:4px; padding:3px 12px; 
+  background:var(--win-gray); 
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-dark-gray); border-bottom:2px solid var(--win-dark-gray);
+  cursor:pointer; font-weight:400; font-size:11px; color:var(--win-black); user-select:none;
+  outline:1px solid var(--win-black);
+}
+.radio-opt input:checked + label { 
+  background:var(--win-light-gray); 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+  font-weight:700; 
+}
+.radio-opt label:hover { background:var(--win-light-gray); }
 
 /* BOTTONI */
-.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 24px; font-family:var(--font); font-size:.95rem; font-weight:600; border:none; border-radius:var(--raggio-sm); cursor:pointer; transition:all var(--transizione); }
-.btn svg { width:18px; height:18px; fill:currentColor; }
-.btn-ambra { background:var(--ambra); color:var(--bianco); width:100%; }
-.btn-ambra:hover { background:var(--ambra-hover); box-shadow:var(--ombra-forte); transform:translateY(-1px); }
-.btn-ambra:disabled { opacity:.5; cursor:not-allowed; transform:none; }
-.btn-oliva { background:var(--oliva); color:var(--bianco); }
-.btn-oliva:hover { background:var(--oliva-scuro); }
-.btn-outline { background:transparent; color:var(--oliva); border:2px solid var(--oliva-medio); }
-.btn-outline:hover { background:var(--oliva-chiaro); border-color:var(--oliva); }
-.btn-sm { padding:8px 16px; font-size:.85rem; }
+.btn { 
+  display:inline-flex; align-items:center; justify-content:center; gap:6px; 
+  padding:4px 16px; font-family:var(--font); font-size:11px; font-weight:400; 
+  background:var(--win-gray); color:var(--win-black);
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-dark-gray); border-bottom:2px solid var(--win-dark-gray);
+  outline:1px solid var(--win-black);
+  cursor:pointer; 
+}
+.btn:active { 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+}
+.btn svg { width:14px; height:14px; fill:currentColor; }
+.btn-ambra { background:var(--win-gray); color:var(--win-black); width:100%; }
+.btn-ambra:hover { background:var(--win-light-gray); }
+.btn-ambra:disabled { opacity:.5; cursor:not-allowed; }
+.btn-oliva { background:var(--win-gray); color:var(--win-black); }
+.btn-oliva:hover { background:var(--win-light-gray); }
+.btn-outline { background:var(--win-gray); color:var(--win-black); }
+.btn-outline:hover { background:var(--win-light-gray); }
+.btn-sm { padding:2px 10px; font-size:11px; }
 
-/* ANNO ACCORDION */
-.anno-section { margin-bottom:16px; }
-.anno-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:var(--oliva); color:var(--bianco); border-radius:var(--raggio) var(--raggio) 0 0; cursor:pointer; user-select:none; transition:background var(--transizione); }
-.anno-section:not(.aperta) .anno-header { border-radius:var(--raggio); }
-.anno-header:hover { background:var(--oliva-scuro); }
-.anno-header h2 { font-family:var(--font-display); font-size:1.12rem; font-weight:600; }
-.anno-header-sfondo { font-size:.8rem; opacity:.85; margin-top:2px; font-weight:400; font-style:italic; }
-.anno-chevron { width:24px; height:24px; fill:var(--bianco); flex-shrink:0; transition:transform var(--transizione); }
+/* ANNO ACCORDION (Windows "Group Box" style) */
+.anno-section { margin-bottom:8px; }
+.anno-header { 
+  display:flex; align-items:center; justify-content:space-between; 
+  padding:4px 8px; 
+  background: linear-gradient(to right, var(--win-title-blue), var(--win-title-blue-grad));
+  color:var(--win-white); cursor:pointer; user-select:none; 
+  font-size:11px; font-weight:700;
+}
+.anno-section:not(.aperta) .anno-header { }
+.anno-header:hover { background: linear-gradient(to right, #1450A0, #2090E0); }
+.anno-header h2 { font-family:var(--font); font-size:12px; font-weight:700; }
+.anno-header-sfondo { font-size:10px; opacity:.9; margin-top:0; font-weight:400; font-style:italic; }
+.anno-chevron { width:16px; height:16px; fill:var(--win-white); flex-shrink:0; }
 .anno-section.aperta .anno-chevron { transform:rotate(180deg); }
-.anno-body { display:none; background:var(--bianco); border:1px solid rgba(97,108,39,0.06); border-top:none; border-radius:0 0 var(--raggio) var(--raggio); box-shadow:var(--ombra); }
+.anno-body { 
+  display:none; 
+  background:var(--win-gray);
+  border-left:2px solid var(--win-dark-gray); border-right:2px solid var(--win-white);
+  border-bottom:2px solid var(--win-white);
+}
 .anno-section.aperta .anno-body { display:block; }
-.anno-body-inner { padding:20px; }
+.anno-body-inner { padding:10px; }
 
 /* PROPOSTA */
-.proposta-box { padding:16px; background:var(--ambra-chiaro); border-radius:var(--raggio-sm); margin-bottom:16px; border-left:3px solid var(--ambra); }
-.proposta-box h3 { font-size:.88rem; font-weight:600; color:var(--ambra-hover); margin-bottom:8px; }
-.proposta-inviata { padding:12px 16px; background:var(--oliva-chiaro); border-radius:var(--raggio-sm); border-left:3px solid var(--oliva); font-size:.9rem; color:var(--oliva-scuro); }
+.proposta-box { 
+  padding:8px; background:var(--win-light-gray); margin-bottom:10px; 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+}
+.proposta-box h3 { font-size:11px; font-weight:700; color:var(--win-black); margin-bottom:6px; }
+.proposta-inviata { 
+  padding:6px 10px; background:var(--win-white); font-size:11px; color:var(--win-black);
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+}
 
 /* AGGIUNGI */
-.btn-aggiungi { width:100%; padding:14px; margin-bottom:16px; background:var(--oliva-chiaro); border:2px dashed var(--oliva-medio); border-radius:var(--raggio-sm); color:var(--oliva); font-family:var(--font); font-size:.9rem; font-weight:600; cursor:pointer; transition:all var(--transizione); display:flex; align-items:center; justify-content:center; gap:8px; }
-.btn-aggiungi:hover { border-color:var(--oliva); background:var(--oliva-medio); }
-.btn-aggiungi svg { width:18px; height:18px; fill:var(--oliva); }
+.btn-aggiungi { 
+  width:100%; padding:6px; margin-bottom:10px; 
+  background:var(--win-gray);
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-dark-gray); border-bottom:2px solid var(--win-dark-gray);
+  outline:1px solid var(--win-black);
+  color:var(--win-black); font-family:var(--font); font-size:11px; font-weight:400; 
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; 
+}
+.btn-aggiungi:hover { background:var(--win-light-gray); }
+.btn-aggiungi:active { 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+}
+.btn-aggiungi svg { width:14px; height:14px; fill:var(--win-black); }
 
 /* LISTA ATTIVITA */
 .attivita-lista { list-style:none; }
-.attivita-item { padding:14px 16px; background:var(--oliva-bg); border-left:3px solid var(--oliva); border-radius:0 var(--raggio-sm) var(--raggio-sm) 0; margin-bottom:10px; transition:box-shadow var(--transizione); }
-.attivita-item:hover { box-shadow:var(--ombra); }
-.attivita-item-titolo { font-weight:600; color:var(--oliva-scuro); font-size:.95rem; }
-.attivita-item-meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; font-size:.78rem; color:var(--testo-soft); }
-.attivita-item-meta span { display:inline-flex; align-items:center; gap:4px; }
-.attivita-item-meta svg { width:12px; height:12px; fill:var(--testo-soft); }
-.attivita-item-desc { margin-top:6px; font-size:.85rem; color:var(--testo); }
-.attivita-item-link { display:inline-flex; align-items:center; gap:4px; margin-top:6px; font-size:.82rem; color:var(--oliva); text-decoration:none; font-weight:500; }
-.attivita-item-link:hover { text-decoration:underline; }
-.attivita-item-link svg { width:12px; height:12px; fill:var(--oliva); }
-.attivita-vuota { text-align:center; padding:24px; color:var(--testo-soft); font-size:.9rem; font-style:italic; }
-.tag-pre { display:inline-block; font-size:.66rem; font-weight:600; background:var(--oliva); color:var(--bianco); padding:2px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:.05em; margin-left:8px; vertical-align:middle; }
+.attivita-item { 
+  padding:6px 8px; background:var(--win-white); 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+  margin-bottom:4px;
+}
+.attivita-item:hover { background:var(--win-highlight); color:var(--win-white); }
+.attivita-item:hover .attivita-item-titolo,
+.attivita-item:hover .attivita-item-meta,
+.attivita-item:hover .attivita-item-meta span,
+.attivita-item:hover .attivita-item-desc,
+.attivita-item:hover .attivita-item-link { color:var(--win-white); fill:var(--win-white); }
+.attivita-item-titolo { font-weight:700; color:var(--win-black); font-size:11px; }
+.attivita-item-meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:2px; font-size:10px; color:#444; }
+.attivita-item-meta span { display:inline-flex; align-items:center; gap:3px; }
+.attivita-item-meta svg { width:10px; height:10px; fill:#444; }
+.attivita-item-desc { margin-top:4px; font-size:11px; color:var(--win-black); }
+.attivita-item-link { display:inline-flex; align-items:center; gap:3px; margin-top:4px; font-size:11px; color:#000080; text-decoration:underline; font-weight:400; }
+.attivita-item-link:hover { color:#FF0000; }
+.attivita-item-link svg { width:10px; height:10px; fill:#000080; }
+.attivita-vuota { text-align:center; padding:16px; color:var(--win-dark-gray); font-size:11px; }
+.tag-pre { 
+  display:inline-block; font-size:9px; font-weight:700; background:var(--win-dark-gray); color:var(--win-white); 
+  padding:1px 5px; text-transform:uppercase; margin-left:6px; vertical-align:middle; 
+}
 
 /* ADMIN / PASSWORD */
-.admin-bar { text-align:center; margin:24px 0 8px; }
-.admin-toggle { background:none; border:none; color:var(--testo-soft); font-family:var(--font); font-size:.8rem; cursor:pointer; text-decoration:underline; opacity:.6; transition:opacity var(--transizione); }
-.admin-toggle:hover { opacity:1; }
-.admin-panel { display:none; margin-top:12px; }
+.admin-bar { text-align:center; margin:12px 0 4px; }
+.admin-toggle { 
+  background:none; border:none; color:var(--win-black); font-family:var(--font); 
+  font-size:11px; cursor:pointer; text-decoration:underline; 
+}
+.admin-toggle:hover { color:#000080; }
+.admin-panel { display:none; margin-top:6px; }
 .admin-panel.visibile { display:block; }
-.admin-login { max-width:360px; margin:0 auto; text-align:center; }
+.admin-login { max-width:320px; margin:0 auto; text-align:center; }
 .admin-login .campo-input { text-align:center; }
 .admin-dashboard { }
-.admin-stat { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
-.stat-card { flex:1; min-width:100px; padding:14px 10px; background:var(--oliva-chiaro); border-radius:var(--raggio-sm); text-align:center; }
-.stat-card-num { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--oliva); }
-.stat-card-label { font-size:.72rem; color:var(--testo-soft); margin-top:2px; }
-.admin-proposte-lista { list-style:none; margin-top:12px; }
-.admin-proposte-item { padding:10px 14px; background:var(--oliva-bg); border-radius:var(--raggio-sm); margin-bottom:6px; font-size:.88rem; display:flex; justify-content:space-between; align-items:center; }
-.admin-proposte-item-nome { font-size:.75rem; color:var(--testo-soft); }
+.admin-stat { display:flex; gap:6px; margin-bottom:10px; flex-wrap:wrap; }
+.stat-card { 
+  flex:1; min-width:90px; padding:8px 6px; text-align:center;
+  background:var(--win-gray);
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white);
+}
+.stat-card-num { font-family:var(--font); font-size:20px; font-weight:700; color:var(--win-black); }
+.stat-card-label { font-size:10px; color:var(--win-black); margin-top:1px; }
+.admin-proposte-lista { list-style:none; margin-top:8px; }
+.admin-proposte-item { 
+  padding:4px 8px; background:var(--win-white); margin-bottom:4px; 
+  font-size:11px; display:flex; justify-content:space-between; align-items:center; 
+  border-top:1px solid var(--win-dark-gray); border-left:1px solid var(--win-dark-gray);
+}
+.admin-proposte-item-nome { font-size:10px; color:#444; }
 
 /* FILTRI */
-.filtri-bar { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+.filtri-bar { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:10px; }
 .filtri-bar .campo { margin-bottom:0; }
-.filtri-bar .campo-select, .filtri-bar .campo-input { padding:8px 12px; font-size:.85rem; }
-.filtri-count { font-size:.82rem; color:var(--testo-soft); margin-bottom:12px; }
-.filtri-count strong { color:var(--oliva-scuro); }
-.filtri-reset { background:none; border:none; color:var(--ambra); font-family:var(--font); font-size:.82rem; cursor:pointer; text-decoration:underline; margin-left:8px; }
+.filtri-bar .campo-select, .filtri-bar .campo-input { padding:2px 6px; font-size:11px; }
+.filtri-count { font-size:11px; color:var(--win-black); margin-bottom:8px; }
+.filtri-count strong { color:var(--win-black); font-weight:700; }
+.filtri-reset { background:none; border:none; color:#000080; font-family:var(--font); font-size:11px; cursor:pointer; text-decoration:underline; margin-left:6px; }
 
 /* TIMELINE */
-.timeline-wrap { margin:20px 0; padding:16px; background:var(--oliva-bg); border-radius:var(--raggio); }
-.timeline-title { font-family:var(--font-display); font-size:.95rem; color:var(--oliva-scuro); margin-bottom:12px; }
+.timeline-wrap { margin:10px 0; padding:8px; background:var(--win-light-gray); border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray); border-right:2px solid var(--win-white); border-bottom:2px solid var(--win-white); }
+.timeline-title { font-family:var(--font); font-size:11px; color:var(--win-black); font-weight:700; margin-bottom:8px; }
 .timeline-svg { width:100%; height:auto; display:block; }
-.timeline-legend { display:flex; gap:16px; margin-top:10px; flex-wrap:wrap; }
-.timeline-legend-item { display:flex; align-items:center; gap:5px; font-size:.75rem; color:var(--testo-soft); }
-.timeline-legend-dot { width:10px; height:10px; border-radius:50%; }
+.timeline-legend { display:flex; gap:12px; margin-top:6px; flex-wrap:wrap; }
+.timeline-legend-item { display:flex; align-items:center; gap:4px; font-size:10px; color:var(--win-black); }
+.timeline-legend-dot { width:10px; height:10px; border:1px solid var(--win-black); }
 
 /* TABS ADMIN */
-.admin-tabs { display:flex; gap:6px; margin-bottom:16px; border-bottom:2px solid var(--oliva-chiaro); padding-bottom:6px; }
-.admin-tab { padding:7px 14px; border:none; background:none; font-family:var(--font); font-size:.83rem; font-weight:600; color:var(--testo-soft); cursor:pointer; border-radius:var(--raggio-sm) var(--raggio-sm) 0 0; transition:all var(--transizione); }
-.admin-tab.attivo { background:var(--oliva); color:var(--bianco); }
-.admin-tab:hover:not(.attivo) { background:var(--oliva-chiaro); }
+.admin-tabs { display:flex; gap:0; margin-bottom:0; border-bottom:2px solid var(--win-dark-gray); padding-bottom:0; }
+.admin-tab { 
+  padding:3px 12px; border:0; background:var(--win-gray); font-family:var(--font); 
+  font-size:11px; font-weight:400; color:var(--win-black); cursor:pointer;
+  border-top:2px solid var(--win-white); border-left:2px solid var(--win-white);
+  border-right:2px solid var(--win-dark-gray);
+  margin-right:2px; position:relative; top:2px;
+}
+.admin-tab.attivo { 
+  background:var(--win-light-gray); font-weight:700; 
+  border-bottom:2px solid var(--win-light-gray);
+  z-index:1;
+}
+.admin-tab:hover:not(.attivo) { background:var(--win-light-gray); }
 .admin-tab-panel { display:none; }
 .admin-tab-panel.visibile { display:block; }
 
 /* GRUPPI PROPOSTE */
-.prop-group { margin-bottom:16px; }
+.prop-group { margin-bottom:10px; }
 .prop-group-header {
   display:flex; align-items:center; justify-content:space-between;
-  padding:10px 14px; background:var(--oliva); color:var(--bianco);
-  border-radius:var(--raggio-sm) var(--raggio-sm) 0 0; font-size:.88rem; font-weight:600;
+  padding:3px 8px; 
+  background: linear-gradient(to right, var(--win-title-blue), var(--win-title-blue-grad));
+  color:var(--win-white); font-size:11px; font-weight:700;
 }
 .prop-group-count {
-  background:rgba(255,255,255,0.2); padding:2px 10px; border-radius:12px; font-size:.78rem;
+  background:rgba(255,255,255,0.3); padding:1px 8px; font-size:10px;
 }
 .prop-group-body {
-  border:1px solid var(--oliva-medio); border-top:none;
-  border-radius:0 0 var(--raggio-sm) var(--raggio-sm); padding:8px;
+  border-left:2px solid var(--win-dark-gray); border-right:2px solid var(--win-white);
+  border-bottom:2px solid var(--win-white); padding:4px;
 }
-.prop-group-body .admin-proposte-item { margin-bottom:4px; }
+.prop-group-body .admin-proposte-item { margin-bottom:2px; }
 .prop-no-group {
-  padding:12px 16px; background:var(--ambra-chiaro); border-left:3px solid var(--ambra);
-  border-radius:var(--raggio-sm); margin-bottom:12px; font-size:.82rem; color:var(--testo-soft);
+  padding:6px 10px; background:var(--win-light-gray); 
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  margin-bottom:8px; font-size:11px; color:var(--win-black);
 }
 
 /* MODAL */
-.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center; padding:20px; }
 .modal-overlay.visibile { display:flex; }
-.modal { background:var(--bianco); border-radius:var(--raggio); box-shadow:var(--ombra-modal); width:100%; max-width:560px; max-height:90vh; overflow-y:auto; padding:28px 24px; animation:modalIn .3s ease; }
-@keyframes modalIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-.modal h3 { font-family:var(--font-display); font-size:1.12rem; color:var(--oliva-scuro); margin-bottom:20px; }
-.modal-actions { display:flex; gap:10px; margin-top:20px; }
-.modal-actions .btn { flex:1; }
+.modal { 
+  background:var(--win-gray); width:100%; max-width:500px; max-height:90vh; overflow-y:auto; 
+  border-top:3px solid var(--win-white); border-left:3px solid var(--win-white);
+  border-right:3px solid var(--win-black); border-bottom:3px solid var(--win-black);
+  outline:1px solid var(--win-dark-gray);
+}
+.modal-title-bar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:3px 4px;
+  background: linear-gradient(to right, var(--win-title-blue), var(--win-title-blue-grad));
+  color:var(--win-white); font-size:11px; font-weight:700; margin-bottom:0;
+}
+.modal-body { padding:12px; }
+.modal h3 { font-family:var(--font); font-size:11px; color:var(--win-black); margin-bottom:10px; display:none; }
+.modal-actions { display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
+.modal-actions .btn { flex:0; min-width:80px; }
+
+/* STATUS BAR */
+.win-status-bar {
+  display:flex; gap:8px; padding:2px 4px; margin-top:4px;
+  border-top:2px solid var(--win-dark-gray); border-left:2px solid var(--win-dark-gray);
+  font-size:10px; color:var(--win-black);
+}
 
 /* FOOTER */
-.footer { text-align:center; margin-top:32px; padding-top:16px; border-top:1px solid var(--oliva-medio); font-size:.75rem; color:var(--testo-soft); }
+.footer { 
+  text-align:center; margin-top:16px; padding-top:8px; 
+  border-top:2px solid var(--win-dark-gray); 
+  font-size:10px; color:var(--win-black); 
+}
 
 /* UTILITY */
 .hidden { display:none !important; }
-.mt-16 { margin-top:16px; }
-@media(max-width:480px) {
-  .container { padding:12px 10px 60px; }
-  .card { padding:20px 16px; }
-  .anno-header { padding:14px 16px; }
-  .radio-group { flex-direction:column; gap:6px; }
-  .modal { padding:20px 16px; }
-  .profilo-bar { gap:8px; font-size:.8rem; }
-  .header-loghi img { width:52px; height:52px; }
+.mt-16 { margin-top:10px; }
+
+/* WIN GROUP BOX */
+.win-groupbox {
+  border:2px solid var(--win-dark-gray); padding:8px 10px; margin-bottom:8px; position:relative;
+}
+.win-groupbox-label {
+  position:absolute; top:-8px; left:8px; background:var(--win-gray); padding:0 4px;
+  font-size:11px; font-weight:700; color:var(--win-black);
+}
+
+@media(max-width:540px) {
+  .container { padding:4px 4px 40px; }
+  .card { padding:8px; }
+  .anno-header { padding:4px 6px; }
+  .radio-group { flex-direction:column; gap:4px; }
+  .modal-body { padding:8px; }
+  .profilo-bar { gap:6px; font-size:10px; }
+  .header-loghi img { width:36px; height:36px; }
   .admin-stat { flex-direction:column; }
   .filtri-bar { grid-template-columns:1fr; }
   .admin-tabs { overflow-x:auto; flex-wrap:nowrap; }
-  .admin-tab { white-space:nowrap; font-size:.78rem; padding:6px 10px; }
+  .admin-tab { white-space:nowrap; font-size:10px; padding:3px 8px; }
 }
 </style>
 </head>
 <body>
+
+<!-- WIN2000 TASKBAR -->
+<div class="win-taskbar">
+  <button class="win-start-btn">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="9" height="9" fill="#ff0000"/><rect x="13" y="2" width="9" height="9" fill="#00b000"/><rect x="2" y="13" width="9" height="9" fill="#0000ff"/><rect x="13" y="13" width="9" height="9" fill="#ffff00"/></svg>
+    <strong>Start</strong>
+  </button>
+  <div style="width:2px;height:20px;border-left:1px solid #808080;border-right:1px solid #fff;margin:0 2px;"></div>
+  <div style="padding:2px 10px;font-size:11px;font-family:var(--font);
+    border-top:1px solid #808080;border-left:1px solid #808080;border-right:1px solid #fff;border-bottom:1px solid #fff;
+    background:#000080;color:#fff;display:flex;align-items:center;gap:4px;">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+    Sfondo Integratore
+  </div>
+  <div class="win-taskbar-clock" id="taskbarClock">10:25</div>
+</div>
+
 <div class="container">
+
+  <!-- WIN2000 WINDOW CHROME - HEADER -->
+  <div class="win-window">
+    <div class="win-title-bar">
+      <div class="win-title-bar-left">
+        <svg class="win-title-bar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Sfondo Integratore &mdash; Sacra Famiglia
+      </div>
+      <div class="win-title-controls">
+        <div class="win-ctrl-btn" title="Riduci a icona">_</div>
+        <div class="win-ctrl-btn" title="Ripristina">&#9633;</div>
+        <div class="win-ctrl-btn" title="Chiudi" style="font-weight:700;">&#x2715;</div>
+      </div>
+    </div>
+    <div class="win-menu-bar">
+      <span class="win-menu-item"><u>F</u>ile</span>
+      <span class="win-menu-item"><u>V</u>isualizza</span>
+      <span class="win-menu-item"><u>S</u>trumenti</span>
+      <span class="win-menu-item"><u>?</u> Guida</span>
+    </div>
+    <div class="win-window-body">
 
   <header class="header">
     <div class="header-loghi">
@@ -222,11 +484,11 @@ textarea.campo-input { resize:vertical; min-height:80px; }
     </div>
     <div class="header-badge">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-      Due sedi, un'unica missione educativa
+      Due sedi, un&apos;unica missione educativa
     </div>
     <h1>Sfondo Integratore</h1>
     <p class="header-sub">Raccolta delle attivit&agrave; legate allo sfondo integratore e proposte per il prossimo anno scolastico.</p>
-    <p style="font-size:0.78rem;color:var(--oliva);margin-top:6px;font-style:italic;letter-spacing:0.02em;">Fondatrice Santa Paola Elisabetta Cerioli</p>
+    <p style="font-size:10px;color:#000080;margin-top:4px;font-style:italic;">Fondatrice Santa Paola Elisabetta Cerioli</p>
     <div class="profilo-bar hidden" id="profiloBar">
       <span class="profilo-bar-name" id="barNome"></span>
       <span class="profilo-bar-info" id="barInfo"></span>
@@ -234,18 +496,38 @@ textarea.campo-input { resize:vertical; min-height:80px; }
     </div>
   </header>
 
+    </div><!-- /win-window-body -->
+    <div class="win-status-bar">
+      <span>Pronto</span>
+      <span style="margin-left:auto;">SacraFamiglia &copy; 2026</span>
+    </div>
+  </div><!-- /win-window -->
+
   <!-- PROFILO -->
   <section id="profiloSection">
-    <div class="card" style="max-width:520px;margin:20px auto;">
-      <h2 style="font-family:var(--font-display);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;">Identificati</h2>
-      <p style="font-size:.85rem;color:var(--testo-soft);margin-bottom:20px;">I tuoi dati verranno salvati per i prossimi accessi.</p>
+    <!-- Win2000 dialog -->
+    <div class="win-window" style="max-width:520px;margin:0 auto 6px;">
+      <div class="win-title-bar">
+        <div class="win-title-bar-left">
+          <svg class="win-title-bar-icon" viewBox="0 0 24 24" fill="white"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+          Identificazione Utente
+        </div>
+        <div class="win-title-controls">
+          <div class="win-ctrl-btn">?</div>
+          <div class="win-ctrl-btn" style="font-weight:700;">&#x2715;</div>
+        </div>
+      </div>
+      <div class="win-window-body">
+    <div class="card" style="border:none;box-shadow:none;outline:none;margin-bottom:0;background:transparent;">
+      <h2 style="font-family:var(--font);font-size:12px;font-weight:700;color:var(--win-black);margin-bottom:2px;">Identificati</h2>
+      <p style="font-size:11px;color:var(--win-black);margin-bottom:12px;">I tuoi dati verranno salvati per i prossimi accessi.</p>
       <div class="campo">
-        <label class="campo-label" for="pNome">Nome e cognome</label>
+        <label class="campo-label" for="pNome">Nome e cognome:</label>
         <input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name">
         <div class="campo-errore" id="errPNome"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci il tuo nome</span></div>
       </div>
       <div class="campo">
-        <label class="campo-label">Sede</label>
+        <label class="campo-label">Sede:</label>
         <div class="radio-group" id="sedeGroup">
           <div class="radio-opt"><input type="radio" name="pSede" id="sedeOrz" value="Orzinuovi"><label for="sedeOrz">Orzinuovi</label></div>
           <div class="radio-opt"><input type="radio" name="pSede" id="sedeMart" value="Martinengo"><label for="sedeMart">Martinengo</label></div>
@@ -253,19 +535,44 @@ textarea.campo-input { resize:vertical; min-height:80px; }
         <div class="campo-errore" id="errPSede"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona la sede</span></div>
       </div>
       <div class="campo">
-        <label class="campo-label">Ordine di scuola</label>
+        <label class="campo-label">Ordine di scuola:</label>
         <div class="radio-group" id="ordineGroup"></div>
-        <div class="campo-errore" id="errPOrdine"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona l'ordine</span></div>
+        <div class="campo-errore" id="errPOrdine"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona l&apos;ordine</span></div>
       </div>
-      <button class="btn btn-ambra mt-16" onclick="salvaProfilo()">
-        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-        Accedi
-      </button>
+      <div style="display:flex;justify-content:center;gap:8px;margin-top:12px;">
+        <button class="btn btn-ambra" style="width:auto;min-width:100px;" onclick="salvaProfilo()">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          OK
+        </button>
+        <button class="btn btn-outline" style="min-width:80px;">Annulla</button>
+      </div>
     </div>
+      </div><!-- /win-window-body -->
+    </div><!-- /win-window -->
   </section>
 
   <!-- DASHBOARD -->
   <section id="dashboardSection" class="hidden">
+  <div class="win-window">
+    <div class="win-title-bar">
+      <div class="win-title-bar-left">
+        <svg class="win-title-bar-icon" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        Registro Attivit&agrave; &mdash; Anno Scolastico
+      </div>
+      <div class="win-title-controls">
+        <div class="win-ctrl-btn" title="Riduci a icona">_</div>
+        <div class="win-ctrl-btn" title="Ripristina">&#9633;</div>
+        <div class="win-ctrl-btn" title="Chiudi" style="font-weight:700;">&#x2715;</div>
+      </div>
+    </div>
+    <div class="win-menu-bar">
+      <span class="win-menu-item"><u>F</u>ile</span>
+      <span class="win-menu-item"><u>M</u>odifica</span>
+      <span class="win-menu-item"><u>V</u>isualizza</span>
+      <span class="win-menu-item"><u>A</u>ttivit&agrave;</span>
+      <span class="win-menu-item"><u>?</u> Guida</span>
+    </div>
+    <div class="win-window-body">
 
     <!-- 2025-26 -->
     <div class="anno-section aperta" id="anno2526">
@@ -327,7 +634,7 @@ textarea.campo-input { resize:vertical; min-height:80px; }
       <div class="card">
         <!-- Login -->
         <div id="adminLogin" class="admin-login">
-          <h3 style="font-family:var(--font-display);font-size:1rem;color:var(--oliva-scuro);margin-bottom:12px;">Inserisci la password</h3>
+          <h3 style="font-family:var(--font);font-size:11px;font-weight:700;color:var(--win-black);margin-bottom:8px;">Inserisci la password</h3>
           <input type="password" id="adminPwd" class="campo-input" placeholder="Password" style="margin-bottom:10px;" onkeydown="if(event.key==='Enter')verificaAdmin()">
           <button class="btn btn-oliva btn-sm" onclick="verificaAdmin()" style="width:100%;">Accedi</button>
           <div class="campo-errore mt-16" id="errAdmin"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Password non corretta</span></div>
@@ -337,14 +644,14 @@ textarea.campo-input { resize:vertical; min-height:80px; }
 
           <!-- SELETTORE ANNO -->
           <div id="annoSelector">
-            <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--oliva-scuro);margin-bottom:16px;text-align:center;">Seleziona l'anno scolastico</h3>
+            <h3 style="font-family:var(--font);font-size:12px;font-weight:700;color:var(--win-black);margin-bottom:10px;text-align:center;">Seleziona l&apos;anno scolastico</h3>
             <div style="display:flex;gap:12px;">
-              <button class="btn btn-oliva" style="flex:1;flex-direction:column;padding:20px 16px;" onclick="selezionaAnnoAdmin('2025-26')">
-                <span style="font-family:var(--font-display);font-size:1.3rem;">2025-26</span>
+              <button class="btn btn-oliva" style="flex:1;flex-direction:column;padding:12px 10px;" onclick="selezionaAnnoAdmin('2025-26')">
+                <span style="font-family:var(--font);font-size:14px;font-weight:700;">2025-26</span>
                 <span style="font-size:.78rem;opacity:.8;margin-top:4px;font-weight:400;">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</span>
               </button>
-              <button class="btn btn-outline" style="flex:1;flex-direction:column;padding:20px 16px;" onclick="selezionaAnnoAdmin('2026-27')">
-                <span style="font-family:var(--font-display);font-size:1.3rem;">2026-27</span>
+              <button class="btn btn-outline" style="flex:1;flex-direction:column;padding:12px 10px;" onclick="selezionaAnnoAdmin('2026-27')">
+                <span style="font-family:var(--font);font-size:14px;font-weight:700;">2026-27</span>
                 <span style="font-size:.78rem;opacity:.8;margin-top:4px;font-weight:400;">Proposte e nuove attivit&agrave;</span>
               </button>
             </div>
@@ -354,8 +661,8 @@ textarea.campo-input { resize:vertical; min-height:80px; }
           <div id="vista2526" class="hidden">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
               <div>
-                <h3 style="font-family:var(--font-display);font-size:1.05rem;color:var(--oliva-scuro);">A.S. 2025-26</h3>
-                <p style="font-size:.85rem;color:var(--ambra);font-style:italic;margin-top:2px;">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</p>
+                <h3 style="font-family:var(--font);font-size:11px;font-weight:700;color:var(--win-black);">A.S. 2025-26</h3>
+                <p style="font-size:10px;color:#000080;font-style:italic;margin-top:1px;">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</p>
               </div>
               <button class="btn btn-outline btn-sm" onclick="tornaSelettoreAnno()">Cambia anno</button>
             </div>
@@ -395,7 +702,7 @@ textarea.campo-input { resize:vertical; min-height:80px; }
             </div>
 
             <!-- LISTA FILTRATA -->
-            <h4 style="font-size:.9rem;color:var(--oliva-scuro);margin:16px 0 8px;">Attivit&agrave; registrate</h4>
+            <h4 style="font-size:11px;font-weight:700;color:var(--win-black);margin:10px 0 6px;">Attivit&agrave; registrate</h4>
             <ul class="attivita-lista" id="adminAttivitaFiltrate">
               <li class="attivita-vuota">Caricamento in corso...</li>
             </ul>
@@ -405,8 +712,8 @@ textarea.campo-input { resize:vertical; min-height:80px; }
           <div id="vista2627" class="hidden">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
               <div>
-                <h3 style="font-family:var(--font-display);font-size:1.05rem;color:var(--oliva-scuro);">A.S. 2026-27 &mdash; Proposte</h3>
-                <p style="font-size:.82rem;color:var(--testo-soft);margin-top:2px;">Titoli proposti dai docenti, raggruppati per area tematica</p>
+<h3 style="font-family:var(--font);font-size:11px;font-weight:700;color:var(--win-black);">A.S. 2026-27 &mdash; Proposte</h3>
+              <p style="font-size:10px;color:#444;margin-top:1px;">Titoli proposti dai docenti, raggruppati per area tematica</p>
               </div>
               <button class="btn btn-outline btn-sm" onclick="tornaSelettoreAnno()">Cambia anno</button>
             </div>
@@ -418,7 +725,7 @@ textarea.campo-input { resize:vertical; min-height:80px; }
 
             <!-- ATTIVITA 2026-27 (in itinere) -->
             <div id="attivita2627Wrap" class="hidden" style="margin-top:20px;">
-              <h4 style="font-size:.9rem;color:var(--oliva-scuro);margin-bottom:8px;">Attivit&agrave; in itinere 2026-27</h4>
+              <h4 style="font-size:11px;font-weight:700;color:var(--win-black);margin-bottom:6px;">Attivit&agrave; in itinere 2026-27</h4>
               <ul class="attivita-lista" id="adminAttivita2627"></ul>
             </div>
           </div>
@@ -427,20 +734,35 @@ textarea.campo-input { resize:vertical; min-height:80px; }
       </div>
     </div>
 
-  </section>
+  </section><!-- /dashboardSection -->
+
+    </div><!-- /win-window-body (dashboard) -->
+    <div class="win-status-bar">
+      <span id="statusBarText">Pronto</span>
+      <span style="margin-left:auto;font-size:10px;">Orzinuovi &amp; Martinengo &copy; 2026</span>
+    </div>
+  </div><!-- /win-window (dashboard) -->
 
   <footer class="footer">
-    Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo<br>
-    SacraFamiglia education &copy; 2026
+    Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo &mdash; SacraFamiglia education &copy; 2026
   </footer>
-</div>
+</div><!-- /container -->
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
-    <h3 id="modalTitolo">Nuova attivit&agrave;</h3>
+    <div class="modal-title-bar">
+      <div style="display:flex;align-items:center;gap:4px;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+        <span id="modalTitolo">Nuova attivit&agrave;</span>
+      </div>
+      <div class="win-title-controls">
+        <div class="win-ctrl-btn" onclick="chiudiModal()" style="font-weight:700;">&#x2715;</div>
+      </div>
+    </div>
+    <div class="modal-body">
     <div class="campo">
-      <label class="campo-label" for="aTitolo">Titolo dell'attivit&agrave;</label>
+      <label class="campo-label" for="aTitolo">Titolo dell&apos;attivit&agrave;:</label>
       <input type="text" id="aTitolo" class="campo-input" placeholder="Es. Laboratorio di scrittura creativa" maxlength="150">
       <div class="campo-errore" id="errATitolo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci un titolo</span></div>
     </div>
@@ -464,16 +786,17 @@ textarea.campo-input { resize:vertical; min-height:80px; }
       <textarea id="aDescrizione" class="campo-input" placeholder="Cosa avete fatto, con quali strumenti, che risultati..." maxlength="500" rows="3"></textarea>
     </div>
     <div class="campo">
-      <label class="campo-label" for="aLink">Link o risorsa <span style="font-weight:400;color:var(--testo-soft)">(facoltativo)</span></label>
+      <label class="campo-label" for="aLink">Link o risorsa <span style="font-weight:400;color:#444">(facoltativo)</span></label>
       <input type="url" id="aLink" class="campo-input" placeholder="https://...">
     </div>
     <div class="modal-actions">
       <button class="btn btn-outline" onclick="chiudiModal()">Annulla</button>
       <button class="btn btn-oliva" onclick="inviaAttivita()">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-        Invia
+        OK
       </button>
     </div>
+    </div><!-- /modal-body -->
   </div>
 </div>
 
@@ -873,7 +1196,7 @@ function renderVista2627() {
 /* ----- TIMELINE SVG ----- */
 const MESI = ['Set','Ott','Nov','Dic','Gen','Feb','Mar','Apr','Mag','Giu'];
 const MESI_FULL = ['Settembre','Ottobre','Novembre','Dicembre','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno'];
-const COLORI_SEDE = { 'Orzinuovi': '#6B7D2F', 'Martinengo': '#B8862B' };
+const COLORI_SEDE = { 'Orzinuovi': '#000080', 'Martinengo': '#800000' };
 
 function periodoToMesi(periodo) {
   const idx = MESI_FULL.indexOf(periodo);
@@ -906,8 +1229,8 @@ function renderTimeline(dati) {
 
   for (let i = 0; i <= maxVal; i++) {
     const y = padT + chartH - i * scaleY;
-    html += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="#C5CCA0" stroke-width="0.5" stroke-dasharray="3,3"/>';
-    html += '<text x="'+(padL-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#5C6148" font-family="Source Sans 3,sans-serif">'+i+'</text>';
+    html += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="#c0c0c0" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    html += '<text x="'+(padL-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#000000" font-family="MS Sans Serif,sans-serif">'+i+'</text>';
   }
 
   for (let i = 0; i < 10; i++) {
@@ -917,31 +1240,31 @@ function renderTimeline(dati) {
     const totalH = orzH + martH;
 
     if (countOrz[i] > 0) {
-      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-orzH)+'" width="'+(barW*0.7)+'" height="'+orzH+'" rx="3" fill="#6B7D2F" opacity="0.85"/>';
+      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-orzH)+'" width="'+(barW*0.7)+'" height="'+orzH+'" rx="0" fill="#000080" opacity="0.9"/>';
     }
     if (countMart[i] > 0) {
-      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-totalH)+'" width="'+(barW*0.7)+'" height="'+martH+'" rx="3" fill="#B8862B" opacity="0.85"/>';
+      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-totalH)+'" width="'+(barW*0.7)+'" height="'+martH+'" rx="0" fill="#800000" opacity="0.9"/>';
     }
     const total = countOrz[i] + countMart[i];
     if (total > 0) {
-      html += '<text x="'+(x+barW/2)+'" y="'+(padT+chartH-totalH-5)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#4A5220" font-family="Source Sans 3,sans-serif">'+total+'</text>';
+      html += '<text x="'+(x+barW/2)+'" y="'+(padT+chartH-totalH-5)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#000000" font-family="MS Sans Serif,sans-serif">'+total+'</text>';
     }
-    html += '<text x="'+(x+barW/2)+'" y="'+(H-padB+16)+'" text-anchor="middle" font-size="11" fill="#5C6148" font-family="Source Sans 3,sans-serif">'+MESI[i]+'</text>';
+    html += '<text x="'+(x+barW/2)+'" y="'+(H-padB+16)+'" text-anchor="middle" font-size="11" fill="#000000" font-family="MS Sans Serif,sans-serif">'+MESI[i]+'</text>';
 
     if (i === 4) {
-      html += '<line x1="'+(x+barW)+'" y1="'+padT+'" x2="'+(x+barW)+'" y2="'+(H-padB)+'" stroke="#B8862B" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>';
-      html += '<text x="'+(x+barW)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" fill="#B8862B" font-family="Source Sans 3,sans-serif" opacity="0.7">I \u2502 II quad.</text>';
+      html += '<line x1="'+(x+barW)+'" y1="'+padT+'" x2="'+(x+barW)+'" y2="'+(H-padB)+'" stroke="#808080" stroke-width="1" stroke-dasharray="4,3" opacity="0.8"/>';
+      html += '<text x="'+(x+barW)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" fill="#808080" font-family="MS Sans Serif,sans-serif" opacity="0.9">I \u2502 II quad.</text>';
     }
   }
 
-  html += '<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#4A5220" stroke-width="1.5"/>';
-  html += '<text x="'+padL+'" y="'+(H-2)+'" font-size="9" fill="#5C6148" font-family="Source Sans 3,sans-serif" opacity="0.6">12 set 2025</text>';
-  html += '<text x="'+(W-padR)+'" y="'+(H-2)+'" text-anchor="end" font-size="9" fill="#5C6148" font-family="Source Sans 3,sans-serif" opacity="0.6">5 giu 2026</text>';
+  html += '<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#000000" stroke-width="1.5"/>';
+  html += '<text x="'+padL+'" y="'+(H-2)+'" font-size="9" fill="#808080" font-family="MS Sans Serif,sans-serif">12 set 2025</text>';
+  html += '<text x="'+(W-padR)+'" y="'+(H-2)+'" text-anchor="end" font-size="9" fill="#808080" font-family="MS Sans Serif,sans-serif">5 giu 2026</text>';
 
   svg.innerHTML = html;
   document.getElementById('timelineLegend').innerHTML =
-    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#6B7D2F"></div>Orzinuovi</div>' +
-    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#B8862B"></div>Martinengo</div>';
+    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#000080"></div>Orzinuovi</div>' +
+    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#800000"></div>Martinengo</div>';
 }
 
 // JSONP per leggere da Apps Script (compatibile CSP Neocities)
@@ -965,6 +1288,17 @@ function caricaJSONP(tipo, callback) {
 
 /* UTILITY */
 function esc(str) { if (!str) return ''; const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+/* WIN2000 CLOCK */
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const el = document.getElementById('taskbarClock');
+  if (el) el.textContent = h + ':' + m;
+}
+updateClock();
+setInterval(updateClock, 10000);
 </script>
 </body>
 </html>
