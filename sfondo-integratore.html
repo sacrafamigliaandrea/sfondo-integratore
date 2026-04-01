@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sfondo Integratore | Due sedi, un'unica missione</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --oliva: #616C27;
+  --oliva-scuro: #4A5220;
+  --oliva-chiaro: #F0F2E6;
+  --oliva-medio: #C5CCA0;
+  --oliva-bg: #F7F8F3;
+  --ambra: #B8862B;
+  --ambra-hover: #A07424;
+  --ambra-chiaro: #FDF6E9;
+  --testo: #2A2E1F;
+  --testo-soft: #5C6148;
+  --bianco: #FFFFFF;
+  --errore: #C97B1A;
+  --raggio: 12px;
+  --raggio-sm: 8px;
+  --ombra: 0 2px 12px rgba(97,108,39,0.08);
+  --ombra-forte: 0 8px 32px rgba(97,108,39,0.12);
+  --ombra-modal: 0 20px 60px rgba(0,0,0,0.25);
+  --transizione: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --font: 'Source Sans 3', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:var(--font); background:var(--oliva-bg); color:var(--testo); min-height:100vh; line-height:1.6; }
+.container { max-width:720px; margin:0 auto; padding:20px 16px 80px; }
+
+/* HEADER */
+.header { text-align:center; padding:24px 0 20px; }
+.header-loghi { display:flex; justify-content:center; gap:16px; margin-bottom:16px; }
+.header-loghi img { width:64px; height:64px; border-radius:50%; border:2px solid var(--oliva-medio); object-fit:cover; }
+.header-badge { display:inline-flex; align-items:center; gap:8px; background:var(--oliva); color:var(--bianco); font-size:.72rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:5px 14px; border-radius:20px; margin-bottom:14px; }
+.header-badge svg { width:14px; height:14px; fill:currentColor; }
+.header h1 { font-family:var(--font-display); font-weight:700; font-size:clamp(1.5rem,4.5vw,2.1rem); color:var(--oliva-scuro); line-height:1.2; margin-bottom:6px; }
+.header-sub { font-size:.92rem; color:var(--testo-soft); max-width:520px; margin:0 auto; }
+
+/* Profilo bar */
+.profilo-bar { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:14px; padding:10px 20px; background:var(--bianco); border-radius:24px; box-shadow:var(--ombra); font-size:.85rem; flex-wrap:wrap; }
+.profilo-bar-name { font-weight:600; color:var(--oliva-scuro); }
+.profilo-bar-info { color:var(--testo-soft); }
+.profilo-bar-btn { background:none; border:1px solid var(--oliva-medio); color:var(--oliva); padding:4px 12px; border-radius:16px; cursor:pointer; font-family:var(--font); font-size:.78rem; font-weight:600; transition:all var(--transizione); }
+.profilo-bar-btn:hover { background:var(--oliva-chiaro); }
+
+/* CARD & CAMPO */
+.card { background:var(--bianco); border-radius:var(--raggio); box-shadow:var(--ombra); padding:28px 24px; border:1px solid rgba(97,108,39,0.06); margin-bottom:16px; }
+.campo { margin-bottom:20px; }
+.campo:last-child { margin-bottom:0; }
+.campo-label { display:block; font-weight:600; font-size:.88rem; color:var(--oliva-scuro); margin-bottom:6px; }
+.campo-hint { display:block; font-size:.78rem; color:var(--testo-soft); margin-bottom:6px; }
+.campo-input,.campo-select { width:100%; padding:11px 14px; font-family:var(--font); font-size:.95rem; color:var(--testo); background:var(--oliva-bg); border:2px solid var(--oliva-medio); border-radius:var(--raggio-sm); outline:none; transition:border-color var(--transizione), box-shadow var(--transizione); }
+.campo-input:focus,.campo-select:focus { border-color:var(--oliva); box-shadow:0 0 0 3px rgba(97,108,39,0.12); }
+.campo-input::placeholder { color:#94A078; }
+textarea.campo-input { resize:vertical; min-height:80px; }
+.campo-errore { display:none; align-items:center; gap:5px; margin-top:5px; font-size:.78rem; color:var(--errore); font-weight:500; }
+.campo-errore svg { width:13px; height:13px; fill:var(--errore); flex-shrink:0; }
+.campo-errore.visibile { display:flex; }
+.campo-input.invalido,.campo-select.invalido { border-color:var(--errore); }
+
+/* RADIO */
+.radio-group { display:flex; gap:10px; flex-wrap:wrap; }
+.radio-opt { position:relative; }
+.radio-opt input { position:absolute; opacity:0; pointer-events:none; }
+.radio-opt label { display:inline-flex; align-items:center; gap:6px; padding:9px 16px; background:var(--oliva-bg); border:2px solid var(--oliva-medio); border-radius:var(--raggio-sm); cursor:pointer; font-weight:500; font-size:.9rem; color:var(--testo-soft); transition:all var(--transizione); user-select:none; }
+.radio-opt input:checked + label { background:var(--oliva-chiaro); border-color:var(--oliva); color:var(--oliva-scuro); font-weight:600; }
+.radio-opt label:hover { border-color:var(--oliva); background:var(--oliva-chiaro); }
+
+/* BOTTONI */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 24px; font-family:var(--font); font-size:.95rem; font-weight:600; border:none; border-radius:var(--raggio-sm); cursor:pointer; transition:all var(--transizione); }
+.btn svg { width:18px; height:18px; fill:currentColor; }
+.btn-ambra { background:var(--ambra); color:var(--bianco); width:100%; }
+.btn-ambra:hover { background:var(--ambra-hover); box-shadow:var(--ombra-forte); transform:translateY(-1px); }
+.btn-ambra:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+.btn-oliva { background:var(--oliva); color:var(--bianco); }
+.btn-oliva:hover { background:var(--oliva-scuro); }
+.btn-outline { background:transparent; color:var(--oliva); border:2px solid var(--oliva-medio); }
+.btn-outline:hover { background:var(--oliva-chiaro); border-color:var(--oliva); }
+.btn-sm { padding:8px 16px; font-size:.85rem; }
+
+/* ANNO ACCORDION */
+.anno-section { margin-bottom:16px; }
+.anno-header { display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:var(--oliva); color:var(--bianco); border-radius:var(--raggio) var(--raggio) 0 0; cursor:pointer; user-select:none; transition:background var(--transizione); }
+.anno-section:not(.aperta) .anno-header { border-radius:var(--raggio); }
+.anno-header:hover { background:var(--oliva-scuro); }
+.anno-header h2 { font-family:var(--font-display); font-size:1.12rem; font-weight:600; }
+.anno-header-sfondo { font-size:.8rem; opacity:.85; margin-top:2px; font-weight:400; font-style:italic; }
+.anno-chevron { width:24px; height:24px; fill:var(--bianco); flex-shrink:0; transition:transform var(--transizione); }
+.anno-section.aperta .anno-chevron { transform:rotate(180deg); }
+.anno-body { display:none; background:var(--bianco); border:1px solid rgba(97,108,39,0.06); border-top:none; border-radius:0 0 var(--raggio) var(--raggio); box-shadow:var(--ombra); }
+.anno-section.aperta .anno-body { display:block; }
+.anno-body-inner { padding:20px; }
+
+/* PROPOSTA */
+.proposta-box { padding:16px; background:var(--ambra-chiaro); border-radius:var(--raggio-sm); margin-bottom:16px; border-left:3px solid var(--ambra); }
+.proposta-box h3 { font-size:.88rem; font-weight:600; color:var(--ambra-hover); margin-bottom:8px; }
+.proposta-inviata { padding:12px 16px; background:var(--oliva-chiaro); border-radius:var(--raggio-sm); border-left:3px solid var(--oliva); font-size:.9rem; color:var(--oliva-scuro); }
+
+/* AGGIUNGI */
+.btn-aggiungi { width:100%; padding:14px; margin-bottom:16px; background:var(--oliva-chiaro); border:2px dashed var(--oliva-medio); border-radius:var(--raggio-sm); color:var(--oliva); font-family:var(--font); font-size:.9rem; font-weight:600; cursor:pointer; transition:all var(--transizione); display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn-aggiungi:hover { border-color:var(--oliva); background:var(--oliva-medio); }
+.btn-aggiungi svg { width:18px; height:18px; fill:var(--oliva); }
+
+/* LISTA ATTIVITA */
+.attivita-lista { list-style:none; }
+.attivita-item { padding:14px 16px; background:var(--oliva-bg); border-left:3px solid var(--oliva); border-radius:0 var(--raggio-sm) var(--raggio-sm) 0; margin-bottom:10px; transition:box-shadow var(--transizione); }
+.attivita-item:hover { box-shadow:var(--ombra); }
+.attivita-item-titolo { font-weight:600; color:var(--oliva-scuro); font-size:.95rem; }
+.attivita-item-meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; font-size:.78rem; color:var(--testo-soft); }
+.attivita-item-meta span { display:inline-flex; align-items:center; gap:4px; }
+.attivita-item-meta svg { width:12px; height:12px; fill:var(--testo-soft); }
+.attivita-item-desc { margin-top:6px; font-size:.85rem; color:var(--testo); }
+.attivita-item-link { display:inline-flex; align-items:center; gap:4px; margin-top:6px; font-size:.82rem; color:var(--oliva); text-decoration:none; font-weight:500; }
+.attivita-item-link:hover { text-decoration:underline; }
+.attivita-item-link svg { width:12px; height:12px; fill:var(--oliva); }
+.attivita-vuota { text-align:center; padding:24px; color:var(--testo-soft); font-size:.9rem; font-style:italic; }
+.tag-pre { display:inline-block; font-size:.66rem; font-weight:600; background:var(--oliva); color:var(--bianco); padding:2px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:.05em; margin-left:8px; vertical-align:middle; }
+
+/* ADMIN / PASSWORD */
+.admin-bar { text-align:center; margin:24px 0 8px; }
+.admin-toggle { background:none; border:none; color:var(--testo-soft); font-family:var(--font); font-size:.8rem; cursor:pointer; text-decoration:underline; opacity:.6; transition:opacity var(--transizione); }
+.admin-toggle:hover { opacity:1; }
+.admin-panel { display:none; margin-top:12px; }
+.admin-panel.visibile { display:block; }
+.admin-login { max-width:360px; margin:0 auto; text-align:center; }
+.admin-login .campo-input { text-align:center; }
+.admin-dashboard { }
+.admin-stat { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; }
+.stat-card { flex:1; min-width:100px; padding:14px 10px; background:var(--oliva-chiaro); border-radius:var(--raggio-sm); text-align:center; }
+.stat-card-num { font-family:var(--font-display); font-size:1.6rem; font-weight:700; color:var(--oliva); }
+.stat-card-label { font-size:.72rem; color:var(--testo-soft); margin-top:2px; }
+.admin-proposte-lista { list-style:none; margin-top:12px; }
+.admin-proposte-item { padding:10px 14px; background:var(--oliva-bg); border-radius:var(--raggio-sm); margin-bottom:6px; font-size:.88rem; display:flex; justify-content:space-between; align-items:center; }
+.admin-proposte-item-nome { font-size:.75rem; color:var(--testo-soft); }
+
+/* FILTRI */
+.filtri-bar { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+.filtri-bar .campo { margin-bottom:0; }
+.filtri-bar .campo-select, .filtri-bar .campo-input { padding:8px 12px; font-size:.85rem; }
+.filtri-count { font-size:.82rem; color:var(--testo-soft); margin-bottom:12px; }
+.filtri-count strong { color:var(--oliva-scuro); }
+.filtri-reset { background:none; border:none; color:var(--ambra); font-family:var(--font); font-size:.82rem; cursor:pointer; text-decoration:underline; margin-left:8px; }
+
+/* TIMELINE */
+.timeline-wrap { margin:20px 0; padding:16px; background:var(--oliva-bg); border-radius:var(--raggio); }
+.timeline-title { font-family:var(--font-display); font-size:.95rem; color:var(--oliva-scuro); margin-bottom:12px; }
+.timeline-svg { width:100%; height:auto; display:block; }
+.timeline-legend { display:flex; gap:16px; margin-top:10px; flex-wrap:wrap; }
+.timeline-legend-item { display:flex; align-items:center; gap:5px; font-size:.75rem; color:var(--testo-soft); }
+.timeline-legend-dot { width:10px; height:10px; border-radius:50%; }
+
+/* TABS ADMIN */
+.admin-tabs { display:flex; gap:6px; margin-bottom:16px; border-bottom:2px solid var(--oliva-chiaro); padding-bottom:6px; }
+.admin-tab { padding:7px 14px; border:none; background:none; font-family:var(--font); font-size:.83rem; font-weight:600; color:var(--testo-soft); cursor:pointer; border-radius:var(--raggio-sm) var(--raggio-sm) 0 0; transition:all var(--transizione); }
+.admin-tab.attivo { background:var(--oliva); color:var(--bianco); }
+.admin-tab:hover:not(.attivo) { background:var(--oliva-chiaro); }
+.admin-tab-panel { display:none; }
+.admin-tab-panel.visibile { display:block; }
+
+/* GRUPPI PROPOSTE */
+.prop-group { margin-bottom:16px; }
+.prop-group-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:10px 14px; background:var(--oliva); color:var(--bianco);
+  border-radius:var(--raggio-sm) var(--raggio-sm) 0 0; font-size:.88rem; font-weight:600;
+}
+.prop-group-count {
+  background:rgba(255,255,255,0.2); padding:2px 10px; border-radius:12px; font-size:.78rem;
+}
+.prop-group-body {
+  border:1px solid var(--oliva-medio); border-top:none;
+  border-radius:0 0 var(--raggio-sm) var(--raggio-sm); padding:8px;
+}
+.prop-group-body .admin-proposte-item { margin-bottom:4px; }
+.prop-no-group {
+  padding:12px 16px; background:var(--ambra-chiaro); border-left:3px solid var(--ambra);
+  border-radius:var(--raggio-sm); margin-bottom:12px; font-size:.82rem; color:var(--testo-soft);
+}
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center; padding:20px; backdrop-filter:blur(4px); }
+.modal-overlay.visibile { display:flex; }
+.modal { background:var(--bianco); border-radius:var(--raggio); box-shadow:var(--ombra-modal); width:100%; max-width:560px; max-height:90vh; overflow-y:auto; padding:28px 24px; animation:modalIn .3s ease; }
+@keyframes modalIn { from { transform:translateY(20px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+.modal h3 { font-family:var(--font-display); font-size:1.12rem; color:var(--oliva-scuro); margin-bottom:20px; }
+.modal-actions { display:flex; gap:10px; margin-top:20px; }
+.modal-actions .btn { flex:1; }
+
+/* FOOTER */
+.footer { text-align:center; margin-top:32px; padding-top:16px; border-top:1px solid var(--oliva-medio); font-size:.75rem; color:var(--testo-soft); }
+
+/* UTILITY */
+.hidden { display:none !important; }
+.mt-16 { margin-top:16px; }
+@media(max-width:480px) {
+  .container { padding:12px 10px 60px; }
+  .card { padding:20px 16px; }
+  .anno-header { padding:14px 16px; }
+  .radio-group { flex-direction:column; gap:6px; }
+  .modal { padding:20px 16px; }
+  .profilo-bar { gap:8px; font-size:.8rem; }
+  .header-loghi img { width:52px; height:52px; }
+  .admin-stat { flex-direction:column; }
+  .filtri-bar { grid-template-columns:1fr; }
+  .admin-tabs { overflow-x:auto; flex-wrap:nowrap; }
+  .admin-tab { white-space:nowrap; font-size:.78rem; padding:6px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="header">
+    <div class="header-loghi">
+      <img src="Orzinuovi_logo_verde.jpg" alt="Sacra Famiglia Orzinuovi">
+      <img src="martinengo_logo_verde.jpg" alt="Sacra Famiglia Martinengo">
+    </div>
+    <div class="header-badge">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      Due sedi, un'unica missione educativa
+    </div>
+    <h1>Sfondo Integratore</h1>
+    <p class="header-sub">Raccolta delle attivit&agrave; legate allo sfondo integratore e proposte per il prossimo anno scolastico.</p>
+    <p style="font-size:0.78rem;color:var(--oliva);margin-top:6px;font-style:italic;letter-spacing:0.02em;">Fondatrice Santa Paola Elisabetta Cerioli</p>
+    <div class="profilo-bar hidden" id="profiloBar">
+      <span class="profilo-bar-name" id="barNome"></span>
+      <span class="profilo-bar-info" id="barInfo"></span>
+      <button class="profilo-bar-btn" onclick="resetProfilo()">Cambia profilo</button>
+    </div>
+  </header>
+
+  <!-- PROFILO -->
+  <section id="profiloSection">
+    <div class="card" style="max-width:520px;margin:20px auto;">
+      <h2 style="font-family:var(--font-display);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;">Identificati</h2>
+      <p style="font-size:.85rem;color:var(--testo-soft);margin-bottom:20px;">I tuoi dati verranno salvati per i prossimi accessi.</p>
+      <div class="campo">
+        <label class="campo-label" for="pNome">Nome e cognome</label>
+        <input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name">
+        <div class="campo-errore" id="errPNome"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci il tuo nome</span></div>
+      </div>
+      <div class="campo">
+        <label class="campo-label">Sede</label>
+        <div class="radio-group" id="sedeGroup">
+          <div class="radio-opt"><input type="radio" name="pSede" id="sedeOrz" value="Orzinuovi"><label for="sedeOrz">Orzinuovi</label></div>
+          <div class="radio-opt"><input type="radio" name="pSede" id="sedeMart" value="Martinengo"><label for="sedeMart">Martinengo</label></div>
+        </div>
+        <div class="campo-errore" id="errPSede"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona la sede</span></div>
+      </div>
+      <div class="campo">
+        <label class="campo-label">Ordine di scuola</label>
+        <div class="radio-group" id="ordineGroup"></div>
+        <div class="campo-errore" id="errPOrdine"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona l'ordine</span></div>
+      </div>
+      <button class="btn btn-ambra mt-16" onclick="salvaProfilo()">
+        <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        Accedi
+      </button>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section id="dashboardSection" class="hidden">
+
+    <!-- 2025-26 -->
+    <div class="anno-section aperta" id="anno2526">
+      <div class="anno-header" onclick="toggleAnno('anno2526')">
+        <div>
+          <h2>2025-26</h2>
+          <div class="anno-header-sfondo">&laquo; Trasformiamo gli errori in opportunit&agrave; &raquo;</div>
+        </div>
+        <svg class="anno-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+      </div>
+      <div class="anno-body">
+        <div class="anno-body-inner">
+          <button class="btn-aggiungi" onclick="apriModal('2025-26')">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Aggiungi un'attivit&agrave; svolta
+          </button>
+          <ul class="attivita-lista" id="lista2526"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2026-27 -->
+    <div class="anno-section" id="anno2627">
+      <div class="anno-header" onclick="toggleAnno('anno2627')">
+        <div>
+          <h2>2026-27</h2>
+          <div class="anno-header-sfondo">Proponi il titolo e registra le attivit&agrave;</div>
+        </div>
+        <svg class="anno-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+      </div>
+      <div class="anno-body">
+        <div class="anno-body-inner">
+          <div id="propostaBox" class="proposta-box">
+            <h3>Proponi il tuo sfondo integratore per il 2026-27</h3>
+            <span class="campo-hint">Ogni docente pu&ograve; inviare una sola proposta</span>
+            <input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Il viaggio: scoprire se stessi e il mondo" maxlength="200" style="margin:8px 0;">
+            <button class="btn btn-ambra btn-sm" onclick="inviaProposta()" style="width:100%;">
+              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              Invia proposta
+            </button>
+          </div>
+          <div id="propostaInviata" class="proposta-inviata hidden">
+            La tua proposta: <strong id="propostaText"></strong>
+          </div>
+          <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Aggiungi un'attivit&agrave; (in itinere)
+          </button>
+          <ul class="attivita-lista" id="lista2627"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN -->
+    <div class="admin-bar">
+      <button class="admin-toggle" onclick="toggleAdmin()">Accesso amministratore</button>
+    </div>
+    <div class="admin-panel" id="adminPanel">
+      <div class="card">
+        <!-- Login -->
+        <div id="adminLogin" class="admin-login">
+          <h3 style="font-family:var(--font-display);font-size:1rem;color:var(--oliva-scuro);margin-bottom:12px;">Inserisci la password</h3>
+          <input type="password" id="adminPwd" class="campo-input" placeholder="Password" style="margin-bottom:10px;" onkeydown="if(event.key==='Enter')verificaAdmin()">
+          <button class="btn btn-oliva btn-sm" onclick="verificaAdmin()" style="width:100%;">Accedi</button>
+          <div class="campo-errore mt-16" id="errAdmin"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Password non corretta</span></div>
+        </div>
+        <!-- Dashboard -->
+        <div id="adminDash" class="admin-dashboard hidden">
+
+          <!-- SELETTORE ANNO -->
+          <div id="annoSelector">
+            <h3 style="font-family:var(--font-display);font-size:1.1rem;color:var(--oliva-scuro);margin-bottom:16px;text-align:center;">Seleziona l'anno scolastico</h3>
+            <div style="display:flex;gap:12px;">
+              <button class="btn btn-oliva" style="flex:1;flex-direction:column;padding:20px 16px;" onclick="selezionaAnnoAdmin('2025-26')">
+                <span style="font-family:var(--font-display);font-size:1.3rem;">2025-26</span>
+                <span style="font-size:.78rem;opacity:.8;margin-top:4px;font-weight:400;">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</span>
+              </button>
+              <button class="btn btn-outline" style="flex:1;flex-direction:column;padding:20px 16px;" onclick="selezionaAnnoAdmin('2026-27')">
+                <span style="font-family:var(--font-display);font-size:1.3rem;">2026-27</span>
+                <span style="font-size:.78rem;opacity:.8;margin-top:4px;font-weight:400;">Proposte e nuove attivit&agrave;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ========== VISTA 2025-26 ========== -->
+          <div id="vista2526" class="hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+              <div>
+                <h3 style="font-family:var(--font-display);font-size:1.05rem;color:var(--oliva-scuro);">A.S. 2025-26</h3>
+                <p style="font-size:.85rem;color:var(--ambra);font-style:italic;margin-top:2px;">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</p>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="tornaSelettoreAnno()">Cambia anno</button>
+            </div>
+
+            <div class="admin-stat" id="adminStats2526"></div>
+
+            <!-- FILTRI -->
+            <div class="filtri-bar">
+              <div class="campo">
+                <select id="fSede" class="campo-select" onchange="applicaFiltri()">
+                  <option value="">Tutte le sedi</option>
+                  <option value="Orzinuovi">Orzinuovi</option>
+                  <option value="Martinengo">Martinengo</option>
+                </select>
+              </div>
+              <div class="campo">
+                <select id="fDocente" class="campo-select" onchange="applicaFiltri()">
+                  <option value="">Tutti i docenti</option>
+                </select>
+              </div>
+              <div class="campo">
+                <select id="fDisciplina" class="campo-select" onchange="applicaFiltri()">
+                  <option value="">Tutte le discipline</option>
+                </select>
+              </div>
+              <div class="campo">
+                <input type="text" id="fKeyword" class="campo-input" placeholder="Cerca per parola chiave..." oninput="applicaFiltri()">
+              </div>
+            </div>
+            <div class="filtri-count" id="filtriCount"></div>
+
+            <!-- TIMELINE -->
+            <div class="timeline-wrap">
+              <div class="timeline-title">Distribuzione attivit&agrave; &mdash; 12 set 2025 / 5 giu 2026</div>
+              <svg id="timelineSvg" class="timeline-svg" viewBox="0 0 680 200" xmlns="http://www.w3.org/2000/svg"></svg>
+              <div class="timeline-legend" id="timelineLegend"></div>
+            </div>
+
+            <!-- LISTA FILTRATA -->
+            <h4 style="font-size:.9rem;color:var(--oliva-scuro);margin:16px 0 8px;">Attivit&agrave; registrate</h4>
+            <ul class="attivita-lista" id="adminAttivitaFiltrate">
+              <li class="attivita-vuota">Caricamento in corso...</li>
+            </ul>
+          </div>
+
+          <!-- ========== VISTA 2026-27 ========== -->
+          <div id="vista2627" class="hidden">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+              <div>
+                <h3 style="font-family:var(--font-display);font-size:1.05rem;color:var(--oliva-scuro);">A.S. 2026-27 &mdash; Proposte</h3>
+                <p style="font-size:.82rem;color:var(--testo-soft);margin-top:2px;">Titoli proposti dai docenti, raggruppati per area tematica</p>
+              </div>
+              <button class="btn btn-outline btn-sm" onclick="tornaSelettoreAnno()">Cambia anno</button>
+            </div>
+
+            <div class="admin-stat" id="adminStats2627"></div>
+
+            <!-- PROPOSTE RAGGRUPPATE -->
+            <div id="proposteRaggruppate"></div>
+
+            <!-- ATTIVITA 2026-27 (in itinere) -->
+            <div id="attivita2627Wrap" class="hidden" style="margin-top:20px;">
+              <h4 style="font-size:.9rem;color:var(--oliva-scuro);margin-bottom:8px;">Attivit&agrave; in itinere 2026-27</h4>
+              <ul class="attivita-lista" id="adminAttivita2627"></ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo<br>
+    SacraFamiglia education &copy; 2026
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <h3 id="modalTitolo">Nuova attivit&agrave;</h3>
+    <div class="campo">
+      <label class="campo-label" for="aTitolo">Titolo dell'attivit&agrave;</label>
+      <input type="text" id="aTitolo" class="campo-input" placeholder="Es. Laboratorio di scrittura creativa" maxlength="150">
+      <div class="campo-errore" id="errATitolo"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci un titolo</span></div>
+    </div>
+    <div class="campo">
+      <label class="campo-label" for="aDisciplina">Disciplina / Campo di esperienza</label>
+      <select id="aDisciplina" class="campo-select"></select>
+    </div>
+    <div class="campo">
+      <label class="campo-label" for="aPeriodo">Periodo</label>
+      <select id="aPeriodo" class="campo-select">
+        <option value="">Seleziona...</option>
+        <option>Settembre</option><option>Ottobre</option><option>Novembre</option>
+        <option>Dicembre</option><option>Gennaio</option><option>Febbraio</option>
+        <option>Marzo</option><option>Aprile</option><option>Maggio</option><option>Giugno</option>
+        <option>Primo quadrimestre</option><option>Secondo quadrimestre</option>
+        <option>Intero anno scolastico</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label class="campo-label" for="aDescrizione">Breve descrizione</label>
+      <textarea id="aDescrizione" class="campo-input" placeholder="Cosa avete fatto, con quali strumenti, che risultati..." maxlength="500" rows="3"></textarea>
+    </div>
+    <div class="campo">
+      <label class="campo-label" for="aLink">Link o risorsa <span style="font-weight:400;color:var(--testo-soft)">(facoltativo)</span></label>
+      <input type="url" id="aLink" class="campo-input" placeholder="https://...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="chiudiModal()">Annulla</button>
+      <button class="btn btn-oliva" onclick="inviaAttivita()">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        Invia
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================
+   CONFIGURAZIONE
+   ===================================================== */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAXRYP_EENJQzSQnOOuKHmo7RpoXS-o-tcUAUF3mIN7W1r1X5U2f4VN95k8rcZKJcJGQ/exec';
+
+// Password admin (SHA-256 di "sfondo2026" — cambiala a piacere rigenerando l'hash)
+const ADMIN_HASH = '526a8f0533636e1d0ef2e02820b0ba73fdbe88c2ce5f631b2518fae81a0d85ec';
+
+const LS_PROFILO  = 'sf_integratore_profilo';
+const LS_PROPOSTA = 'sf_integratore_proposta_2627';
+const LS_ATTIVITA = 'sf_integratore_attivita';
+
+let modalAnnoCorrente = '';
+
+/* =====================================================
+   DISCIPLINE PER ORDINE
+   ===================================================== */
+const DISCIPLINE = {
+  'Nido': ['Attivita educativa','Laboratorio sensoriale','Laboratorio espressivo','Routine e cura','Progetto speciale'],
+  'Infanzia': ['Il se e l\'altro','Il corpo e il movimento','Immagini suoni colori','I discorsi e le parole','La conoscenza del mondo','Educazione civica','Progetto trasversale'],
+  'Primaria': ['Italiano','Matematica','Scienze','Storia','Geografia','Inglese','Arte e immagine','Musica','Educazione fisica','Tecnologia','Religione','Educazione civica','Progetto trasversale'],
+  'Primaria SBS': ['Italiano','Matematica','Scienze','Storia','Geografia','English','Arte e immagine','Musica','Educazione fisica','Tecnologia','Religione','Educazione civica','Progetto trasversale','CLIL / Bilingual Module'],
+  'Secondaria I grado': ['Italiano','Storia','Geografia','Matematica','Scienze','Inglese','Seconda lingua comunitaria','Arte e immagine','Musica','Educazione fisica','Tecnologia','Religione','Educazione civica','Progetto trasversale'],
+  'Secondaria I grado SBS': ['Italiano','Storia','Geografia','Matematica','Scienze','English','Arte e immagine','Musica','Educazione fisica','Tecnologia','Religione','Educazione civica','Progetto trasversale','CLIL / Bilingual Module']
+};
+
+const ORDINI_SEDE = {
+  'Orzinuovi': ['Nido','Infanzia','Primaria','Secondaria I grado'],
+  'Martinengo': ['Nido','Infanzia','Primaria','Primaria SBS','Secondaria I grado','Secondaria I grado SBS']
+};
+
+/* =====================================================
+   ATTIVITA' PRE-COMPILATE ANDREA (2025-26)
+   ===================================================== */
+const ATTIVITA_ANDREA = [
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'ScriviMeglio \u2014 Laboratorio di scrittura guidata',
+     disciplina:'Italiano / Tecnologia', periodo:'Intero anno scolastico',
+     descrizione:'Web app con 100 prompt e approccio socratico. Filosofia "mai rosso per errori": l\'errore ortografico e sintattico diventa punto di partenza per la riflessione. Include l\'Officina della Lingua con grammatica valenziale (Ferraboschi).',
+     link:'https://tracciatema.neocities.org' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'CyberEscape \u2014 Simulazione di cittadinanza digitale',
+     disciplina:'Educazione civica / Tecnologia', periodo:'Secondo quadrimestre',
+     descrizione:'12 missioni con scenari digitali reali (cyberbullismo, phishing, sexting, truffe gaming). Le scelte sbagliate non terminano il gioco ma generano conseguenze formative: l\'errore \u00e8 il motore dell\'apprendimento.',
+     link:'https://cyberescape.neocities.org' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'Calibro \u2014 Valutazione qualitativa',
+     disciplina:'Progetto trasversale', periodo:'Intero anno scolastico',
+     descrizione:'Scala qualitativa a 5 livelli con spirale Dewey dinamica. Documenta la crescita, non il giudizio: ogni livello \u00e8 un\'opportunit\u00e0 di miglioramento. Frecce trend mostrano la direzione del percorso.',
+     link:'' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'Comportamentismo e Social Media',
+     disciplina:'Tecnologia', periodo:'Primo quadrimestre',
+     descrizione:'Attivit\u00e0 interattiva che smonta il condizionamento operante (Skinner) nei social. Gli studenti scoprono come i propri "errori" digitali sono progettati dalle piattaforme e trasformano la consapevolezza in cambiamento.',
+     link:'https://comportamentismo.neocities.org' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'PesoDigitale \u2014 Impronta digitale consapevole',
+     disciplina:'Educazione civica', periodo:'Secondo quadrimestre',
+     descrizione:'9 sezioni con metafora LEGO brick. Errori di privacy e condivisione diventano mattoncini di consapevolezza. Manifesto digitale personale e gioco Brick Invaders sbloccabile.',
+     link:'https://pesodigitale.neocities.org' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'Crescere Cittadini Digitali \u2014 Ecosistema genitori',
+     disciplina:'Educazione civica', periodo:'Marzo',
+     descrizione:'Serata genitori con Guida (17 sezioni + podcast), CyberEscape (missione "In Famiglia"), Patto Digitale (costruttore con export PDF). L\'errore educativo pi\u00f9 comune \u2014 non parlare di digitale \u2014 diventa patto condiviso.',
+     link:'https://genitori.neocities.org' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'Atlante dello Studente \u2014 Portfolio competenze',
+     disciplina:'Progetto trasversale', periodo:'Intero anno scolastico',
+     descrizione:'Portfolio: Competenze Chiave Europee, Life Skills, Condotta, Competenze Digitali. Sistema ASSOC con soglia configurabile. L\'errore non \u00e8 assenza di competenza ma punto di partenza misurabile.',
+     link:'' },
+  { nome:'Andrea Cerioli', sede:'Orzinuovi', ordine:'Secondaria I grado', anno:'2025-26', pre:true,
+     titolo:'Stampa 3D \u2014 Simulatore laboratorio',
+     disciplina:'Tecnologia', periodo:'Secondo quadrimestre',
+     descrizione:'Simulatore TinkerCAD \u2192 Cura \u2192 Anycubic Kobra Plus con 10 modelli STL reali. Trial & error come metodo: la stampa fallita diventa lezione di tolleranze, materiali e parametri.',
+     link:'https://stampa3d.neocities.org' }
+];
+
+/* =====================================================
+   INIT
+   ===================================================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('input[name="pSede"]').forEach(r => {
+    r.addEventListener('change', () => generaOrdini(r.value));
+  });
+  const profilo = JSON.parse(localStorage.getItem(LS_PROFILO));
+  if (profilo && profilo.nome) mostraDashboard(profilo);
+});
+
+/* =====================================================
+   PROFILO
+   ===================================================== */
+function generaOrdini(sede) {
+  const g = document.getElementById('ordineGroup');
+  const ordini = ORDINI_SEDE[sede] || [];
+  g.innerHTML = ordini.map((o,i) => '<div class="radio-opt"><input type="radio" name="pOrdine" id="ordine'+i+'" value="'+o+'"><label for="ordine'+i+'">'+o+'</label></div>').join('');
+}
+
+function salvaProfilo() {
+  document.querySelectorAll('.campo-errore').forEach(el => el.classList.remove('visibile'));
+  const nome = document.getElementById('pNome').value.trim();
+  const sede = document.querySelector('input[name="pSede"]:checked');
+  const ordine = document.querySelector('input[name="pOrdine"]:checked');
+  let ok = true;
+  if (!nome) { document.getElementById('errPNome').classList.add('visibile'); ok = false; }
+  if (!sede) { document.getElementById('errPSede').classList.add('visibile'); ok = false; }
+  if (!ordine) { document.getElementById('errPOrdine').classList.add('visibile'); ok = false; }
+  if (!ok) return;
+  const p = { nome, sede: sede.value, ordine: ordine.value };
+  localStorage.setItem(LS_PROFILO, JSON.stringify(p));
+  mostraDashboard(p);
+}
+
+function resetProfilo() {
+  localStorage.removeItem(LS_PROFILO);
+  document.getElementById('profiloSection').classList.remove('hidden');
+  document.getElementById('dashboardSection').classList.add('hidden');
+  document.getElementById('profiloBar').classList.add('hidden');
+}
+
+function mostraDashboard(p) {
+  document.getElementById('profiloSection').classList.add('hidden');
+  document.getElementById('dashboardSection').classList.remove('hidden');
+  document.getElementById('profiloBar').classList.remove('hidden');
+  document.getElementById('barNome').textContent = p.nome;
+  document.getElementById('barInfo').textContent = p.sede + ' \u2014 ' + p.ordine;
+  aggiornaDiscipline(p.ordine);
+  const proposta = localStorage.getItem(LS_PROPOSTA);
+  if (proposta) {
+    document.getElementById('propostaBox').classList.add('hidden');
+    document.getElementById('propostaInviata').classList.remove('hidden');
+    document.getElementById('propostaText').textContent = proposta;
+  }
+  caricaAttivita();
+}
+
+/* ACCORDION */
+function toggleAnno(id) { document.getElementById(id).classList.toggle('aperta'); }
+
+/* DISCIPLINE */
+function aggiornaDiscipline(ordine) {
+  const s = document.getElementById('aDisciplina');
+  const d = DISCIPLINE[ordine] || DISCIPLINE['Primaria'];
+  s.innerHTML = '<option value="">Seleziona...</option>' + d.map(x => '<option value="'+x+'">'+x+'</option>').join('');
+}
+
+/* MODAL */
+function apriModal(anno) {
+  modalAnnoCorrente = anno;
+  document.getElementById('modalTitolo').textContent = 'Nuova attivit\u00e0 \u2014 ' + anno;
+  ['aTitolo','aDescrizione','aLink'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('aDisciplina').selectedIndex = 0;
+  document.getElementById('aPeriodo').selectedIndex = 0;
+  document.querySelectorAll('.campo-errore').forEach(el => el.classList.remove('visibile'));
+  document.getElementById('modalOverlay').classList.add('visibile');
+}
+function chiudiModal() { document.getElementById('modalOverlay').classList.remove('visibile'); }
+document.addEventListener('click', e => { if (e.target.id === 'modalOverlay') chiudiModal(); });
+
+/* INVIO ATTIVITA */
+function inviaAttivita() {
+  const titolo = document.getElementById('aTitolo').value.trim();
+  const disciplina = document.getElementById('aDisciplina').value;
+  const periodo = document.getElementById('aPeriodo').value;
+  const descrizione = document.getElementById('aDescrizione').value.trim();
+  const link = document.getElementById('aLink').value.trim();
+  document.querySelectorAll('.campo-errore').forEach(el => el.classList.remove('visibile'));
+  if (!titolo) { document.getElementById('errATitolo').classList.add('visibile'); return; }
+  const p = JSON.parse(localStorage.getItem(LS_PROFILO));
+  const att = { nome:p.nome, sede:p.sede, ordine:p.ordine, anno:modalAnnoCorrente, titolo, disciplina, periodo, descrizione, link, timestamp:new Date().toISOString() };
+  inviaSheet('attivita', att);
+  const salvate = JSON.parse(localStorage.getItem(LS_ATTIVITA) || '[]');
+  salvate.push(att);
+  localStorage.setItem(LS_ATTIVITA, JSON.stringify(salvate));
+  chiudiModal();
+  caricaAttivita();
+}
+
+/* INVIO PROPOSTA */
+function inviaProposta() {
+  const t = document.getElementById('propostaTitolo').value.trim();
+  if (!t || t.length < 3) return;
+  const p = JSON.parse(localStorage.getItem(LS_PROFILO));
+  inviaSheet('proposta', { nome:p.nome, sede:p.sede, ordine:p.ordine, titolo:t });
+  localStorage.setItem(LS_PROPOSTA, t);
+  document.getElementById('propostaBox').classList.add('hidden');
+  document.getElementById('propostaInviata').classList.remove('hidden');
+  document.getElementById('propostaText').textContent = t;
+}
+
+/* IMAGE PIXEL */
+function inviaSheet(tipo, dati) {
+  const params = new URLSearchParams({ tipo, ...dati });
+  new Image().src = APPS_SCRIPT_URL + '?' + params.toString();
+}
+
+/* RENDER ATTIVITA */
+function caricaAttivita() {
+  const salvate = JSON.parse(localStorage.getItem(LS_ATTIVITA) || '[]');
+  const profilo = JSON.parse(localStorage.getItem(LS_PROFILO));
+  const isAndrea = profilo.nome.toLowerCase().includes('cerioli') || profilo.nome.toLowerCase().includes('andrea c');
+
+  ['2025-26','2026-27'].forEach(anno => {
+    const id = 'lista' + anno.replace('-','');
+    const el = document.getElementById(id);
+    let items = salvate.filter(a => a.anno === anno);
+    if (isAndrea && anno === '2025-26') items = [...ATTIVITA_ANDREA.filter(a => a.anno === anno), ...items];
+    el.innerHTML = items.length
+      ? items.map(renderAtt).join('')
+      : '<li class="attivita-vuota">' + (anno === '2025-26' ? 'Nessuna attivit\u00e0 registrata.' : 'Archivio aperto tutto l\'anno.') + '</li>';
+  });
+}
+
+function renderAtt(a) {
+  const pre = a.pre ? '<span class="tag-pre">pre-compilata</span>' : '';
+  const lnk = a.link ? '<a href="'+esc(a.link)+'" target="_blank" rel="noopener" class="attivita-item-link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Apri risorsa</a>' : '';
+  const desc = a.descrizione ? '<div class="attivita-item-desc">'+esc(a.descrizione)+'</div>' : '';
+  return '<li class="attivita-item"><div class="attivita-item-titolo">'+esc(a.titolo)+pre+'</div><div class="attivita-item-meta">'
+    + (a.disciplina ? '<span><svg viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg>'+esc(a.disciplina)+'</span>' : '')
+    + (a.periodo ? '<span><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>'+esc(a.periodo)+'</span>' : '')
+    + '</div>' + desc + lnk + '</li>';
+}
+
+/* =====================================================
+   ADMIN
+   ===================================================== */
+let adminDatiAttivita = [];
+let adminDatiProposte = [];
+let adminAnnoCorrente = '';
+
+function toggleAdmin() { document.getElementById('adminPanel').classList.toggle('visibile'); }
+
+async function verificaAdmin() {
+  const pwd = document.getElementById('adminPwd').value;
+  const enc = new TextEncoder();
+  const hash = await crypto.subtle.digest('SHA-256', enc.encode(pwd));
+  const hex = Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+  if (hex === ADMIN_HASH) {
+    document.getElementById('adminLogin').classList.add('hidden');
+    document.getElementById('adminDash').classList.remove('hidden');
+    document.getElementById('errAdmin').classList.remove('visibile');
+    caricaDatiAdmin();
+  } else {
+    document.getElementById('errAdmin').classList.add('visibile');
+  }
+}
+
+function caricaDatiAdmin() {
+  caricaJSONP('leggi_proposte', function(data) { adminDatiProposte = data || []; });
+  caricaJSONP('leggi_attivita', function(data) { adminDatiAttivita = data || []; });
+}
+
+function selezionaAnnoAdmin(anno) {
+  adminAnnoCorrente = anno;
+  document.getElementById('annoSelector').classList.add('hidden');
+  if (anno === '2025-26') {
+    document.getElementById('vista2526').classList.remove('hidden');
+    document.getElementById('vista2627').classList.add('hidden');
+    popolaFiltri();
+    applicaFiltri();
+  } else {
+    document.getElementById('vista2627').classList.remove('hidden');
+    document.getElementById('vista2526').classList.add('hidden');
+    renderVista2627();
+  }
+}
+
+function tornaSelettoreAnno() {
+  document.getElementById('annoSelector').classList.remove('hidden');
+  document.getElementById('vista2526').classList.add('hidden');
+  document.getElementById('vista2627').classList.add('hidden');
+}
+
+/* ----- 2025-26: FILTRI + TIMELINE ----- */
+function popolaFiltri() {
+  const att2526 = adminDatiAttivita.filter(a => a.anno === '2025-26');
+  const docenti = [...new Set(att2526.map(a => a.nome).filter(Boolean))].sort();
+  const discipline = [...new Set(att2526.map(a => a.disciplina).filter(Boolean))].sort();
+  document.getElementById('fDocente').innerHTML = '<option value="">Tutti i docenti</option>' + docenti.map(d => '<option value="'+esc(d)+'">'+esc(d)+'</option>').join('');
+  document.getElementById('fDisciplina').innerHTML = '<option value="">Tutte le discipline</option>' + discipline.map(d => '<option value="'+esc(d)+'">'+esc(d)+'</option>').join('');
+}
+
+function applicaFiltri() {
+  const sede = document.getElementById('fSede').value;
+  const docente = document.getElementById('fDocente').value;
+  const disciplina = document.getElementById('fDisciplina').value;
+  const keyword = document.getElementById('fKeyword').value.toLowerCase().trim();
+
+  let filtrate = adminDatiAttivita.filter(a => {
+    if (a.anno !== '2025-26') return false;
+    if (sede && a.sede !== sede) return false;
+    if (docente && a.nome !== docente) return false;
+    if (disciplina && a.disciplina !== disciplina) return false;
+    if (keyword) {
+      const testo = (a.titolo+' '+a.descrizione+' '+a.disciplina+' '+a.nome).toLowerCase();
+      if (!testo.includes(keyword)) return false;
+    }
+    return true;
+  });
+
+  const totale2526 = adminDatiAttivita.filter(a => a.anno === '2025-26').length;
+  const docentiSet = new Set(filtrate.map(a => a.nome));
+  const sediSet = new Set(filtrate.map(a => a.sede));
+  const discSet = new Set(filtrate.map(a => a.disciplina).filter(Boolean));
+
+  document.getElementById('adminStats2526').innerHTML =
+    statCard(filtrate.length, 'Attivit\u00e0') + statCard(docentiSet.size, 'Docenti') +
+    statCard(sediSet.size, 'Sedi') + statCard(discSet.size, 'Discipline');
+
+  const hasFilter = sede || docente || disciplina || keyword;
+  const resetBtn = hasFilter ? ' <button class="filtri-reset" onclick="resetFiltri()">Reset filtri</button>' : '';
+  document.getElementById('filtriCount').innerHTML =
+    '<strong>' + filtrate.length + '</strong> attivit\u00e0' + (hasFilter ? ' su '+totale2526+' totali' : '') + resetBtn;
+
+  document.getElementById('adminAttivitaFiltrate').innerHTML = filtrate.length
+    ? filtrate.map(renderAtt).join('')
+    : '<li class="attivita-vuota">Nessuna attivit\u00e0 corrisponde ai filtri.</li>';
+
+  renderTimeline(filtrate);
+}
+
+function resetFiltri() {
+  document.getElementById('fSede').value = '';
+  document.getElementById('fDocente').value = '';
+  document.getElementById('fDisciplina').value = '';
+  document.getElementById('fKeyword').value = '';
+  applicaFiltri();
+}
+
+function statCard(n, label) {
+  return '<div class="stat-card"><div class="stat-card-num">'+n+'</div><div class="stat-card-label">'+label+'</div></div>';
+}
+
+/* ----- 2026-27: PROPOSTE RAGGRUPPATE ----- */
+function renderVista2627() {
+  // Stats
+  const att2627 = adminDatiAttivita.filter(a => a.anno === '2026-27');
+  const docentiP = new Set(adminDatiProposte.map(p => p.nome));
+  const sediP = new Set(adminDatiProposte.map(p => p.sede));
+
+  document.getElementById('adminStats2627').innerHTML =
+    statCard(adminDatiProposte.length, 'Proposte titolo') +
+    statCard(docentiP.size, 'Docenti') +
+    statCard(sediP.size, 'Sedi') +
+    statCard(att2627.length, 'Attivit\u00e0 in itinere');
+
+  // Raggruppa proposte per tematica (se presente) o per "non classificata"
+  const gruppi = {};
+  adminDatiProposte.forEach(p => {
+    const tema = (p.tematica && p.tematica.trim()) ? p.tematica.trim() : '__non_classificata';
+    if (!gruppi[tema]) gruppi[tema] = [];
+    gruppi[tema].push(p);
+  });
+
+  const el = document.getElementById('proposteRaggruppate');
+  if (!adminDatiProposte.length) {
+    el.innerHTML = '<div class="attivita-vuota">Nessuna proposta ancora ricevuta.</div>';
+    return;
+  }
+
+  let html = '';
+  const temiOrdinati = Object.keys(gruppi).sort((a,b) => {
+    if (a === '__non_classificata') return 1;
+    if (b === '__non_classificata') return -1;
+    return a.localeCompare(b);
+  });
+
+  const hasTemi = temiOrdinati.some(t => t !== '__non_classificata');
+  if (!hasTemi) {
+    html += '<div class="prop-no-group">Le proposte non sono ancora classificate per area tematica. Aggiungi una colonna "Tematica" nel foglio Proposte del Google Sheet per abilitare il raggruppamento.</div>';
+  }
+
+  temiOrdinati.forEach(tema => {
+    const items = gruppi[tema];
+    const label = tema === '__non_classificata' ? 'Da classificare' : tema;
+    html += '<div class="prop-group">';
+    html += '<div class="prop-group-header"><span>'+esc(label)+'</span><span class="prop-group-count">'+items.length+'</span></div>';
+    html += '<div class="prop-group-body">';
+    html += items.map(p =>
+      '<div class="admin-proposte-item"><span>'+esc(p.titolo)+'</span><span class="admin-proposte-item-nome">'+esc(p.nome)+' \u00b7 '+esc(p.sede)+' \u00b7 '+esc(p.ordine)+'</span></div>'
+    ).join('');
+    html += '</div></div>';
+  });
+
+  el.innerHTML = html;
+
+  // Attivita 2026-27 in itinere
+  if (att2627.length) {
+    document.getElementById('attivita2627Wrap').classList.remove('hidden');
+    document.getElementById('adminAttivita2627').innerHTML = att2627.map(renderAtt).join('');
+  }
+}
+
+/* ----- TIMELINE SVG ----- */
+const MESI = ['Set','Ott','Nov','Dic','Gen','Feb','Mar','Apr','Mag','Giu'];
+const MESI_FULL = ['Settembre','Ottobre','Novembre','Dicembre','Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno'];
+const COLORI_SEDE = { 'Orzinuovi': '#6B7D2F', 'Martinengo': '#B8862B' };
+
+function periodoToMesi(periodo) {
+  const idx = MESI_FULL.indexOf(periodo);
+  if (idx >= 0) return [idx];
+  if (periodo === 'Primo quadrimestre') return [0,1,2,3,4];
+  if (periodo === 'Secondo quadrimestre') return [5,6,7,8,9];
+  if (periodo === 'Intero anno scolastico') return [0,1,2,3,4,5,6,7,8,9];
+  return [];
+}
+
+function renderTimeline(dati) {
+  const svg = document.getElementById('timelineSvg');
+  const W = 680, H = 200, padL = 36, padR = 10, padT = 20, padB = 40;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const barW = chartW / 10;
+
+  const countOrz = new Array(10).fill(0);
+  const countMart = new Array(10).fill(0);
+  dati.forEach(a => {
+    const mesi = periodoToMesi(a.periodo);
+    mesi.forEach(m => {
+      if (a.sede === 'Martinengo') countMart[m]++; else countOrz[m]++;
+    });
+  });
+
+  const maxVal = Math.max(1, ...countOrz.map((v,i) => v + countMart[i]));
+  const scaleY = chartH / (maxVal + 1);
+  let html = '';
+
+  for (let i = 0; i <= maxVal; i++) {
+    const y = padT + chartH - i * scaleY;
+    html += '<line x1="'+padL+'" y1="'+y+'" x2="'+(W-padR)+'" y2="'+y+'" stroke="#C5CCA0" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    html += '<text x="'+(padL-6)+'" y="'+(y+4)+'" text-anchor="end" font-size="10" fill="#5C6148" font-family="Source Sans 3,sans-serif">'+i+'</text>';
+  }
+
+  for (let i = 0; i < 10; i++) {
+    const x = padL + i * barW;
+    const orzH = countOrz[i] * scaleY;
+    const martH = countMart[i] * scaleY;
+    const totalH = orzH + martH;
+
+    if (countOrz[i] > 0) {
+      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-orzH)+'" width="'+(barW*0.7)+'" height="'+orzH+'" rx="3" fill="#6B7D2F" opacity="0.85"/>';
+    }
+    if (countMart[i] > 0) {
+      html += '<rect x="'+(x+barW*0.15)+'" y="'+(padT+chartH-totalH)+'" width="'+(barW*0.7)+'" height="'+martH+'" rx="3" fill="#B8862B" opacity="0.85"/>';
+    }
+    const total = countOrz[i] + countMart[i];
+    if (total > 0) {
+      html += '<text x="'+(x+barW/2)+'" y="'+(padT+chartH-totalH-5)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#4A5220" font-family="Source Sans 3,sans-serif">'+total+'</text>';
+    }
+    html += '<text x="'+(x+barW/2)+'" y="'+(H-padB+16)+'" text-anchor="middle" font-size="11" fill="#5C6148" font-family="Source Sans 3,sans-serif">'+MESI[i]+'</text>';
+
+    if (i === 4) {
+      html += '<line x1="'+(x+barW)+'" y1="'+padT+'" x2="'+(x+barW)+'" y2="'+(H-padB)+'" stroke="#B8862B" stroke-width="1" stroke-dasharray="4,3" opacity="0.5"/>';
+      html += '<text x="'+(x+barW)+'" y="'+(H-4)+'" text-anchor="middle" font-size="9" fill="#B8862B" font-family="Source Sans 3,sans-serif" opacity="0.7">I \u2502 II quad.</text>';
+    }
+  }
+
+  html += '<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#4A5220" stroke-width="1.5"/>';
+  html += '<text x="'+padL+'" y="'+(H-2)+'" font-size="9" fill="#5C6148" font-family="Source Sans 3,sans-serif" opacity="0.6">12 set 2025</text>';
+  html += '<text x="'+(W-padR)+'" y="'+(H-2)+'" text-anchor="end" font-size="9" fill="#5C6148" font-family="Source Sans 3,sans-serif" opacity="0.6">5 giu 2026</text>';
+
+  svg.innerHTML = html;
+  document.getElementById('timelineLegend').innerHTML =
+    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#6B7D2F"></div>Orzinuovi</div>' +
+    '<div class="timeline-legend-item"><div class="timeline-legend-dot" style="background:#B8862B"></div>Martinengo</div>';
+}
+
+// JSONP per leggere da Apps Script (compatibile CSP Neocities)
+let jsonpCounter = 0;
+function caricaJSONP(tipo, callback) {
+  const cbName = '__sfCb' + (++jsonpCounter);
+  window[cbName] = function(data) {
+    callback(data);
+    delete window[cbName];
+    if (s.parentNode) s.parentNode.removeChild(s);
+  };
+  const s = document.createElement('script');
+  s.src = APPS_SCRIPT_URL + '?tipo=' + tipo + '&callback=' + cbName;
+  s.onerror = function() {
+    callback([]);
+    delete window[cbName];
+    if (s.parentNode) s.parentNode.removeChild(s);
+  };
+  document.head.appendChild(s);
+}
+
+/* UTILITY */
+function esc(str) { if (!str) return ''; const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+</script>
+</body>
+</html>
