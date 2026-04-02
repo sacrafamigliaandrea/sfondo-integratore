@@ -448,6 +448,9 @@ function salvaProfilo(){
 }
 function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');}
 
+let sheetAtt=null; /* dati attivita da Google Sheet, null = non ancora caricati */
+let sheetProp=null; /* dati proposte da Google Sheet */
+
 function mostraDash(p){
   document.getElementById('profiloSection').classList.add('hidden');
   document.getElementById('dashboardSection').classList.remove('hidden');
@@ -458,7 +461,10 @@ function mostraDash(p){
   document.getElementById('aDisciplina').innerHTML='<option value="">Seleziona disciplina...</option>'+ds.map(d=>'<option value="'+d+'">'+d+'</option>').join('');
   const pr=localStorage.getItem(LS_PR);
   if(pr){document.getElementById('propostaBox').classList.add('hidden');document.getElementById('propostaOk').classList.remove('hidden');document.getElementById('propostaText').textContent=pr;}
-  caricaAtt();
+  caricaAtt(); /* render immediato con localStorage + pre-fill */
+  /* Carica dati da Google Sheet e aggiorna */
+  jsonp('leggi_attivita',d=>{sheetAtt=Array.isArray(d)?d:[];caricaAtt();});
+  jsonp('leggi_proposte',d=>{sheetProp=Array.isArray(d)?d:[];caricaPropostePub();});
 }
 
 /* ===== ACCORDION ===== */
@@ -491,20 +497,50 @@ function inviaProposta(){
 
 function inviaSheet(tipo,dati){new Image().src=SCRIPT_URL+'?'+new URLSearchParams({tipo,...dati}).toString();}
 
-/* ===== RENDER ACTIVITIES (FIX: usa listaId per id coerenti) ===== */
+/* ===== RENDER ACTIVITIES (merges: ANDREA pre-fill + Google Sheet + localStorage) ===== */
 function caricaAtt(){
   const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');
   const p=JSON.parse(localStorage.getItem(LS_P));
-  if(!p)return; /* FIX: null-check per evitare crash */
+  if(!p)return;
   const isA=p.nome.toLowerCase().includes('cerioli')||p.nome.toLowerCase().includes('andrea c');
 
   ['2025-26','2026-27'].forEach(anno=>{
     const el=document.getElementById(listaId(anno));
-    if(!el)return; /* FIX: null-check sull'elemento */
-    let items=sal.filter(a=>a.anno===anno);
-    if(isA&&anno==='2025-26')items=[...ANDREA,...items];
+    if(!el)return;
+
+    /* 1. Pre-fill Andrea (solo 2025-26, solo se e' Andrea) */
+    let items=[];
+    if(isA&&anno==='2025-26')items=[...ANDREA];
+
+    /* 2. Dati da Google Sheet (se gia' caricati) */
+    if(sheetAtt){
+      const fromSheet=sheetAtt.filter(a=>a.anno===anno);
+      /* Evita duplicati: escludi dal Sheet quelli che hanno stesso titolo+nome del pre-fill */
+      const preKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
+      fromSheet.forEach(a=>{
+        const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
+        if(!preKeys.has(k))items.push(a);
+      });
+    }
+
+    /* 3. Dati da localStorage (invii recenti non ancora nel Sheet) */
+    const lsItems=sal.filter(a=>a.anno===anno);
+    const existKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
+    lsItems.forEach(a=>{
+      const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
+      if(!existKeys.has(k))items.push(a);
+    });
+
     el.innerHTML=items.length?items.map(renderAtt).join(''):'<li class="att-vuota">Nessuna attivit\u00e0 ancora.</li>';
   });
+}
+
+/* ===== PROPOSTE PUBBLICHE (mostra conteggio sotto accordion 2026-27) ===== */
+function caricaPropostePub(){
+  /* Opzionale: mostra quante proposte sono arrivate nel header 2026-27 */
+  if(!sheetProp||!sheetProp.length)return;
+  const hdr=document.querySelector('#anno2627 .anno-header-sfondo');
+  if(hdr)hdr.textContent='Proposte ricevute: '+sheetProp.length+' \u2014 Proponi il titolo e registra le attivit\u00e0';
 }
 
 function renderAtt(a){
@@ -529,14 +565,21 @@ async function verificaPwd(){
   else document.getElementById('pwdErr').classList.add('vis');
 }
 
-/* ===== ADMIN (FIX: sequenza JSONP + flag ready) ===== */
+/* ===== ADMIN (riusa dati Sheet se gia' caricati, altrimenti JSONP) ===== */
 function avviaAdmin(){
   document.getElementById('publicView').style.display='none';
   document.getElementById('adminView').classList.add('vis');
   adminReady={att:false,prop:false};
-  jsonp('leggi_proposte',d=>{adminProp=Array.isArray(d)?d:[];adminReady.prop=true;if(adminReady.att)cambiaAnnoAdmin();});
-  jsonp('leggi_attivita',d=>{adminDati=Array.isArray(d)?d:[];adminReady.att=true;if(adminReady.prop)cambiaAnnoAdmin();});
-  /* Fallback: se entrambi non rispondono entro 5s, mostra comunque */
+
+  /* Se i dati sono gia' stati caricati dalla vista pubblica, riusali */
+  if(sheetProp!==null){adminProp=sheetProp;adminReady.prop=true;}
+  if(sheetAtt!==null){adminDati=sheetAtt;adminReady.att=true;}
+
+  if(adminReady.att&&adminReady.prop){cambiaAnnoAdmin();return;}
+
+  /* Altrimenti carica da JSONP */
+  if(!adminReady.prop)jsonp('leggi_proposte',d=>{adminProp=Array.isArray(d)?d:[];sheetProp=adminProp;adminReady.prop=true;if(adminReady.att)cambiaAnnoAdmin();});
+  if(!adminReady.att)jsonp('leggi_attivita',d=>{adminDati=Array.isArray(d)?d:[];sheetAtt=adminDati;adminReady.att=true;if(adminReady.prop)cambiaAnnoAdmin();});
   setTimeout(()=>{if(!adminReady.att||!adminReady.prop)cambiaAnnoAdmin();},5000);
 }
 function esciAdmin(){document.getElementById('adminView').classList.remove('vis');document.getElementById('publicView').style.display='';}
