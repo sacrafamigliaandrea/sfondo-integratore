@@ -234,12 +234,12 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .btn-percorso svg{width:16px;height:16px;stroke:var(--oliva);fill:none}
 
 .percorso-modal{max-width:520px;display:flex;flex-direction:column}
-.percorso-content{display:flex;flex-direction:column;gap:14px}
-.percorso-line{display:flex;align-items:baseline;gap:12px;font-size:.92rem;color:var(--testo);line-height:1.6}
-.percorso-anno{font-family:var(--fd);font-weight:700;font-size:.72rem;color:var(--oliva);background:var(--oliva-chiaro);padding:3px 8px;border-radius:10px;flex-shrink:0;letter-spacing:.03em}
-.percorso-line--futuro{padding:12px 14px;background:var(--oliva-chiaro);border-radius:var(--raggio-sm);border-left:3px solid var(--oliva)}
+.percorso-content{display:flex;flex-direction:column;gap:12px}
+.percorso-line{font-size:.92rem;color:var(--testo);line-height:1.65;padding-left:64px;position:relative}
+.percorso-anno{position:absolute;left:0;top:2px;font-family:var(--fd);font-weight:700;font-size:.72rem;color:var(--oliva);background:var(--oliva-chiaro);padding:3px 8px;border-radius:10px;letter-spacing:.03em}
+.percorso-line--futuro{padding:14px 14px 14px 64px;background:var(--oliva-chiaro);border-radius:var(--raggio-sm);border-left:3px solid var(--oliva)}
 .percorso-line--futuro .percorso-anno{background:var(--oliva);color:var(--bianco)}
-.percorso-chiusa{font-size:.88rem;color:var(--testo-soft);font-style:italic;line-height:1.7;padding-top:8px;border-top:1px solid var(--oliva-chiaro);margin-top:4px}
+.percorso-chiusa{font-size:.88rem;color:var(--testo-soft);font-style:italic;line-height:1.7;padding-top:10px;border-top:1px solid var(--oliva-chiaro);margin-top:4px}
 
 .hidden{display:none!important}
 .mt-16{margin-top:16px}
@@ -323,7 +323,6 @@ textarea.campo-input{resize:vertical;min-height:80px}
     <div class="header-badge"><svg class="ico-sm ico"><use href="#ico-cap"/></svg>Due sedi, un'unica missione educativa</div>
     <h1>Sfondo Integratore</h1>
     <p class="header-sub">Il filo che lega ci&ograve; che si impara a ci&ograve; che si diventa &mdash; attraverso ogni disciplina, ogni relazione, ogni gesto educativo.</p>
-    <p class="header-fondatrice">Fondatrice Santa Paola Elisabetta Cerioli</p>
   </header>
 
   <!-- GRID 4 CARD ANNO — cronologia crescente: prima la storia, poi l'azione -->
@@ -514,15 +513,9 @@ textarea.campo-input{resize:vertical;min-height:80px}
      PERCORSO MODAL
      =============================================== -->
 <div class="modal-overlay" id="percorsoOverlay">
-  <div class="modal percorso-modal">
-    <div class="percorso-content">
-      <p class="percorso-line"><span class="percorso-anno">2023-24</span>Abbiamo iniziato dalle <strong>emozioni</strong>, perch&eacute; senza riconoscerle non si cresce.</p>
-      <p class="percorso-line"><span class="percorso-anno">2024-25</span>Siamo passati alle <strong>relazioni</strong>, perch&eacute; crescere da soli non basta.</p>
-      <p class="percorso-line"><span class="percorso-anno">2025-26</span>Abbiamo affrontato l'<strong>errore</strong>, perch&eacute; cadere &egrave; il primo passo per rialzarsi.</p>
-      <p class="percorso-line percorso-line--futuro"><span class="percorso-anno">2026-27</span>Ora cerchiamo un <strong>Porto Sicuro</strong>: uno spazio che accoglie, argina e ascolta.</p>
-      <p class="percorso-chiusa">Perch&eacute; un preadolescente che impara a sentire, a legarsi e a cadere ha bisogno di un luogo dove tutto questo sia possibile &mdash; senza paura.</p>
-    </div>
-    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('percorsoOverlay').classList.remove('vis')" style="margin-top:16px;align-self:center">Chiudi</button>
+  <div class="modal percorso-modal" style="max-width:720px;padding:16px">
+    <img src="sfondo.jpg" alt="Il Filo dell'Educazione: Il Percorso Sacra Famiglia" style="width:100%;height:auto;border-radius:var(--raggio);display:block">
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('percorsoOverlay').classList.remove('vis')" style="margin-top:12px;align-self:center">Chiudi</button>
   </div>
 </div>
 
@@ -646,9 +639,14 @@ function aggiornaContatori(){
       countEl.textContent=np>0?np+' propost'+(np===1?'a':'e')+' ricevut'+(np===1?'a':'e'):'Servono le vostre proposte';
     } else {
       let n=0;
-      if(sheetAtt)n=sheetAtt.filter(a=>a.anno===anno).length;
-      if(anno==='2025-26')n+=ANDREA.length;
-      countEl.textContent=n+' attivit\u00e0';
+      if(sheetAtt){
+        /* Sheet caricato: conta solo dal Sheet (include gia' i pre-fill di Andrea) */
+        n=sheetAtt.filter(a=>a.anno===anno).length;
+      } else {
+        /* Sheet non ancora caricato: usa pre-fill come stima */
+        if(anno==='2025-26')n=ANDREA.length;
+      }
+      countEl.textContent=n>0?n+' attivit\u00e0':'';
     }
   });
 }
