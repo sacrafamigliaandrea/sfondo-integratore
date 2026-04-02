@@ -26,25 +26,24 @@
 body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-height:100vh;line-height:1.7;font-weight:450;-webkit-font-smoothing:antialiased}
 
 /* ===== PUBLIC LAYOUT ===== */
-.pub-wrap{max-width:920px;margin:0 auto;padding:20px 24px 40px}
+.pub-wrap{max-width:920px;margin:0 auto;padding:0 24px 40px}
+
+/* ===== PROFILO STRIP (barra sottile in alto) ===== */
+.profilo-strip{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:10px 0;font-size:.8rem;border-bottom:1px solid var(--oliva-chiaro);margin-bottom:12px}
+.profilo-strip-name{font-weight:600;color:var(--oliva-scuro)}
+.profilo-strip-info{color:var(--testo-soft)}
+.profilo-strip-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:3px 12px;border-radius:12px;cursor:pointer;font-family:var(--ff);font-size:.72rem;font-weight:600;transition:all var(--tr)}
+.profilo-strip-btn:hover{background:var(--oliva-chiaro)}
 
 /* ===== HEADER ===== */
-.header{display:flex;align-items:center;gap:20px;padding:16px 0 14px;flex-wrap:wrap}
-.header-loghi{display:flex;gap:12px;flex-shrink:0}
-.header-loghi img{width:56px;height:56px;border-radius:50%;border:2px solid var(--oliva-medio);object-fit:cover;box-shadow:var(--ombra)}
-.header-body{flex:1;min-width:200px}
-.header-badge{display:inline-flex;align-items:center;gap:6px;background:var(--oliva);color:var(--bianco);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:16px;margin-bottom:4px}
-.header-badge svg{width:14px;height:14px;stroke:currentColor;fill:none}
-.header h1{font-family:var(--fd);font-weight:800;font-size:clamp(1.3rem,3.5vw,1.8rem);color:var(--oliva-scuro);line-height:1.15;margin-bottom:2px}
-.header-sub{font-size:.85rem;color:var(--testo-soft);line-height:1.4}
-.header-fondatrice{font-size:.75rem;color:var(--oliva);font-style:italic;letter-spacing:.02em}
-
-/* ===== PROFILO BAR ===== */
-.profilo-bar{display:flex;align-items:center;gap:12px;margin-left:auto;padding:8px 16px;background:var(--bianco);border-radius:20px;box-shadow:var(--ombra);font-size:.82rem;flex-shrink:0}
-.profilo-bar-name{font-weight:600;color:var(--oliva-scuro)}
-.profilo-bar-info{color:var(--testo-soft)}
-.profilo-bar-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:4px 12px;border-radius:14px;cursor:pointer;font-family:var(--ff);font-size:.75rem;font-weight:600;transition:all var(--tr);min-height:36px}
-.profilo-bar-btn:hover{background:var(--oliva-chiaro)}
+.header{text-align:center;padding:16px 0 12px}
+.header-loghi{display:flex;justify-content:center;gap:14px;margin-bottom:10px}
+.header-loghi img{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--oliva-medio);object-fit:cover}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:var(--oliva);color:var(--bianco);font-size:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:14px;margin-bottom:6px}
+.header-badge svg{width:13px;height:13px;stroke:currentColor;fill:none}
+.header h1{font-family:var(--fd);font-weight:800;font-size:1.5rem;color:var(--oliva-scuro);line-height:1.15;margin-bottom:4px}
+.header-sub{font-size:.84rem;color:var(--testo-soft);line-height:1.5;max-width:520px;margin:0 auto 2px}
+.header-fondatrice{font-size:.72rem;color:var(--oliva);font-style:italic}
 
 /* ===== CARD ===== */
 .card{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:22px 20px;border:1px solid rgba(92,107,36,.04);margin-bottom:14px}
@@ -104,6 +103,16 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .anno-card-anno{font-family:var(--ff);font-weight:600;font-size:.72rem;letter-spacing:.04em;opacity:.6;text-transform:uppercase;margin-bottom:4px;display:block}
 .anno-card-sfondo{font-family:var(--fd);font-weight:700;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;line-height:1.3;margin-bottom:8px;opacity:1;flex-grow:1;display:flex;align-items:center;justify-content:center}
 .anno-card-count{font-size:.7rem;font-weight:600;opacity:.65}
+
+/* ===== AUTOCOMPLETE ===== */
+.ac-list{position:absolute;top:100%;left:0;right:0;background:var(--bianco);border:2px solid var(--oliva-medio);border-top:none;border-radius:0 0 var(--raggio-sm) var(--raggio-sm);max-height:220px;overflow-y:auto;z-index:50;box-shadow:var(--ombra)}
+.ac-item{padding:10px 14px;cursor:pointer;font-size:.88rem;transition:background .15s;display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:44px}
+.ac-item:hover,.ac-item.ac-active{background:var(--oliva-chiaro)}
+.ac-item-nome{font-weight:600;color:var(--oliva-scuro)}
+.ac-item-meta{font-size:.75rem;color:var(--testo-soft);text-align:right;white-space:nowrap}
+.ac-item+.ac-item{border-top:1px solid var(--oliva-chiaro)}
+.btn-manuale-link{display:block;background:none;border:none;color:var(--oliva);font-family:var(--ff);font-size:.78rem;font-weight:500;cursor:pointer;padding:8px 0;text-decoration:underline;opacity:.7;transition:opacity var(--tr)}
+.btn-manuale-link:hover{opacity:1}
 
 /* ===== ACCESSI ===== */
 .accessi-row{display:flex;gap:12px;justify-content:center;margin-bottom:8px}
@@ -236,9 +245,8 @@ textarea.campo-input{resize:vertical;min-height:80px}
   .admin-sidebar{border-right:none;border-bottom:1px solid var(--oliva-chiaro);max-height:50vh}
   .chart-row{grid-template-columns:1fr}
   .radio-group{flex-direction:column;gap:8px}
-  .pub-wrap{padding:14px 12px 40px}
-  .header{flex-direction:column;text-align:center;gap:10px;padding:12px 0 10px}
-  .profilo-bar{margin-left:0;flex-wrap:wrap;justify-content:center}
+  .pub-wrap{padding:0 12px 40px}
+  .profilo-strip{justify-content:center;flex-wrap:wrap}
   .anno-grid{grid-template-columns:1fr 1fr;gap:10px}
 }
 </style>
@@ -293,22 +301,23 @@ textarea.campo-input{resize:vertical;min-height:80px}
      =============================================== -->
 <div id="publicView">
 <div class="pub-wrap">
+
+  <!-- PROFILO STRIP (visibile dopo login) -->
+  <div class="profilo-strip hidden" id="profiloBar">
+    <span class="profilo-strip-name" id="barNome"></span>
+    <span class="profilo-strip-info" id="barInfo"></span>
+    <button class="profilo-strip-btn" onclick="resetProfilo()">Cambia profilo</button>
+  </div>
+
   <header class="header">
     <div class="header-loghi">
       <img src="Orzinuovi_logo_verde.jpg" alt="Sacra Famiglia Orzinuovi">
       <img src="martinengo_logo_verde.jpg" alt="Sacra Famiglia Martinengo">
     </div>
-    <div class="header-body">
-      <div class="header-badge"><svg class="ico-sm ico"><use href="#ico-cap"/></svg>Due sedi, un'unica missione educativa</div>
-      <h1>Sfondo Integratore</h1>
-      <p class="header-sub">Il filo che lega ci&ograve; che si impara a ci&ograve; che si diventa &mdash; attraverso ogni disciplina, ogni relazione, ogni gesto educativo.</p>
-      <p class="header-fondatrice">Fondatrice Santa Paola Elisabetta Cerioli</p>
-    </div>
-    <div class="profilo-bar hidden" id="profiloBar">
-      <span class="profilo-bar-name" id="barNome"></span>
-      <span class="profilo-bar-info" id="barInfo"></span>
-      <button class="profilo-bar-btn" onclick="resetProfilo()">Cambia profilo</button>
-    </div>
+    <div class="header-badge"><svg class="ico-sm ico"><use href="#ico-cap"/></svg>Due sedi, un'unica missione educativa</div>
+    <h1>Sfondo Integratore</h1>
+    <p class="header-sub">Il filo che lega ci&ograve; che si impara a ci&ograve; che si diventa &mdash; attraverso ogni disciplina, ogni relazione, ogni gesto educativo.</p>
+    <p class="header-fondatrice">Fondatrice Santa Paola Elisabetta Cerioli</p>
   </header>
 
   <!-- GRID 4 CARD ANNO — cronologia crescente: prima la storia, poi l'azione -->
@@ -360,13 +369,27 @@ textarea.campo-input{resize:vertical;min-height:80px}
     </div>
   </div>
 
-  <!-- LOGIN FORM (collassabile, visibile solo dopo click su Accesso docente) -->
+  <!-- LOGIN FORM (autocomplete + fallback manuale) -->
   <section id="profiloSection" class="hidden">
     <div class="card" style="max-width:540px;margin:12px auto;">
-      <div class="campo"><label class="campo-label" for="pNome">Nome e cognome</label><input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name"><div class="campo-errore" id="errPN"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Inserisci il tuo nome</span></div></div>
-      <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona la sede</span></div></div>
-      <div class="campo"><label class="campo-label">Ordine di scuola</label><div class="radio-group" id="ordineGroup"></div><div class="campo-errore" id="errPO"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona l'ordine</span></div></div>
-      <button class="btn btn-terra mt-16" onclick="salvaProfilo()"><svg class="ico"><use href="#ico-check"/></svg>Accedi alla piattaforma</button>
+
+      <!-- AUTOCOMPLETE -->
+      <div class="campo" style="position:relative">
+        <label class="campo-label" for="pNome">Chi sei?</label>
+        <input type="text" id="pNome" class="campo-input" placeholder="Inizia a digitare il tuo nome o cognome..." autocomplete="off" oninput="filtraDocenti()" onfocus="filtraDocenti()">
+        <div class="ac-list hidden" id="acList"></div>
+        <div class="campo-errore" id="errPN"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona o inserisci il tuo nome</span></div>
+      </div>
+
+      <!-- CAMPI MANUALI (nascosti, si aprono se il nome non e' in lista) -->
+      <div id="acManual" class="hidden">
+        <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona la sede</span></div></div>
+        <div class="campo"><label class="campo-label">Ordine di scuola</label><div class="radio-group" id="ordineGroup"></div><div class="campo-errore" id="errPO"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona l'ordine</span></div></div>
+      </div>
+
+      <button class="btn-manuale-link" id="btnManuale" onclick="mostraManuale()">Non trovi il tuo nome? Registrati manualmente</button>
+
+      <button class="btn btn-terra mt-16" id="btnAccedi" onclick="salvaProfilo()" style="display:none"><svg class="ico"><use href="#ico-check"/></svg>Accedi alla piattaforma</button>
     </div>
   </section>
 
@@ -503,6 +526,10 @@ const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwAXRYP_EENJQzSQnOOuKH
 const PWD_HASH='526a8f0533636e1d0ef2e02820b0ba73fdbe88c2ce5f631b2518fae81a0d85ec';
 const LS_P='sf_profilo',LS_PR='sf_proposta27',LS_A='sf_attivita';
 let modalAnno='',adminDati=[],adminProp=[],adminReady={att:false,prop:false};
+let profiloManuale=false; /* true se il docente usa il form manuale */
+
+/* ===== DOCENTI NOTI (da XLSX personale) ===== */
+const DOCENTI_NOTI=[{"nome":"Francesca Angella","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Alessia Appiani","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Alexia Arnoldi","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Anna Barbieri","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Anna Barbieri","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Belotti","sede":"Martinengo","ordine":"Primaria"},{"nome":"Beretta","sede":"Martinengo","ordine":"Primaria"},{"nome":"Ilaria Bergamaschi","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"padre Luca Bergamaschi","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Lucrezia Bertazzoli","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Siria Bertoli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Paola Bettoni","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Laura Bonetti","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Bonfadini","sede":"Martinengo","ordine":"Primaria"},{"nome":"Olga Bosetti","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Giulia Bucchi","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Giacomo Bulla","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Busetti","sede":"Martinengo","ordine":"Primaria"},{"nome":"Caironi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Laura Capister","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Cappelletti","sede":"Martinengo","ordine":"Primaria"},{"nome":"Casali","sede":"Martinengo","ordine":"Primaria"},{"nome":"Casciani","sede":"Martinengo","ordine":"Primaria"},{"nome":"Caslini","sede":"Martinengo","ordine":"Primaria"},{"nome":"Andrea Castelli","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Sara Castelli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Federica Castro","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Andrea Cerioli","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Andrea Cerioli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"MariaPia Cividini","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Sofia Colombo","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Elisabetta Coltrini","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Domenico Conti","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Elena Costa","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Debora Decker","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Debora Decker","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Alessandro Dini","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Micol Dossena","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Fasce","sede":"Martinengo","ordine":"Primaria"},{"nome":"Gloria Ferrari","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Piergiovanna Franguelli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Elena Fratus","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Marco Gamba","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"fra Stefano Garro","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Paola Grassi","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Roberto Grazioli","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Roberto Grazioli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"David Adu Gyamfi","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Silvia Iacono","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Adele Lamenta","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Daniela Lamera","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Othim Lissandro","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Longhi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Melissa Lucrezia Macchi","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Deborah Maffeis","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Deborah Maffeis","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Francesca Mainoldi","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Daniela Malagni","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Daniela Malagni","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Chiara Manenti","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Cinzia Manenti","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Manenti","sede":"Martinengo","ordine":"Primaria"},{"nome":"Barbara Marchetti","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Melissa Martinelli","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Nicole Mercandelli","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Minola","sede":"Martinengo","ordine":"Primaria"},{"nome":"p. Ederson de Assis Monte","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"p. Ederson de Assis Monte","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Federica Moscheni","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Motterlini","sede":"Martinengo","ordine":"Primaria"},{"nome":"Muschio","sede":"Martinengo","ordine":"Primaria"},{"nome":"Nassozi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Nisoli","sede":"Martinengo","ordine":"Primaria"},{"nome":"Ogao","sede":"Martinengo","ordine":"Primaria"},{"nome":"Ong","sede":"Martinengo","ordine":"Primaria"},{"nome":"Jessica Pagani","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Palmas","sede":"Martinengo","ordine":"Primaria"},{"nome":"Maria Chiara Pezzotta","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Beatrice Piacentini","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Beatrice Piacentini","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Savina Pini","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Poggio","sede":"Martinengo","ordine":"Primaria"},{"nome":"Paolo Premoli","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Previdi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Catia Quintini","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Ranghetti","sede":"Martinengo","ordine":"Primaria"},{"nome":"Marco Regonini","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Vittorio Rigan\u00f2","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Elisa Roda","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Francesca Rodondi","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Francesca Rodondi","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Emilia Rosin","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Eleonora Rota","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Saccomandi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Veronica Sanvitti","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Scaburri","sede":"Martinengo","ordine":"Primaria"},{"nome":"Adele Scaroni","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Sempio","sede":"Martinengo","ordine":"Primaria"},{"nome":"Alessia Serini","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Alessia Serini","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Sara Sottura","sede":"Orzinuovi","ordine":"Primaria"},{"nome":"Sara Sottura","sede":"Orzinuovi","ordine":"Secondaria I grado"},{"nome":"Suardi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Gregory Tucker","sede":"Martinengo","ordine":"Secondaria I grado"},{"nome":"Ubbiali","sede":"Martinengo","ordine":"Primaria"},{"nome":"Vecchi","sede":"Martinengo","ordine":"Primaria"},{"nome":"Zamuner","sede":"Martinengo","ordine":"Primaria"},{"nome":"Zendrini","sede":"Martinengo","ordine":"Primaria"}];
 
 /* ===== SFONDI INTEGRATORI ===== */
 const SFONDI={
@@ -624,21 +651,113 @@ function aggiornaContatori(){
 function toggleLoginForm(){
   const sec=document.getElementById('profiloSection');
   sec.classList.toggle('hidden');
-  if(!sec.classList.contains('hidden'))sec.scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(!sec.classList.contains('hidden')){
+    sec.scrollIntoView({behavior:'smooth',block:'nearest'});
+    setTimeout(()=>document.getElementById('pNome').focus(),200);
+  }
 }
+
+/* Autocomplete: filtra docenti noti + docenti dal Sheet */
+function getDocentiCompleti(){
+  let lista=[...DOCENTI_NOTI];
+  if(sheetAtt){
+    const noti=new Set(DOCENTI_NOTI.map(d=>(d.nome+'|'+d.sede+'|'+d.ordine).toLowerCase()));
+    const visti=new Set();
+    sheetAtt.forEach(a=>{
+      if(!a.nome||!a.sede||!a.ordine)return;
+      const k=(a.nome+'|'+a.sede+'|'+a.ordine).toLowerCase();
+      if(!noti.has(k)&&!visti.has(k)){visti.add(k);lista.push({nome:a.nome,sede:a.sede,ordine:a.ordine});}
+    });
+  }
+  return lista;
+}
+
+/* Normalizza stringa: minuscolo, rimuovi accenti, trim */
+function norm(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();}
+
+/* Fuzzy match: ogni token dell'input deve apparire nel nome (ordine libero) */
+function fuzzyMatch(input,nome){
+  const tokens=norm(input).split(/\s+/).filter(Boolean);
+  const target=norm(nome);
+  return tokens.every(t=>target.includes(t));
+}
+
+/* Cache match corrente per selezionaDocente */
+let acMatchCorrente=[];
+
+function filtraDocenti(){
+  const input=document.getElementById('pNome'),q=input.value.trim(),list=document.getElementById('acList');
+  if(q.length<2){list.classList.add('hidden');return;}
+  const tutti=getDocentiCompleti();
+  const match=tutti.filter(d=>fuzzyMatch(q,d.nome));
+  if(!match.length){list.classList.add('hidden');return;}
+  acMatchCorrente=match.slice(0,12);
+  list.innerHTML=acMatchCorrente.map((d,i)=>
+    '<div class="ac-item" onmousedown="selezionaDocente('+i+')"><span class="ac-item-nome">'+esc(d.nome)+'</span><span class="ac-item-meta">'+esc(d.sede)+' &middot; '+esc(d.ordine)+'</span></div>'
+  ).join('');
+  list.classList.remove('hidden');
+}
+
+function selezionaDocente(idx){
+  const d=acMatchCorrente[idx];if(!d)return;
+  const p={nome:d.nome,sede:d.sede,ordine:d.ordine};
+  localStorage.setItem(LS_P,JSON.stringify(p));
+  document.getElementById('acList').classList.add('hidden');
+  document.getElementById('pNome').value=d.nome;
+  mostraDash(p);
+}
+
+function mostraManuale(){
+  profiloManuale=true;
+  document.getElementById('acManual').classList.remove('hidden');
+  document.getElementById('btnAccedi').style.display='';
+  document.getElementById('btnManuale').style.display='none';
+  document.getElementById('acList').classList.add('hidden');
+}
+
+/* Chiudi autocomplete quando si clicca fuori */
+document.addEventListener('click',e=>{
+  const list=document.getElementById('acList');
+  if(list&&!e.target.closest('#profiloSection'))list.classList.add('hidden');
+});
 
 function salvaProfilo(){
   document.querySelectorAll('.campo-errore').forEach(e=>e.classList.remove('vis'));
-  const n=document.getElementById('pNome').value.trim(),s=document.querySelector('input[name="pSede"]:checked'),o=document.querySelector('input[name="pOrdine"]:checked');
-  let ok=true;
-  if(!n){document.getElementById('errPN').classList.add('vis');ok=false;}
-  if(!s){document.getElementById('errPS').classList.add('vis');ok=false;}
-  if(!o){document.getElementById('errPO').classList.add('vis');ok=false;}
-  if(!ok)return;
-  const p={nome:n,sede:s.value,ordine:o.value};
-  localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
+  const n=document.getElementById('pNome').value.trim();
+  if(!n){document.getElementById('errPN').classList.add('vis');return;}
+
+  if(profiloManuale){
+    /* Form manuale: sede e ordine obbligatori */
+    const s=document.querySelector('input[name="pSede"]:checked'),o=document.querySelector('input[name="pOrdine"]:checked');
+    let ok=true;
+    if(!s){document.getElementById('errPS').classList.add('vis');ok=false;}
+    if(!o){document.getElementById('errPO').classList.add('vis');ok=false;}
+    if(!ok)return;
+    const p={nome:n,sede:s.value,ordine:o.value};
+    localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
+  } else {
+    /* Tentativo fuzzy match: cerca un docente noto */
+    const tutti=getDocentiCompleti();
+    const match=tutti.filter(d=>fuzzyMatch(n,d.nome));
+    if(match.length===1){
+      /* Match univoco: login diretto */
+      const p={nome:match[0].nome,sede:match[0].sede,ordine:match[0].ordine};
+      localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
+    } else if(match.length>1){
+      /* Piu' match: mostra il dropdown per disambiguare */
+      acMatchCorrente=match.slice(0,12);
+      const list=document.getElementById('acList');
+      list.innerHTML=acMatchCorrente.map((d,i)=>
+        '<div class="ac-item" onmousedown="selezionaDocente('+i+')"><span class="ac-item-nome">'+esc(d.nome)+'</span><span class="ac-item-meta">'+esc(d.sede)+' &middot; '+esc(d.ordine)+'</span></div>'
+      ).join('');
+      list.classList.remove('hidden');
+    } else {
+      /* Nessun match: apri form manuale */
+      mostraManuale();
+    }
+  }
 }
-function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.add('hidden');document.getElementById('accessiArea').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');chiudiDettaglio();}
+function resetProfilo(){localStorage.removeItem(LS_P);profiloManuale=false;document.getElementById('pNome').value='';document.getElementById('acManual').classList.add('hidden');document.getElementById('btnAccedi').style.display='none';document.getElementById('btnManuale').style.display='';document.getElementById('profiloSection').classList.add('hidden');document.getElementById('accessiArea').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');chiudiDettaglio();}
 
 let sheetAtt=null; /* dati attivita da Google Sheet, null = non ancora caricati */
 let sheetProp=null; /* dati proposte da Google Sheet */
