@@ -78,17 +78,37 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .btn-ghost:hover{background:var(--oliva-chiaro);border-color:var(--oliva)}
 .btn-sm{padding:9px 16px;font-size:.85rem}
 
-/* ===== ANNO ACCORDION ===== */
-.anno-section{margin-bottom:16px}
-.anno-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--oliva);color:var(--bianco);border-radius:var(--raggio) var(--raggio) 0 0;cursor:pointer;user-select:none;transition:background var(--tr)}
-.anno-header:hover{background:var(--oliva-scuro)}
-.anno-header h2{font-family:var(--fd);font-size:1.1rem;font-weight:700}
-.anno-header-sfondo{font-size:.82rem;opacity:.85;margin-top:2px;font-style:italic}
-.anno-chevron{width:22px;height:22px;fill:var(--bianco);flex-shrink:0;transition:transform var(--tr)}
-.anno-section.aperta .anno-chevron{transform:rotate(180deg)}
-.anno-body{display:none;background:var(--bianco);border:1px solid rgba(92,107,36,.06);border-top:none;border-radius:0 0 var(--raggio) var(--raggio);box-shadow:var(--ombra)}
-.anno-section.aperta .anno-body{display:block}
-.anno-body-inner{padding:20px}
+/* ===== ANNO CARD GRID ===== */
+.anno-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.anno-card{position:relative;aspect-ratio:1;padding:16px 14px;border-radius:var(--raggio);cursor:pointer;transition:all var(--tr);border:2px solid transparent;overflow:hidden;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.anno-card:hover{transform:translateY(-3px);box-shadow:var(--ombra-up)}
+.anno-card.selected{border-color:var(--oliva-scuro);box-shadow:var(--ombra-up)}
+
+.anno-card--attivo{background:var(--oliva);color:var(--bianco)}
+.anno-card--attivo:hover{background:var(--oliva-scuro)}
+.anno-card--prossimo{background:var(--terra);color:var(--bianco)}
+.anno-card--prossimo:hover{background:var(--terra-hover)}
+.anno-card--storico{background:var(--bianco);color:var(--testo);border:1.5px solid var(--oliva-medio)}
+.anno-card--storico:hover{background:var(--oliva-chiaro);border-color:var(--oliva)}
+
+.anno-card-badge{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:12px;margin-bottom:4px;align-self:center}
+.anno-card-badge--attivo{background:rgba(255,255,255,.2);color:var(--bianco)}
+.anno-card-badge--prossimo{background:rgba(255,255,255,.2);color:var(--bianco)}
+.anno-card-badge--storico{background:var(--oliva-chiaro);color:var(--oliva)}
+
+.anno-card-anno{font-family:var(--ff);font-weight:600;font-size:.72rem;letter-spacing:.04em;opacity:.6;text-transform:uppercase;margin-bottom:4px;display:block}
+.anno-card-sfondo{font-family:var(--fd);font-weight:700;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;line-height:1.3;margin-bottom:8px;opacity:1;flex-grow:1;display:flex;align-items:center;justify-content:center}
+.anno-card-count{font-size:.7rem;font-weight:600;opacity:.65}
+
+/* ===== INVITO PRE-LOGIN ===== */
+.invito-testo{text-align:center;font-size:.92rem;color:var(--testo-soft);line-height:1.7;margin-bottom:8px;padding:8px 0}
+
+/* ===== ANNO DETTAGLIO (espande sotto le card) ===== */
+.anno-dettaglio{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:24px;margin-bottom:20px;border:1px solid rgba(92,107,36,.06);animation:slideDown .3s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.anno-dettaglio-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
+.anno-dettaglio-h2{font-family:var(--fd);font-weight:800;font-size:1.15rem;color:var(--oliva-scuro)}
+.anno-dettaglio-sfondo{font-size:.88rem;color:var(--testo-soft);font-style:italic;margin-top:2px}
 
 /* ===== ACTIVITY LIST ===== */
 .att-lista{list-style:none}
@@ -188,6 +208,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .footer{text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--oliva-medio);font-size:.75rem;color:var(--testo-soft)}
 .hidden{display:none!important}
 .mt-16{margin-top:16px}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -196,6 +217,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
   .chart-row{grid-template-columns:1fr}
   .radio-group{flex-direction:column;gap:8px}
   .pub-wrap{padding:16px 12px 60px}
+  .anno-grid{grid-template-columns:1fr 1fr;gap:10px}
 }
 </style>
 </head>
@@ -222,10 +244,41 @@ textarea.campo-input{resize:vertical;min-height:80px}
     </div>
   </header>
 
-  <!-- LOGIN -->
+  <!-- GRID 4 CARD ANNO — cronologia crescente: prima la storia, poi l'azione -->
+  <div class="anno-grid" id="annoGrid">
+    <div class="anno-card anno-card--storico" id="card2324" onclick="apriAnno('2023-24')">
+      <span class="anno-card-badge anno-card-badge--storico">Storico</span>
+      <span class="anno-card-anno">2023-24</span>
+      <p class="anno-card-sfondo">&laquo;Educhiamo con la forza delle emozioni&raquo;</p>
+      <span class="anno-card-count" id="count2023-24">0 attivit&agrave;</span>
+    </div>
+    <div class="anno-card anno-card--storico" id="card2425" onclick="apriAnno('2024-25')">
+      <span class="anno-card-badge anno-card-badge--storico">Storico</span>
+      <span class="anno-card-anno">2024-25</span>
+      <p class="anno-card-sfondo">&laquo;Educhiamo alla cura delle relazioni&raquo;</p>
+      <span class="anno-card-count" id="count2024-25">0 attivit&agrave;</span>
+    </div>
+    <div class="anno-card anno-card--attivo" id="card2526" onclick="apriAnno('2025-26')">
+      <span class="anno-card-badge anno-card-badge--attivo">In corso</span>
+      <span class="anno-card-anno">2025-26</span>
+      <p class="anno-card-sfondo">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</p>
+      <span class="anno-card-count" id="count2025-26">0 attivit&agrave;</span>
+    </div>
+    <div class="anno-card anno-card--prossimo" id="card2627" onclick="apriAnno('2026-27')">
+      <span class="anno-card-badge anno-card-badge--prossimo">Prossimo</span>
+      <span class="anno-card-anno">2026-27</span>
+      <p class="anno-card-sfondo">&laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p>
+      <span class="anno-card-count" id="count2026-27">0 proposte</span>
+    </div>
+  </div>
+
+  <!-- INVITO (visibile solo pre-login, sotto le card) -->
+  <p class="invito-testo" id="invitoTesto">Questo &egrave; il percorso della nostra scuola.<br>Identificati per entrare anche tu nella storia.</p>
+
+  <!-- LOGIN (sotto le card, scompare dopo identificazione) -->
   <section id="profiloSection">
     <div class="card" style="max-width:480px;margin:20px auto;">
-      <h2 style="font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;font-weight:700">Identificati</h2>
+      <h2 style="font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;font-weight:700">Identificati per interagire</h2>
       <p style="font-size:.85rem;color:var(--testo-soft);margin-bottom:18px">I tuoi dati verranno salvati per i prossimi accessi.</p>
       <div class="campo"><label class="campo-label" for="pNome">Nome e cognome</label><input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name"><div class="campo-errore" id="errPN"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci il tuo nome</span></div></div>
       <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona la sede</span></div></div>
@@ -234,32 +287,35 @@ textarea.campo-input{resize:vertical;min-height:80px}
     </div>
   </section>
 
-  <!-- DASHBOARD DOCENTE -->
+  <!-- DASHBOARD DOCENTE (dettaglio + admin, visibile dopo login) -->
   <section id="dashboardSection" class="hidden">
-    <!-- 2025-26 -->
-    <div class="anno-section aperta" id="anno2526">
-      <div class="anno-header" onclick="toggleAnno('anno2526')">
-        <div><h2>2025-26</h2><div class="anno-header-sfondo">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</div></div>
-        <svg class="anno-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
-      </div>
-      <div class="anno-body"><div class="anno-body-inner">
-        <button class="btn-aggiungi" onclick="apriModal('2025-26')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; svolta</button>
-        <ul class="att-lista" id="listaAtt2025-26"></ul>
-      </div></div>
-    </div>
 
-    <!-- 2026-27 -->
-    <div class="anno-section" id="anno2627">
-      <div class="anno-header" onclick="toggleAnno('anno2627')">
-        <div><h2>2026-27</h2><div class="anno-header-sfondo">Proponi il titolo e registra le attivit&agrave;</div></div>
-        <svg class="anno-chevron" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+    <!-- DETTAGLIO ANNO (si apre sotto le card) -->
+    <div id="annoDettaglio" class="anno-dettaglio hidden">
+      <div class="anno-dettaglio-header">
+        <div>
+          <h2 id="dettaglioTitolo" class="anno-dettaglio-h2"></h2>
+          <p id="dettaglioSfondo" class="anno-dettaglio-sfondo"></p>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="chiudiDettaglio()">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          Chiudi
+        </button>
       </div>
-      <div class="anno-body"><div class="anno-body-inner">
-        <div id="propostaBox" class="proposta-box"><h3>Proponi lo sfondo integratore 2026-27</h3><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Il viaggio: scoprire se stessi e il mondo" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Invia la tua proposta</button></div>
+
+      <!-- Contenuto 2025-26 / storici -->
+      <div id="dettaglioAttivita" class="hidden">
+        <button class="btn-aggiungi" id="btnAggiungiAtt" onclick="apriModal(annoAperto)"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; svolta</button>
+        <ul class="att-lista" id="listaDettaglio"></ul>
+      </div>
+
+      <!-- Contenuto 2026-27 -->
+      <div id="dettaglioProposte" class="hidden">
+        <div id="propostaBox" class="proposta-box"><h3>Proponi una variante del titolo 2026-27</h3><p style="font-size:.82rem;color:var(--testo-soft);margin-bottom:10px">Perimetro: &laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Porto Sicuro: accogliere per crescere insieme" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Invia la tua proposta</button></div>
         <div id="propostaOk" class="proposta-ok hidden">La tua proposta: <strong id="propostaText"></strong></div>
         <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; in itinere</button>
-        <ul class="att-lista" id="listaAtt2026-27"></ul>
-      </div></div>
+        <ul class="att-lista" id="listaDettaglioProposte"></ul>
+      </div>
     </div>
 
     <!-- Admin link -->
@@ -288,7 +344,9 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <div class="sidebar-label">Anno scolastico</div>
       <select id="fAnno" class="sidebar-select" onchange="cambiaAnnoAdmin()">
         <option value="2025-26">2025-26 &mdash; Trasformiamo gli errori in opportunit&agrave;</option>
-        <option value="2026-27">2026-27 &mdash; Proposte</option>
+        <option value="2026-27">2026-27 &mdash; Il Porto Sicuro che accoglie, argina e ascolta</option>
+        <option value="2024-25">2024-25 &mdash; Educhiamo alla cura delle relazioni</option>
+        <option value="2023-24">2023-24 &mdash; Educhiamo con la forza delle emozioni</option>
       </select>
     </div>
     <div id="sidebarFiltri">
@@ -346,6 +404,16 @@ const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwAXRYP_EENJQzSQnOOuKH
 const PWD_HASH='526a8f0533636e1d0ef2e02820b0ba73fdbe88c2ce5f631b2518fae81a0d85ec';
 const LS_P='sf_profilo',LS_PR='sf_proposta27',LS_A='sf_attivita';
 let modalAnno='',adminDati=[],adminProp=[],adminReady={att:false,prop:false};
+
+/* ===== SFONDI INTEGRATORI ===== */
+const SFONDI={
+  '2026-27':'Il Porto Sicuro che accoglie, argina e ascolta',
+  '2025-26':'Trasformiamo gli errori in opportunit\u00e0',
+  '2024-25':'Educhiamo alla cura delle relazioni',
+  '2023-24':'Educhiamo con la forza delle emozioni'
+};
+const ANNI_ATTIVI=['2025-26','2026-27']; /* anni in cui si puo' inserire */
+const ANNI_TUTTI=['2025-26','2026-27','2024-25','2023-24'];
 
 /* ===== ORDINI / DISCIPLINE ===== */
 const ORDINI={
@@ -427,12 +495,32 @@ document.addEventListener('DOMContentLoaded',()=>{
     const g=document.getElementById('ordineGroup');
     g.innerHTML=(ORDINI[r.value]||[]).map((o,i)=>'<div class="radio-opt"><input type="radio" name="pOrdine" id="ord'+i+'" value="'+o+'"><label for="ord'+i+'">'+o+'</label></div>').join('');
   }));
+
+  /* Carica dati Sheet per contatori card (anche prima del login) */
+  jsonp('leggi_attivita',d=>{sheetAtt=Array.isArray(d)?d:[];aggiornaContatori();caricaAtt();});
+  jsonp('leggi_proposte',d=>{sheetProp=Array.isArray(d)?d:[];aggiornaContatori();caricaPropostePub();});
+
   const p=JSON.parse(localStorage.getItem(LS_P));
   if(p&&p.nome)mostraDash(p);
 });
 
-/* ===== HELPER: restituisce l'id lista per un anno ===== */
-function listaId(anno){return 'listaAtt'+anno;}
+/* ===== AGGIORNA CONTATORI CARD (funziona anche pre-login) ===== */
+function aggiornaContatori(){
+  ANNI_TUTTI.forEach(anno=>{
+    const countEl=document.getElementById('count'+anno);
+    if(!countEl)return;
+    if(anno==='2026-27'){
+      const np=sheetProp?sheetProp.length:0;
+      countEl.textContent=np+' propost'+(np===1?'a':'e');
+    } else {
+      let n=0;
+      if(sheetAtt)n=sheetAtt.filter(a=>a.anno===anno).length;
+      /* Aggiungi pre-fill Andrea per 2025-26 (sempre visibile nei contatori) */
+      if(anno==='2025-26')n+=ANDREA.length;
+      countEl.textContent=n+' attivit\u00e0';
+    }
+  });
+}
 
 /* ===== PROFILO ===== */
 function salvaProfilo(){
@@ -446,7 +534,7 @@ function salvaProfilo(){
   const p={nome:n,sede:s.value,ordine:o.value};
   localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
 }
-function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');}
+function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');var inv=document.getElementById('invitoTesto');if(inv)inv.classList.remove('hidden');chiudiDettaglio();}
 
 let sheetAtt=null; /* dati attivita da Google Sheet, null = non ancora caricati */
 let sheetProp=null; /* dati proposte da Google Sheet */
@@ -455,20 +543,124 @@ function mostraDash(p){
   document.getElementById('profiloSection').classList.add('hidden');
   document.getElementById('dashboardSection').classList.remove('hidden');
   document.getElementById('profiloBar').classList.remove('hidden');
+  const invito=document.getElementById('invitoTesto');
+  if(invito)invito.classList.add('hidden');
   document.getElementById('barNome').textContent=p.nome;
   document.getElementById('barInfo').textContent=p.sede+' \u2014 '+p.ordine;
   const ds=DISC[p.ordine]||DISC['Primaria'];
   document.getElementById('aDisciplina').innerHTML='<option value="">Seleziona disciplina...</option>'+ds.map(d=>'<option value="'+d+'">'+d+'</option>').join('');
   const pr=localStorage.getItem(LS_PR);
   if(pr){document.getElementById('propostaBox').classList.add('hidden');document.getElementById('propostaOk').classList.remove('hidden');document.getElementById('propostaText').textContent=pr;}
-  caricaAtt(); /* render immediato con localStorage + pre-fill */
-  /* Carica dati da Google Sheet e aggiorna */
-  jsonp('leggi_attivita',d=>{sheetAtt=Array.isArray(d)?d:[];caricaAtt();});
-  jsonp('leggi_proposte',d=>{sheetProp=Array.isArray(d)?d:[];caricaPropostePub();});
+  /* Aggiorna contatori (i dati Sheet potrebbero essere gia' arrivati dall'init) */
+  aggiornaContatori();
+  caricaAtt();
+  /* Se Sheet non ancora caricato, ricarica */
+  if(sheetAtt===null)jsonp('leggi_attivita',d=>{sheetAtt=Array.isArray(d)?d:[];aggiornaContatori();caricaAtt();});
+  if(sheetProp===null)jsonp('leggi_proposte',d=>{sheetProp=Array.isArray(d)?d:[];aggiornaContatori();caricaPropostePub();});
 }
 
-/* ===== ACCORDION ===== */
-function toggleAnno(id){document.getElementById(id).classList.toggle('aperta');}
+/* ===== CARD NAVIGATION ===== */
+let annoAperto='';
+
+function apriAnno(anno){
+  /* Se non loggato, evidenzia il login */
+  const p=JSON.parse(localStorage.getItem(LS_P));
+  if(!p||!p.nome){
+    const loginCard=document.querySelector('#profiloSection .card');
+    if(loginCard){loginCard.style.animation='none';loginCard.offsetHeight;loginCard.style.animation='shake .4s ease';
+    loginCard.scrollIntoView({behavior:'smooth',block:'center'});}
+    return;
+  }
+  /* Deseleziona tutte le card */
+  document.querySelectorAll('.anno-card').forEach(c=>c.classList.remove('selected'));
+
+  /* Se clicco la stessa card gia' aperta, chiudo */
+  if(annoAperto===anno){chiudiDettaglio();return;}
+
+  annoAperto=anno;
+  const det=document.getElementById('annoDettaglio');
+  const sfondo=SFONDI[anno]||'';
+
+  /* Seleziona la card */
+  const cardMap={'2025-26':'card2526','2026-27':'card2627','2024-25':'card2425','2023-24':'card2324'};
+  const cardEl=document.getElementById(cardMap[anno]);
+  if(cardEl)cardEl.classList.add('selected');
+
+  /* Header dettaglio */
+  document.getElementById('dettaglioTitolo').textContent='A.S. '+anno;
+  document.getElementById('dettaglioSfondo').textContent=sfondo?'\u00ab'+sfondo+'\u00bb':'Proponi il titolo e registra le attivit\u00e0';
+
+  /* Mostra sezione corretta */
+  const secAtt=document.getElementById('dettaglioAttivita');
+  const secProp=document.getElementById('dettaglioProposte');
+  const btnAgg=document.getElementById('btnAggiungiAtt');
+
+  if(anno==='2026-27'){
+    secAtt.classList.add('hidden');
+    secProp.classList.remove('hidden');
+    renderDettaglioProposte();
+  } else {
+    secProp.classList.add('hidden');
+    secAtt.classList.remove('hidden');
+    /* Mostra bottone aggiungi solo per anni attivi */
+    btnAgg.style.display=ANNI_ATTIVI.includes(anno)?'':'none';
+    renderDettaglioAtt(anno);
+  }
+
+  det.classList.remove('hidden');
+  det.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function chiudiDettaglio(){
+  annoAperto='';
+  document.getElementById('annoDettaglio').classList.add('hidden');
+  document.querySelectorAll('.anno-card').forEach(c=>c.classList.remove('selected'));
+}
+
+function renderDettaglioAtt(anno){
+  const p=JSON.parse(localStorage.getItem(LS_P));
+  if(!p)return;
+  const isA=p.nome.toLowerCase().includes('cerioli')||p.nome.toLowerCase().includes('andrea c');
+  const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');
+
+  let items=[];
+  if(isA&&anno==='2025-26')items=[...ANDREA];
+
+  if(sheetAtt){
+    const fromSheet=sheetAtt.filter(a=>a.anno===anno);
+    const preKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
+    fromSheet.forEach(a=>{
+      const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
+      if(!preKeys.has(k))items.push(a);
+    });
+  }
+
+  const lsItems=sal.filter(a=>a.anno===anno);
+  const existKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
+  lsItems.forEach(a=>{
+    const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
+    if(!existKeys.has(k))items.push(a);
+  });
+
+  const emptyMsg=ANNI_ATTIVI.includes(anno)?'Nessuna attivit\u00e0 ancora.':'Nessuna attivit\u00e0 registrata per questo anno scolastico.';
+  document.getElementById('listaDettaglio').innerHTML=items.length?items.map(renderAtt).join(''):'<li class="att-vuota">'+emptyMsg+'</li>';
+}
+
+function renderDettaglioProposte(){
+  const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');
+  const items=sal.filter(a=>a.anno==='2026-27');
+
+  if(sheetAtt){
+    const fromSheet=sheetAtt.filter(a=>a.anno==='2026-27');
+    const existKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
+    fromSheet.forEach(a=>{
+      const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
+      if(!existKeys.has(k))items.push(a);
+    });
+  }
+
+  document.getElementById('listaDettaglioProposte').innerHTML=items.length?items.map(renderAtt).join(''):'<li class="att-vuota">Nessuna attivit\u00e0 in itinere.</li>';
+}
 
 /* ===== ACTIVITY MODAL ===== */
 function apriModal(anno){modalAnno=anno;document.getElementById('modalTitolo').textContent='Nuova attivit\u00e0 \u2014 '+anno;['aTitolo','aDesc','aLink'].forEach(id=>document.getElementById(id).value='');document.getElementById('aDisciplina').selectedIndex=0;document.getElementById('aPeriodo').selectedIndex=0;document.querySelectorAll('.campo-errore').forEach(e=>e.classList.remove('vis'));document.getElementById('modalOverlay').classList.add('vis');}
@@ -497,50 +689,26 @@ function inviaProposta(){
 
 function inviaSheet(tipo,dati){new Image().src=SCRIPT_URL+'?'+new URLSearchParams({tipo,...dati}).toString();}
 
-/* ===== RENDER ACTIVITIES (merges: ANDREA pre-fill + Google Sheet + localStorage) ===== */
+/* ===== RENDER ACTIVITIES — aggiorna contatori card + dettaglio aperto ===== */
 function caricaAtt(){
-  const sal=JSON.parse(localStorage.getItem(LS_A)||'[]');
   const p=JSON.parse(localStorage.getItem(LS_P));
   if(!p)return;
-  const isA=p.nome.toLowerCase().includes('cerioli')||p.nome.toLowerCase().includes('andrea c');
-
-  ['2025-26','2026-27'].forEach(anno=>{
-    const el=document.getElementById(listaId(anno));
-    if(!el)return;
-
-    /* 1. Pre-fill Andrea (solo 2025-26, solo se e' Andrea) */
-    let items=[];
-    if(isA&&anno==='2025-26')items=[...ANDREA];
-
-    /* 2. Dati da Google Sheet (se gia' caricati) */
-    if(sheetAtt){
-      const fromSheet=sheetAtt.filter(a=>a.anno===anno);
-      /* Evita duplicati: escludi dal Sheet quelli che hanno stesso titolo+nome del pre-fill */
-      const preKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
-      fromSheet.forEach(a=>{
-        const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
-        if(!preKeys.has(k))items.push(a);
-      });
-    }
-
-    /* 3. Dati da localStorage (invii recenti non ancora nel Sheet) */
-    const lsItems=sal.filter(a=>a.anno===anno);
-    const existKeys=new Set(items.map(a=>(a.nome+'||'+a.titolo).toLowerCase()));
-    lsItems.forEach(a=>{
-      const k=((a.nome||'')+'||'+(a.titolo||'')).toLowerCase();
-      if(!existKeys.has(k))items.push(a);
-    });
-
-    el.innerHTML=items.length?items.map(renderAtt).join(''):'<li class="att-vuota">Nessuna attivit\u00e0 ancora.</li>';
-  });
+  aggiornaContatori();
+  /* Se c'e' un dettaglio aperto, aggiornalo */
+  if(annoAperto){
+    if(annoAperto==='2026-27')renderDettaglioProposte();
+    else renderDettaglioAtt(annoAperto);
+  }
 }
 
-/* ===== PROPOSTE PUBBLICHE (mostra conteggio sotto accordion 2026-27) ===== */
+/* ===== PROPOSTE PUBBLICHE ===== */
 function caricaPropostePub(){
-  /* Opzionale: mostra quante proposte sono arrivate nel header 2026-27 */
-  if(!sheetProp||!sheetProp.length)return;
-  const hdr=document.querySelector('#anno2627 .anno-header-sfondo');
-  if(hdr)hdr.textContent='Proposte ricevute: '+sheetProp.length+' \u2014 Proponi il titolo e registra le attivit\u00e0';
+  if(!sheetProp)return;
+  /* Aggiorna contatore card 2026-27 */
+  const countEl=document.getElementById('count2026-27');
+  if(countEl)countEl.textContent=sheetProp.length+' propost'+(sheetProp.length===1?'a':'e');
+  /* Aggiorna dettaglio se aperto su 2026-27 */
+  if(annoAperto==='2026-27')renderDettaglioProposte();
 }
 
 function renderAtt(a){
@@ -587,14 +755,17 @@ function esciAdmin(){document.getElementById('adminView').classList.remove('vis'
 function cambiaAnnoAdmin(){
   const anno=document.getElementById('fAnno').value;
   document.getElementById('adminAnnoLabel').textContent=anno;
-  document.getElementById('sidebarFiltri').style.display=anno==='2025-26'?'':'none';
-  if(anno==='2025-26'){popolaFiltri();applicaFiltri();}
-  else renderAdmin2627();
+  /* Mostra filtri per tutti gli anni tranne 2026-27 (che ha solo proposte) */
+  const hasFiltri=(anno!=='2026-27');
+  document.getElementById('sidebarFiltri').style.display=hasFiltri?'':'none';
+  if(anno==='2026-27')renderAdmin2627();
+  else{popolaFiltri();applicaFiltri();}
 }
 
 function popolaFiltri(){
+  const anno=document.getElementById('fAnno').value;
   const sede=document.getElementById('fSede').value;
-  const att=adminDati.filter(a=>a.anno==='2025-26');
+  const att=adminDati.filter(a=>a.anno===anno);
   const attS=sede?att.filter(a=>a.sede===sede):att;
   const docs=[...new Set(attS.map(a=>a.nome).filter(Boolean))].sort();
   const fD=document.getElementById('fDocente'),cur=fD.value;
@@ -603,9 +774,11 @@ function popolaFiltri(){
 
 function applicaFiltri(){
   popolaFiltri();
+  const anno=document.getElementById('fAnno').value;
+  const sfondo=SFONDI[anno]||'';
   const sede=document.getElementById('fSede').value,doc=document.getElementById('fDocente').value,area=document.getElementById('fArea').value,key=document.getElementById('fKey').value.toLowerCase().trim();
   let f=adminDati.filter(a=>{
-    if(a.anno!=='2025-26')return false;
+    if(a.anno!==anno)return false;
     if(sede&&a.sede!==sede)return false;
     if(doc&&a.nome!==doc)return false;
     if(area&&getArea(a.disciplina)!==area)return false;
@@ -615,7 +788,7 @@ function applicaFiltri(){
   const ds=new Set(f.map(a=>a.nome)),ss=new Set(f.map(a=>a.sede)),as2=new Set(f.map(a=>getArea(a.disciplina)));
   document.getElementById('sidebarStats').innerHTML=sstat(f.length,'Attivit\u00e0')+sstat(ds.size,'Docenti')+sstat(ss.size,'Sedi')+sstat(as2.size,'Aree');
   const main=document.getElementById('adminMain');
-  let h='<h2>A.S. 2025-26 \u2014 \u00abTrasformiamo gli errori in opportunit\u00e0\u00bb</h2>';
+  let h='<h2>A.S. '+esc(anno)+(sfondo?' \u2014 \u00ab'+esc(sfondo)+'\u00bb':'')+'</h2>';
   h+='<div class="chart-row"><div class="chart-card"><h3>Timeline \u2014 distribuzione per mese</h3><svg id="histSvg" class="chart-svg" viewBox="0 0 600 220"></svg></div>';
   h+='<div class="chart-card"><h3>Copertura per area disciplinare</h3><div id="areaBars"></div></div></div>';
   h+='<h2 style="margin-top:8px">Attivit\u00e0 registrate <span style="font-family:var(--ff);font-size:.85rem;font-weight:500;color:var(--testo-soft)">('+f.length+')</span></h2>';
