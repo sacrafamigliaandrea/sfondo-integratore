@@ -20,30 +20,34 @@
   --fd:'Inter',system-ui,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.ico{width:18px;height:18px;flex-shrink:0;display:inline-block;vertical-align:middle}
+.ico-sm{width:13px;height:13px}
+.ico-lg{width:22px;height:22px}
 body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-height:100vh;line-height:1.7;font-weight:450;-webkit-font-smoothing:antialiased}
 
 /* ===== PUBLIC LAYOUT ===== */
-.pub-wrap{max-width:680px;margin:0 auto;padding:24px 20px 80px}
+.pub-wrap{max-width:920px;margin:0 auto;padding:20px 24px 40px}
 
 /* ===== HEADER ===== */
-.header{text-align:center;padding:28px 0 20px}
-.header-loghi{display:flex;justify-content:center;gap:24px;margin-bottom:16px}
-.header-loghi img{width:88px;height:88px;border-radius:50%;border:2px solid var(--oliva-medio);object-fit:cover;box-shadow:var(--ombra)}
-.header-badge{display:inline-flex;align-items:center;gap:8px;background:var(--oliva);color:var(--bianco);font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:14px}
-.header-badge svg{width:14px;height:14px;fill:currentColor}
-.header h1{font-family:var(--fd);font-weight:800;font-size:clamp(1.8rem,5vw,2.5rem);color:var(--oliva-scuro);line-height:1.15;margin-bottom:6px}
-.header-sub{font-size:.95rem;color:var(--testo-soft);max-width:520px;margin:0 auto}
-.header-fondatrice{font-size:.8rem;color:var(--oliva);margin-top:6px;font-style:italic;letter-spacing:.02em}
+.header{display:flex;align-items:center;gap:20px;padding:16px 0 14px;flex-wrap:wrap}
+.header-loghi{display:flex;gap:12px;flex-shrink:0}
+.header-loghi img{width:56px;height:56px;border-radius:50%;border:2px solid var(--oliva-medio);object-fit:cover;box-shadow:var(--ombra)}
+.header-body{flex:1;min-width:200px}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:var(--oliva);color:var(--bianco);font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:16px;margin-bottom:4px}
+.header-badge svg{width:14px;height:14px;stroke:currentColor;fill:none}
+.header h1{font-family:var(--fd);font-weight:800;font-size:clamp(1.3rem,3.5vw,1.8rem);color:var(--oliva-scuro);line-height:1.15;margin-bottom:2px}
+.header-sub{font-size:.85rem;color:var(--testo-soft);line-height:1.4}
+.header-fondatrice{font-size:.75rem;color:var(--oliva);font-style:italic;letter-spacing:.02em}
 
 /* ===== PROFILO BAR ===== */
-.profilo-bar{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:14px;padding:10px 20px;background:var(--bianco);border-radius:24px;box-shadow:var(--ombra);font-size:.85rem;flex-wrap:wrap}
+.profilo-bar{display:flex;align-items:center;gap:12px;margin-left:auto;padding:8px 16px;background:var(--bianco);border-radius:20px;box-shadow:var(--ombra);font-size:.82rem;flex-shrink:0}
 .profilo-bar-name{font-weight:600;color:var(--oliva-scuro)}
 .profilo-bar-info{color:var(--testo-soft)}
-.profilo-bar-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:4px 14px;border-radius:16px;cursor:pointer;font-family:var(--ff);font-size:.78rem;font-weight:600;transition:all var(--tr);min-height:44px}
+.profilo-bar-btn{background:none;border:1px solid var(--oliva-medio);color:var(--oliva);padding:4px 12px;border-radius:14px;cursor:pointer;font-family:var(--ff);font-size:.75rem;font-weight:600;transition:all var(--tr);min-height:36px}
 .profilo-bar-btn:hover{background:var(--oliva-chiaro)}
 
 /* ===== CARD ===== */
-.card{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:28px 24px;border:1px solid rgba(92,107,36,.04);margin-bottom:18px}
+.card{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:22px 20px;border:1px solid rgba(92,107,36,.04);margin-bottom:14px}
 
 /* ===== FORM ===== */
 .campo{margin-bottom:20px}.campo:last-child{margin-bottom:0}
@@ -54,7 +58,7 @@ body{font-family:var(--ff);background:var(--oliva-bg);color:var(--testo);min-hei
 .campo-input::placeholder{color:#8A9070;font-weight:400}
 textarea.campo-input{resize:vertical;min-height:80px}
 .campo-errore{display:none;align-items:center;gap:6px;margin-top:5px;font-size:.8rem;color:var(--terra);font-weight:500}
-.campo-errore svg{width:14px;height:14px;fill:var(--terra);flex-shrink:0}
+.campo-errore svg{width:14px;height:14px;stroke:var(--terra);fill:none;flex-shrink:0}
 .campo-errore.vis{display:flex}
 .campo-input.inv{border-color:var(--terra)}
 
@@ -68,7 +72,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 
 /* ===== BUTTONS ===== */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;font-family:var(--ff);font-size:.95rem;font-weight:600;border:none;border-radius:var(--raggio-sm);cursor:pointer;transition:all var(--tr);min-height:48px}
-.btn svg{width:18px;height:18px;fill:currentColor}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none}
 .btn-terra{background:var(--terra);color:var(--bianco);width:100%}
 .btn-terra:hover{background:var(--terra-hover);box-shadow:var(--ombra-up);transform:translateY(-2px)}
 .btn-terra:disabled{opacity:.5;cursor:not-allowed;transform:none}
@@ -79,36 +83,43 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .btn-sm{padding:9px 16px;font-size:.85rem}
 
 /* ===== ANNO CARD GRID ===== */
-.anno-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.anno-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
 .anno-card{position:relative;aspect-ratio:1;padding:16px 14px;border-radius:var(--raggio);cursor:pointer;transition:all var(--tr);border:2px solid transparent;overflow:hidden;display:flex;flex-direction:column;justify-content:center;text-align:center}
 .anno-card:hover{transform:translateY(-3px);box-shadow:var(--ombra-up)}
 .anno-card.selected{border-color:var(--oliva-scuro);box-shadow:var(--ombra-up)}
 
 .anno-card--attivo{background:var(--oliva);color:var(--bianco)}
 .anno-card--attivo:hover{background:var(--oliva-scuro)}
-.anno-card--prossimo{background:var(--terra);color:var(--bianco)}
-.anno-card--prossimo:hover{background:var(--terra-hover)}
 .anno-card--storico{background:var(--bianco);color:var(--testo);border:1.5px solid var(--oliva-medio)}
 .anno-card--storico:hover{background:var(--oliva-chiaro);border-color:var(--oliva)}
+.anno-card--aperto{background:transparent;color:var(--oliva);border:2px dashed var(--oliva-medio)}
+.anno-card--aperto:hover{background:var(--oliva-chiaro);border-color:var(--oliva)}
+.anno-card--aperto .anno-card-sfondo{font-style:normal;opacity:.7}
+.anno-card-badge--aperto{background:var(--oliva-chiaro);color:var(--oliva)}
 
 .anno-card-badge{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:12px;margin-bottom:4px;align-self:center}
 .anno-card-badge--attivo{background:rgba(255,255,255,.2);color:var(--bianco)}
-.anno-card-badge--prossimo{background:rgba(255,255,255,.2);color:var(--bianco)}
 .anno-card-badge--storico{background:var(--oliva-chiaro);color:var(--oliva)}
 
 .anno-card-anno{font-family:var(--ff);font-weight:600;font-size:.72rem;letter-spacing:.04em;opacity:.6;text-transform:uppercase;margin-bottom:4px;display:block}
 .anno-card-sfondo{font-family:var(--fd);font-weight:700;font-size:clamp(.82rem,2vw,1.05rem);font-style:italic;line-height:1.3;margin-bottom:8px;opacity:1;flex-grow:1;display:flex;align-items:center;justify-content:center}
 .anno-card-count{font-size:.7rem;font-weight:600;opacity:.65}
 
-/* ===== INVITO PRE-LOGIN ===== */
-.invito-testo{text-align:center;font-size:.92rem;color:var(--testo-soft);line-height:1.7;margin-bottom:8px;padding:8px 0}
+/* ===== ACCESSI ===== */
+.accessi-row{display:flex;gap:12px;justify-content:center;margin-bottom:8px}
+.btn-accesso{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;font-family:var(--ff);font-size:.88rem;font-weight:600;border:none;border-radius:var(--raggio-sm);cursor:pointer;transition:all var(--tr);min-height:48px}
+.btn-accesso svg{width:18px;height:18px;stroke:currentColor;fill:none}
+.btn-accesso--docente{background:var(--oliva);color:var(--bianco)}
+.btn-accesso--docente:hover{background:var(--oliva-scuro);box-shadow:var(--ombra-up);transform:translateY(-1px)}
+.btn-accesso--admin{background:transparent;color:var(--testo-soft);border:1.5px solid var(--oliva-medio)}
+.btn-accesso--admin:hover{background:var(--oliva-chiaro);border-color:var(--oliva);color:var(--oliva-scuro)}
 
 /* ===== ANNO DETTAGLIO (espande sotto le card) ===== */
-.anno-dettaglio{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:24px;margin-bottom:20px;border:1px solid rgba(92,107,36,.06);animation:slideDown .3s ease}
+.anno-dettaglio{background:var(--bianco);border-radius:var(--raggio);box-shadow:var(--ombra);padding:20px;margin-bottom:16px;border:1px solid rgba(92,107,36,.06);animation:slideDown .3s ease}
 @keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.anno-dettaglio-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:12px}
-.anno-dettaglio-h2{font-family:var(--fd);font-weight:800;font-size:1.15rem;color:var(--oliva-scuro)}
-.anno-dettaglio-sfondo{font-size:.88rem;color:var(--testo-soft);font-style:italic;margin-top:2px}
+.anno-dettaglio-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px}
+.anno-dettaglio-h2{font-family:var(--fd);font-weight:800;font-size:1.05rem;color:var(--oliva-scuro)}
+.anno-dettaglio-sfondo{font-size:.85rem;color:var(--testo-soft);font-style:italic;margin-top:2px}
 
 /* ===== ACTIVITY LIST ===== */
 .att-lista{list-style:none}
@@ -117,11 +128,11 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .att-item-titolo{font-weight:600;color:var(--oliva-scuro);font-size:.95rem}
 .att-item-meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;font-size:.78rem;color:var(--testo-soft)}
 .att-item-meta span{display:inline-flex;align-items:center;gap:3px}
-.att-item-meta svg{width:12px;height:12px;fill:var(--testo-soft)}
+.att-item-meta svg{width:13px;height:13px;stroke:var(--testo-soft);fill:none}
 .att-item-desc{margin-top:6px;font-size:.85rem;color:var(--testo);line-height:1.6}
 .att-item-link{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:.82rem;color:var(--terra);text-decoration:none;font-weight:600}
 .att-item-link:hover{text-decoration:underline}
-.att-item-link svg{width:12px;height:12px;fill:var(--terra)}
+.att-item-link svg{width:13px;height:13px;stroke:var(--terra);fill:none}
 .att-vuota{text-align:center;padding:24px;color:var(--testo-soft);font-size:.88rem;font-style:italic}
 .tag-pre{display:inline-block;font-size:.65rem;font-weight:600;background:var(--oliva);color:var(--bianco);padding:2px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em;margin-left:6px;vertical-align:middle}
 .tag-area{display:inline-block;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:10px;color:#fff;margin-left:6px;vertical-align:middle}
@@ -133,12 +144,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .proposta-ok{padding:12px 16px;background:var(--oliva-chiaro);border-radius:var(--raggio-sm);border-left:4px solid var(--oliva);font-size:.88rem;color:var(--oliva-scuro)}
 .btn-aggiungi{width:100%;padding:14px;margin-bottom:16px;background:var(--oliva-chiaro);border:2px dashed var(--oliva-medio);border-radius:var(--raggio-sm);color:var(--oliva);font-family:var(--ff);font-size:.88rem;font-weight:600;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
 .btn-aggiungi:hover{border-color:var(--oliva);background:var(--oliva-medio)}
-.btn-aggiungi svg{width:18px;height:18px;fill:var(--oliva)}
-
-/* ===== ADMIN LINK ===== */
-.admin-link{text-align:center;margin:28px 0 8px}
-.admin-link a{color:var(--testo-soft);font-size:.82rem;text-decoration:underline;opacity:.6;transition:opacity var(--tr)}
-.admin-link a:hover{opacity:1}
+.btn-aggiungi svg{width:18px;height:18px;stroke:var(--oliva);fill:none}
 
 /* ===== ADMIN LAYOUT ===== */
 .admin-wrap{display:none;min-height:100vh}
@@ -205,10 +211,24 @@ textarea.campo-input{resize:vertical;min-height:80px}
 .pwd-err.vis{display:block}
 
 /* ===== FOOTER ===== */
-.footer{text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--oliva-medio);font-size:.75rem;color:var(--testo-soft)}
+.footer{text-align:center;margin-top:28px;padding:16px 0;border-top:1px solid var(--oliva-medio);font-size:.72rem;color:var(--testo-soft);line-height:1.8}
+.footer-copy{font-weight:700;font-size:.78rem;color:var(--oliva);letter-spacing:.03em}
+/* ===== PERCORSO ===== */
+.percorso-trigger{text-align:center;margin-bottom:14px}
+.btn-percorso{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--oliva);font-family:var(--ff);font-size:.82rem;font-weight:600;cursor:pointer;padding:6px 14px;border-radius:16px;transition:all var(--tr);letter-spacing:.02em}
+.btn-percorso:hover{background:var(--oliva-chiaro);color:var(--oliva-scuro)}
+.btn-percorso svg{width:16px;height:16px;stroke:var(--oliva);fill:none}
+
+.percorso-modal{max-width:520px;display:flex;flex-direction:column}
+.percorso-content{display:flex;flex-direction:column;gap:14px}
+.percorso-line{display:flex;align-items:baseline;gap:12px;font-size:.92rem;color:var(--testo);line-height:1.6}
+.percorso-anno{font-family:var(--fd);font-weight:700;font-size:.72rem;color:var(--oliva);background:var(--oliva-chiaro);padding:3px 8px;border-radius:10px;flex-shrink:0;letter-spacing:.03em}
+.percorso-line--futuro{padding:12px 14px;background:var(--oliva-chiaro);border-radius:var(--raggio-sm);border-left:3px solid var(--oliva)}
+.percorso-line--futuro .percorso-anno{background:var(--oliva);color:var(--bianco)}
+.percorso-chiusa{font-size:.88rem;color:var(--testo-soft);font-style:italic;line-height:1.7;padding-top:8px;border-top:1px solid var(--oliva-chiaro);margin-top:4px}
+
 .hidden{display:none!important}
 .mt-16{margin-top:16px}
-@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -216,12 +236,57 @@ textarea.campo-input{resize:vertical;min-height:80px}
   .admin-sidebar{border-right:none;border-bottom:1px solid var(--oliva-chiaro);max-height:50vh}
   .chart-row{grid-template-columns:1fr}
   .radio-group{flex-direction:column;gap:8px}
-  .pub-wrap{padding:16px 12px 60px}
+  .pub-wrap{padding:14px 12px 40px}
+  .header{flex-direction:column;text-align:center;gap:10px;padding:12px 0 10px}
+  .profilo-bar{margin-left:0;flex-wrap:wrap;justify-content:center}
   .anno-grid{grid-template-columns:1fr 1fr;gap:10px}
 }
 </style>
 </head>
 <body>
+
+<!-- SVG Sprite — Lucide-style, stroke-based, educational tone -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="ico-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+  </symbol>
+  <symbol id="ico-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+  </symbol>
+  <symbol id="ico-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  </symbol>
+  <symbol id="ico-pencil" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+  </symbol>
+  <symbol id="ico-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>
+  </symbol>
+  <symbol id="ico-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+  </symbol>
+  <symbol id="ico-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+  </symbol>
+  <symbol id="ico-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+  </symbol>
+  <symbol id="ico-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </symbol>
+  <symbol id="ico-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+  </symbol>
+  <symbol id="ico-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/>
+  </symbol>
+  <symbol id="ico-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+  <symbol id="ico-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/>
+  </symbol>
+</svg>
 
 <!-- ===============================================
      PUBLIC VIEW
@@ -233,10 +298,12 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <img src="Orzinuovi_logo_verde.jpg" alt="Sacra Famiglia Orzinuovi">
       <img src="martinengo_logo_verde.jpg" alt="Sacra Famiglia Martinengo">
     </div>
-    <div class="header-badge"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Due sedi, un'unica missione educativa</div>
-    <h1>Sfondo Integratore</h1>
-    <p class="header-sub">Raccolta delle attivit&agrave; legate allo sfondo integratore e proposte per il prossimo anno scolastico.</p>
-    <p class="header-fondatrice">Fondatrice Santa Paola Elisabetta Cerioli</p>
+    <div class="header-body">
+      <div class="header-badge"><svg class="ico-sm ico"><use href="#ico-cap"/></svg>Due sedi, un'unica missione educativa</div>
+      <h1>Sfondo Integratore</h1>
+      <p class="header-sub">Il filo che lega ci&ograve; che si impara a ci&ograve; che si diventa &mdash; attraverso ogni disciplina, ogni relazione, ogni gesto educativo.</p>
+      <p class="header-fondatrice">Fondatrice Santa Paola Elisabetta Cerioli</p>
+    </div>
     <div class="profilo-bar hidden" id="profiloBar">
       <span class="profilo-bar-name" id="barNome"></span>
       <span class="profilo-bar-info" id="barInfo"></span>
@@ -264,30 +331,46 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <p class="anno-card-sfondo">&laquo;Trasformiamo gli errori in opportunit&agrave;&raquo;</p>
       <span class="anno-card-count" id="count2025-26">0 attivit&agrave;</span>
     </div>
-    <div class="anno-card anno-card--prossimo" id="card2627" onclick="apriAnno('2026-27')">
-      <span class="anno-card-badge anno-card-badge--prossimo">Prossimo</span>
-      <span class="anno-card-anno">2026-27</span>
-      <p class="anno-card-sfondo">&laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p>
-      <span class="anno-card-count" id="count2026-27">0 proposte</span>
+    <div class="anno-card anno-card--aperto" id="card2627" onclick="apriAnno('2026-27')">
+      <span class="anno-card-badge anno-card-badge--aperto">2026-27</span>
+      <p class="anno-card-sfondo">Quale sar&agrave; il prossimo passo?</p>
+      <span class="anno-card-count" id="count2026-27">Servono le vostre proposte</span>
     </div>
   </div>
 
-  <!-- INVITO (visibile solo pre-login, sotto le card) -->
-  <p class="invito-testo" id="invitoTesto">Questo &egrave; il percorso della nostra scuola.<br>Identificati per entrare anche tu nella storia.</p>
+  <!-- PULSANTE PERCORSO -->
+  <div class="percorso-trigger">
+    <button class="btn-percorso" onclick="document.getElementById('percorsoOverlay').classList.add('vis')">
+      <svg class="ico"><use href="#ico-sparkle"/></svg>
+      Il nostro percorso
+    </button>
+  </div>
 
-  <!-- LOGIN (sotto le card, scompare dopo identificazione) -->
-  <section id="profiloSection">
-    <div class="card" style="max-width:480px;margin:20px auto;">
-      <h2 style="font-family:var(--fd);font-size:1.15rem;color:var(--oliva-scuro);margin-bottom:4px;font-weight:700">Identificati per interagire</h2>
-      <p style="font-size:.85rem;color:var(--testo-soft);margin-bottom:18px">I tuoi dati verranno salvati per i prossimi accessi.</p>
-      <div class="campo"><label class="campo-label" for="pNome">Nome e cognome</label><input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name"><div class="campo-errore" id="errPN"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci il tuo nome</span></div></div>
-      <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona la sede</span></div></div>
-      <div class="campo"><label class="campo-label">Ordine di scuola</label><div class="radio-group" id="ordineGroup"></div><div class="campo-errore" id="errPO"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Seleziona l'ordine</span></div></div>
-      <button class="btn btn-terra mt-16" onclick="salvaProfilo()"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>Accedi alla piattaforma</button>
+  <!-- AREA ACCESSI (sotto le card) -->
+  <div id="accessiArea">
+    <div class="accessi-row" id="accessiBtns">
+      <button class="btn-accesso btn-accesso--docente" onclick="toggleLoginForm()">
+        <svg class="ico"><use href="#ico-user"/></svg>
+        Accesso docente
+      </button>
+      <button class="btn-accesso btn-accesso--admin" onclick="apriPwdModal()">
+        <svg class="ico"><use href="#ico-shield"/></svg>
+        Accesso amministratore
+      </button>
+    </div>
+  </div>
+
+  <!-- LOGIN FORM (collassabile, visibile solo dopo click su Accesso docente) -->
+  <section id="profiloSection" class="hidden">
+    <div class="card" style="max-width:540px;margin:12px auto;">
+      <div class="campo"><label class="campo-label" for="pNome">Nome e cognome</label><input type="text" id="pNome" class="campo-input" placeholder="Es. Maria Rossi" maxlength="60" autocomplete="name"><div class="campo-errore" id="errPN"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Inserisci il tuo nome</span></div></div>
+      <div class="campo"><label class="campo-label">Sede</label><div class="radio-group" id="sedeGroup"><div class="radio-opt"><input type="radio" name="pSede" id="sedeO" value="Orzinuovi"><label for="sedeO">Orzinuovi</label></div><div class="radio-opt"><input type="radio" name="pSede" id="sedeM" value="Martinengo"><label for="sedeM">Martinengo</label></div></div><div class="campo-errore" id="errPS"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona la sede</span></div></div>
+      <div class="campo"><label class="campo-label">Ordine di scuola</label><div class="radio-group" id="ordineGroup"></div><div class="campo-errore" id="errPO"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Seleziona l'ordine</span></div></div>
+      <button class="btn btn-terra mt-16" onclick="salvaProfilo()"><svg class="ico"><use href="#ico-check"/></svg>Accedi alla piattaforma</button>
     </div>
   </section>
 
-  <!-- DASHBOARD DOCENTE (dettaglio + admin, visibile dopo login) -->
+  <!-- DASHBOARD DOCENTE (dettaglio, visibile dopo login) -->
   <section id="dashboardSection" class="hidden">
 
     <!-- DETTAGLIO ANNO (si apre sotto le card) -->
@@ -298,31 +381,31 @@ textarea.campo-input{resize:vertical;min-height:80px}
           <p id="dettaglioSfondo" class="anno-dettaglio-sfondo"></p>
         </div>
         <button class="btn btn-ghost btn-sm" onclick="chiudiDettaglio()">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+          <svg class="ico"><use href="#ico-x"/></svg>
           Chiudi
         </button>
       </div>
 
       <!-- Contenuto 2025-26 / storici -->
       <div id="dettaglioAttivita" class="hidden">
-        <button class="btn-aggiungi" id="btnAggiungiAtt" onclick="apriModal(annoAperto)"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; svolta</button>
+        <button class="btn-aggiungi" id="btnAggiungiAtt" onclick="apriModal(annoAperto)"><svg class="ico"><use href="#ico-pencil"/></svg>Registra attivit&agrave; svolta</button>
         <ul class="att-lista" id="listaDettaglio"></ul>
       </div>
 
       <!-- Contenuto 2026-27 -->
       <div id="dettaglioProposte" class="hidden">
-        <div id="propostaBox" class="proposta-box"><h3>Proponi una variante del titolo 2026-27</h3><p style="font-size:.82rem;color:var(--testo-soft);margin-bottom:10px">Perimetro: &laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Porto Sicuro: accogliere per crescere insieme" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Invia la tua proposta</button></div>
+        <div id="propostaBox" class="proposta-box"><h3>Proponi una variante del titolo 2026-27</h3><p style="font-size:.82rem;color:var(--testo-soft);margin-bottom:10px">Perimetro: &laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Porto Sicuro: accogliere per crescere insieme" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg class="ico"><use href="#ico-send"/></svg>Invia la tua proposta</button></div>
         <div id="propostaOk" class="proposta-ok hidden">La tua proposta: <strong id="propostaText"></strong></div>
-        <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>Registra attivit&agrave; in itinere</button>
+        <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')"><svg class="ico"><use href="#ico-pencil"/></svg>Registra attivit&agrave; in itinere</button>
         <ul class="att-lista" id="listaDettaglioProposte"></ul>
       </div>
     </div>
-
-    <!-- Admin link -->
-    <div class="admin-link"><a href="#" onclick="event.preventDefault();apriPwdModal()">Accesso amministratore</a></div>
   </section>
 
-  <footer class="footer">Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo<br>SacraFamiglia education &copy; 2026</footer>
+  <footer class="footer">
+    <div class="footer-copy">SacraFamiglia education &copy; 2026</div>
+    <div>Scuola Sacra Famiglia &mdash; Orzinuovi &amp; Martinengo &mdash; Fondatrice Santa Paola Elisabetta Cerioli</div>
+  </footer>
 </div>
 </div>
 
@@ -389,12 +472,28 @@ textarea.campo-input{resize:vertical;min-height:80px}
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <h3 id="modalTitolo">Nuova attivit&agrave;</h3>
-    <div class="campo"><label class="campo-label" for="aTitolo">Titolo dell'attivit&agrave;</label><input type="text" id="aTitolo" class="campo-input" placeholder="Es. Laboratorio di scrittura creativa" maxlength="150"><div class="campo-errore" id="errAT"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg><span>Inserisci un titolo</span></div></div>
+    <div class="campo"><label class="campo-label" for="aTitolo">Titolo dell'attivit&agrave;</label><input type="text" id="aTitolo" class="campo-input" placeholder="Es. Laboratorio di scrittura creativa" maxlength="150"><div class="campo-errore" id="errAT"><svg class="ico-sm ico"><use href="#ico-alert"/></svg><span>Inserisci un titolo</span></div></div>
     <div class="campo"><label class="campo-label" for="aDisciplina">Disciplina / Campo di esperienza</label><select id="aDisciplina" class="campo-select"></select></div>
     <div class="campo"><label class="campo-label" for="aPeriodo">Periodo</label><select id="aPeriodo" class="campo-select"><option value="">Seleziona il periodo...</option><option>Settembre</option><option>Ottobre</option><option>Novembre</option><option>Dicembre</option><option>Gennaio</option><option>Febbraio</option><option>Marzo</option><option>Aprile</option><option>Maggio</option><option>Giugno</option><option>Primo quadrimestre</option><option>Secondo quadrimestre</option><option>Intero anno scolastico</option></select></div>
     <div class="campo"><label class="campo-label" for="aDesc">Breve descrizione</label><textarea id="aDesc" class="campo-input" placeholder="Cosa avete fatto, con quali strumenti, che risultati..." maxlength="500" rows="3"></textarea></div>
     <div class="campo"><label class="campo-label" for="aLink">Link o risorsa <span style="font-weight:400;color:var(--testo-soft)">(facoltativo)</span></label><input type="url" id="aLink" class="campo-input" placeholder="https://..."></div>
-    <div class="modal-actions"><button class="btn btn-ghost" onclick="chiudiModal()">Annulla</button><button class="btn btn-oliva" onclick="inviaAttivita()"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>Registra attivit&agrave;</button></div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="chiudiModal()">Annulla</button><button class="btn btn-oliva" onclick="inviaAttivita()"><svg class="ico"><use href="#ico-send"/></svg>Registra attivit&agrave;</button></div>
+  </div>
+</div>
+
+<!-- ===============================================
+     PERCORSO MODAL
+     =============================================== -->
+<div class="modal-overlay" id="percorsoOverlay">
+  <div class="modal percorso-modal">
+    <div class="percorso-content">
+      <p class="percorso-line"><span class="percorso-anno">2023-24</span>Abbiamo iniziato dalle <strong>emozioni</strong>, perch&eacute; senza riconoscerle non si cresce.</p>
+      <p class="percorso-line"><span class="percorso-anno">2024-25</span>Siamo passati alle <strong>relazioni</strong>, perch&eacute; crescere da soli non basta.</p>
+      <p class="percorso-line"><span class="percorso-anno">2025-26</span>Abbiamo affrontato l'<strong>errore</strong>, perch&eacute; cadere &egrave; il primo passo per rialzarsi.</p>
+      <p class="percorso-line percorso-line--futuro"><span class="percorso-anno">2026-27</span>Ora cerchiamo un <strong>Porto Sicuro</strong>: uno spazio che accoglie, argina e ascolta.</p>
+      <p class="percorso-chiusa">Perch&eacute; un preadolescente che impara a sentire, a legarsi e a cadere ha bisogno di un luogo dove tutto questo sia possibile &mdash; senza paura.</p>
+    </div>
+    <button class="btn btn-ghost btn-sm" onclick="document.getElementById('percorsoOverlay').classList.remove('vis')" style="margin-top:16px;align-self:center">Chiudi</button>
   </div>
 </div>
 
@@ -511,11 +610,10 @@ function aggiornaContatori(){
     if(!countEl)return;
     if(anno==='2026-27'){
       const np=sheetProp?sheetProp.length:0;
-      countEl.textContent=np+' propost'+(np===1?'a':'e');
+      countEl.textContent=np>0?np+' propost'+(np===1?'a':'e')+' ricevut'+(np===1?'a':'e'):'Servono le vostre proposte';
     } else {
       let n=0;
       if(sheetAtt)n=sheetAtt.filter(a=>a.anno===anno).length;
-      /* Aggiungi pre-fill Andrea per 2025-26 (sempre visibile nei contatori) */
       if(anno==='2025-26')n+=ANDREA.length;
       countEl.textContent=n+' attivit\u00e0';
     }
@@ -523,6 +621,12 @@ function aggiornaContatori(){
 }
 
 /* ===== PROFILO ===== */
+function toggleLoginForm(){
+  const sec=document.getElementById('profiloSection');
+  sec.classList.toggle('hidden');
+  if(!sec.classList.contains('hidden'))sec.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
 function salvaProfilo(){
   document.querySelectorAll('.campo-errore').forEach(e=>e.classList.remove('vis'));
   const n=document.getElementById('pNome').value.trim(),s=document.querySelector('input[name="pSede"]:checked'),o=document.querySelector('input[name="pOrdine"]:checked');
@@ -534,17 +638,16 @@ function salvaProfilo(){
   const p={nome:n,sede:s.value,ordine:o.value};
   localStorage.setItem(LS_P,JSON.stringify(p));mostraDash(p);
 }
-function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');var inv=document.getElementById('invitoTesto');if(inv)inv.classList.remove('hidden');chiudiDettaglio();}
+function resetProfilo(){localStorage.removeItem(LS_P);document.getElementById('profiloSection').classList.add('hidden');document.getElementById('accessiArea').classList.remove('hidden');document.getElementById('dashboardSection').classList.add('hidden');document.getElementById('profiloBar').classList.add('hidden');chiudiDettaglio();}
 
 let sheetAtt=null; /* dati attivita da Google Sheet, null = non ancora caricati */
 let sheetProp=null; /* dati proposte da Google Sheet */
 
 function mostraDash(p){
   document.getElementById('profiloSection').classList.add('hidden');
+  document.getElementById('accessiArea').classList.add('hidden');
   document.getElementById('dashboardSection').classList.remove('hidden');
   document.getElementById('profiloBar').classList.remove('hidden');
-  const invito=document.getElementById('invitoTesto');
-  if(invito)invito.classList.add('hidden');
   document.getElementById('barNome').textContent=p.nome;
   document.getElementById('barInfo').textContent=p.sede+' \u2014 '+p.ordine;
   const ds=DISC[p.ordine]||DISC['Primaria'];
@@ -563,12 +666,10 @@ function mostraDash(p){
 let annoAperto='';
 
 function apriAnno(anno){
-  /* Se non loggato, evidenzia il login */
+  /* Se non loggato, apri il form docente */
   const p=JSON.parse(localStorage.getItem(LS_P));
   if(!p||!p.nome){
-    const loginCard=document.querySelector('#profiloSection .card');
-    if(loginCard){loginCard.style.animation='none';loginCard.offsetHeight;loginCard.style.animation='shake .4s ease';
-    loginCard.scrollIntoView({behavior:'smooth',block:'center'});}
+    toggleLoginForm();
     return;
   }
   /* Deseleziona tutte le card */
@@ -665,7 +766,7 @@ function renderDettaglioProposte(){
 /* ===== ACTIVITY MODAL ===== */
 function apriModal(anno){modalAnno=anno;document.getElementById('modalTitolo').textContent='Nuova attivit\u00e0 \u2014 '+anno;['aTitolo','aDesc','aLink'].forEach(id=>document.getElementById(id).value='');document.getElementById('aDisciplina').selectedIndex=0;document.getElementById('aPeriodo').selectedIndex=0;document.querySelectorAll('.campo-errore').forEach(e=>e.classList.remove('vis'));document.getElementById('modalOverlay').classList.add('vis');}
 function chiudiModal(){document.getElementById('modalOverlay').classList.remove('vis');}
-document.addEventListener('click',e=>{if(e.target.id==='modalOverlay')chiudiModal();if(e.target.id==='pwdOverlay')chiudiPwdModal();});
+document.addEventListener('click',e=>{if(e.target.id==='modalOverlay')chiudiModal();if(e.target.id==='pwdOverlay')chiudiPwdModal();if(e.target.id==='percorsoOverlay')e.target.classList.remove('vis');});
 
 function inviaAttivita(){
   const t=document.getElementById('aTitolo').value.trim();
@@ -715,11 +816,11 @@ function renderAtt(a){
   const pre=a.pre?'<span class="tag-pre">pre-compilata</span>':'';
   const ar=getArea(a.disciplina),ac=AREA_COLORS[ar]||AREA_COLORS['Altro'];
   const tag=' <span class="tag-area '+ac[1]+'">'+esc(ar)+'</span>';
-  const lnk=a.link?'<a href="'+esc(a.link)+'" target="_blank" rel="noopener" class="att-item-link"><svg viewBox="0 0 24 24"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>Apri risorsa</a>':'';
+  const lnk=a.link?'<a href="'+esc(a.link)+'" target="_blank" rel="noopener" class="att-item-link"><svg class="ico-sm ico"><use href="#ico-link"/></svg>Apri risorsa</a>':'';
   const desc=a.descrizione?'<div class="att-item-desc">'+esc(a.descrizione)+'</div>':'';
   return '<li class="att-item"><div class="att-item-titolo">'+esc(a.titolo)+pre+tag+'</div><div class="att-item-meta">'
-    +(a.disciplina?'<span><svg viewBox="0 0 24 24"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1z"/></svg>'+esc(a.disciplina)+'</span>':'')
-    +(a.periodo?'<span><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>'+esc(a.periodo)+'</span>':'')
+    +(a.disciplina?'<span><svg class="ico-sm ico"><use href="#ico-book"/></svg>'+esc(a.disciplina)+'</span>':'')
+    +(a.periodo?'<span><svg class="ico-sm ico"><use href="#ico-cal"/></svg>'+esc(a.periodo)+'</span>':'')
     +'</div>'+desc+lnk+'</li>';
 }
 
