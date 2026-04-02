@@ -418,7 +418,7 @@ textarea.campo-input{resize:vertical;min-height:80px}
       <!-- Contenuto 2026-27 -->
       <div id="dettaglioProposte" class="hidden">
         <div id="propostaBox" class="proposta-box"><h3>Proponi una variante del titolo 2026-27</h3><p style="font-size:.82rem;color:var(--testo-soft);margin-bottom:10px">Perimetro: &laquo;Il Porto Sicuro che accoglie, argina e ascolta&raquo;</p><input type="text" id="propostaTitolo" class="campo-input" placeholder="Es. Porto Sicuro: accogliere per crescere insieme" maxlength="200" style="margin-bottom:10px"><button class="btn btn-terra btn-sm" onclick="inviaProposta()" style="width:100%"><svg class="ico"><use href="#ico-send"/></svg>Invia la tua proposta</button></div>
-        <div id="propostaOk" class="proposta-ok hidden">La tua proposta: <strong id="propostaText"></strong></div>
+        <div id="propostaOk" class="proposta-ok hidden">La tua proposta: <strong id="propostaText"></strong> <button class="btn-manuale-link" style="display:inline;margin-left:8px" onclick="modificaProposta()">Modifica</button></div>
         <button class="btn-aggiungi mt-16" onclick="apriModal('2026-27')"><svg class="ico"><use href="#ico-pencil"/></svg>Registra attivit&agrave; in itinere</button>
         <ul class="att-lista" id="listaDettaglioProposte"></ul>
       </div>
@@ -905,6 +905,14 @@ function inviaProposta(){
   if(!p)return;
   inviaSheet('proposta',{nome:p.nome,sede:p.sede,ordine:p.ordine,titolo:t});
   localStorage.setItem(LS_PR,t);document.getElementById('propostaBox').classList.add('hidden');document.getElementById('propostaOk').classList.remove('hidden');document.getElementById('propostaText').textContent=t;
+}
+
+function modificaProposta(){
+  const pr=localStorage.getItem(LS_PR)||'';
+  document.getElementById('propostaTitolo').value=pr;
+  document.getElementById('propostaOk').classList.add('hidden');
+  document.getElementById('propostaBox').classList.remove('hidden');
+  document.getElementById('propostaTitolo').focus();
 }
 
 function inviaSheet(tipo,dati){new Image().src=SCRIPT_URL+'?'+new URLSearchParams({tipo,...dati}).toString();}
