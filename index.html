@@ -1068,7 +1068,28 @@ function renderAreaBars(dati){
   el.innerHTML=h;
 }
 
-/* ===== 2026-27 PROPOSTE (FIX: null-safety su proprieta) ===== */
+/* ===== 2026-27 PROPOSTE (auto-classificazione per keyword) ===== */
+const TEMI_AUTO={
+  'Accoglienza':['accoglie','accoglienza','accogliere','inclusione','ospita','casa','porto','approdo','rifugio','abbraccio'],
+  'Ascolto':['ascolta','ascolto','ascoltare','dialogo','voce','parola','comunicare','esprimere','silenzio'],
+  'Protezione':['argina','arginare','protegge','protezione','sicuro','sicurezza','tutela','difesa','confine','limite','riparo'],
+  'Crescita':['crescere','crescita','maturare','percorso','cammino','viaggio','scoperta','diventare','evoluzione','passo','radici','ali'],
+  'Relazioni':['relazione','relazioni','legame','comunita','insieme','gruppo','appartenenza','fiducia','cura','noi'],
+  'Emozioni':['emozione','emozioni','sentire','empatia','disagio','paura','coraggio','fragilita','forza','cuore'],
+  'Errore':['errore','errori','sbagliare','cadere','fallire','riprovare','opportunita','tentativo','rialzarsi']
+};
+
+function classificaProposta(titolo){
+  const t=norm(titolo);
+  let best='',bestScore=0;
+  for(const[tema,kw] of Object.entries(TEMI_AUTO)){
+    let score=0;
+    kw.forEach(k=>{if(t.includes(k))score++;});
+    if(score>bestScore){bestScore=score;best=tema;}
+  }
+  return best||'Altro';
+}
+
 function renderAdmin2627(){
   const att=adminDati.filter(a=>a.anno==='2026-27');
   const dp=new Set(adminProp.map(p=>(p&&p.nome)||'')),sp=new Set(adminProp.map(p=>(p&&p.sede)||''));
@@ -1076,22 +1097,28 @@ function renderAdmin2627(){
   const main=document.getElementById('adminMain');
   let h='<h2>A.S. 2026-27 \u2014 Proposte sfondo integratore</h2>';
   if(!adminProp.length){h+='<div class="att-vuota">Nessuna proposta ancora ricevuta.</div>';main.innerHTML=h;return;}
+
+  /* Classifica: tematica manuale ha precedenza, altrimenti auto */
   const gr={};
   adminProp.forEach(p=>{
     if(!p)return;
-    const t=(p.tematica&&p.tematica.trim())||'__nc';
+    const t=(p.tematica&&p.tematica.trim())||classificaProposta(p.titolo||'');
     if(!gr[t])gr[t]=[];
     gr[t].push(p);
   });
-  const keys=Object.keys(gr).sort((a,b)=>a==='__nc'?1:b==='__nc'?-1:a.localeCompare(b));
-  const hasTemi=keys.some(k=>k!=='__nc');
-  if(!hasTemi)h+='<div class="prop-note">Le proposte non sono ancora classificate. Aggiungi una colonna "Tematica" (F) nel foglio Proposte del Google Sheet per abilitare il raggruppamento per area.</div>';
+
+  const keys=Object.keys(gr).sort((a,b)=>{
+    if(a==='Altro')return 1;if(b==='Altro')return-1;
+    return gr[b].length-gr[a].length; /* piu' proposte prima */
+  });
+
   keys.forEach(k=>{
-    const items=gr[k],label=k==='__nc'?'Da classificare':k;
-    h+='<div class="prop-group"><div class="prop-group-hdr"><span>'+esc(label)+'</span><span class="prop-group-count">'+items.length+'</span></div><div class="prop-group-body">';
+    const items=gr[k];
+    h+='<div class="prop-group"><div class="prop-group-hdr"><span>'+esc(k)+'</span><span class="prop-group-count">'+items.length+'</span></div><div class="prop-group-body">';
     h+=items.map(p=>'<div class="prop-item"><span>'+esc(p.titolo||'')+'</span><span class="prop-item-nome">'+esc(p.nome||'')+' \u00b7 '+esc(p.sede||'')+'</span></div>').join('');
     h+='</div></div>';
   });
+
   if(att.length){h+='<h2 style="margin-top:24px">Attivit\u00e0 in itinere 2026-27</h2><ul class="att-lista">'+att.map(renderAtt).join('')+'</ul>';}
   main.innerHTML=h;
 }
